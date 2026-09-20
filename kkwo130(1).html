@@ -1,0 +1,2285 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>kkwo130 — Broadcast Home</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background:
+        radial-gradient(circle at 80% 0%, #28213a 0%, transparent 35%),
+        #0b0d16;
+    color: #f5f3f7;
+    font-family: Arial, "Noto Sans KR", sans-serif;
+}
+
+button,
+input,
+textarea {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(11, 13, 22, 0.92);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid #292e40;
+}
+
+.nav {
+    max-width: 1150px;
+    margin: auto;
+    height: 72px;
+    padding: 0 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+}
+
+.logo span {
+    color: #efb8d2;
+}
+
+nav {
+    display: flex;
+    gap: 5px;
+}
+
+nav button {
+    border: 0;
+    background: transparent;
+    color: #a9afbf;
+    padding: 9px 12px;
+    border-radius: 8px;
+}
+
+nav button:hover {
+    background: #181d2c;
+    color: white;
+}
+
+.admin-btn {
+    background: transparent;
+    border: 1px solid #30364b;
+    color: #aeb5c7;
+    border-radius: 9px;
+    padding: 9px 13px;
+}
+
+.admin-btn:hover {
+    background: #181d2c;
+    color: white;
+}
+
+/* HERO */
+
+main {
+    max-width: 1150px;
+    margin: auto;
+}
+
+.hero {
+    min-height: 570px;
+    padding: 80px 22px;
+
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 35px;
+    align-items: center;
+}
+
+.eyebrow {
+    color: #efb8d2;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+}
+
+h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(55px, 8vw, 95px);
+    line-height: 0.9;
+    margin: 18px 0;
+}
+
+.hero-description {
+    color: #9fa6b8;
+    line-height: 1.8;
+    max-width: 600px;
+}
+
+/* ON AIR */
+
+.live-box {
+    background: linear-gradient(145deg, #171b2b, #10131e);
+    border: 1px solid #292f43;
+    border-radius: 22px;
+    padding: 30px;
+
+    box-shadow: 0 25px 70px rgba(0,0,0,0.35);
+}
+
+.live-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: #777f91;
+    font-weight: bold;
+    letter-spacing: 0.12em;
+}
+
+.live-status.on {
+    color: #ff7597;
+}
+
+.live-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #555b6d;
+}
+
+.live-status.on .live-dot {
+    background: #ff5679;
+    box-shadow: 0 0 18px #ff5679;
+    animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+    50% {
+        opacity: 0.3;
+        transform: scale(0.75);
+    }
+}
+
+.live-title {
+    font-size: 25px;
+    margin: 20px 0 7px;
+}
+
+.live-sub {
+    color: #9098aa;
+    line-height: 1.6;
+}
+
+/* SECTIONS */
+
+section {
+    padding: 65px 22px;
+}
+
+.section-title {
+    margin-bottom: 25px;
+}
+
+.section-title h2 {
+    font-family: Georgia, serif;
+    font-size: 36px;
+    margin: 0 0 8px;
+}
+
+.section-title p {
+    color: #8991a5;
+    margin: 0;
+}
+
+/* GALLERY */
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.gallery-card {
+    overflow: hidden;
+    background: #131827;
+    border: 1px solid #292f43;
+    border-radius: 18px;
+}
+
+.gallery-image {
+    height: 215px;
+
+    background:
+        linear-gradient(135deg, #302944, #b98ca7);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Georgia, serif;
+    font-size: 35px;
+}
+
+.gallery-body {
+    padding: 18px;
+}
+
+.gallery-body h3 {
+    margin: 0 0 8px;
+}
+
+.gallery-body p {
+    margin: 0;
+    color: #9da5b7;
+    line-height: 1.6;
+}
+
+/* NOTICE */
+
+.notice {
+    background: #131827;
+    border: 1px solid #292f43;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 12px;
+}
+
+.notice-title {
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.notice-text {
+    color: #9da5b7;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    margin: 10px 0;
+}
+
+.notice-date {
+    color: #6f778a;
+    font-size: 12px;
+}
+
+/* LETTER */
+
+.official-letter {
+    max-width: 820px;
+    background: #eee1dd;
+    color: #2c2730;
+
+    border-radius: 22px;
+    padding: 35px;
+
+    box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+}
+
+.official-letter h3 {
+    font-family: Georgia, serif;
+    font-size: 28px;
+    margin-top: 0;
+}
+
+.official-letter p {
+    white-space: pre-wrap;
+    line-height: 2;
+}
+
+/* VISITOR LETTER */
+
+.write-letter {
+    max-width: 820px;
+
+    background: #131827;
+    border: 1px solid #292f43;
+    border-radius: 20px;
+
+    padding: 30px;
+}
+
+.write-letter h3 {
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    color: #9fa6b8;
+    font-size: 13px;
+    margin: 15px 0 7px;
+}
+
+input,
+textarea {
+    width: 100%;
+
+    background: #0a0d16;
+    color: white;
+
+    border: 1px solid #30364a;
+    border-radius: 9px;
+
+    padding: 12px;
+    outline: none;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #efb8d2;
+}
+
+textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+.primary-btn {
+    margin-top: 15px;
+
+    border: 0;
+    border-radius: 9px;
+
+    background: #efb8d2;
+    color: #241b21;
+
+    padding: 12px 18px;
+    font-weight: bold;
+}
+
+.primary-btn:hover {
+    filter: brightness(1.08);
+}
+
+.visitor-letter {
+    margin-top: 15px;
+    padding: 18px;
+
+    background: #181e2d;
+    border: 1px solid #292f43;
+    border-radius: 13px;
+}
+
+.visitor-letter-name {
+    font-weight: bold;
+}
+
+.visitor-letter-date {
+    display: block;
+    color: #6f778a;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.visitor-letter-text {
+    margin-top: 12px;
+    color: #c2c7d2;
+    line-height: 1.7;
+    white-space: pre-wrap;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    color: #666f82;
+    padding: 60px 20px;
+}
+
+/* MODAL */
+
+.modal {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0,0,0,0.75);
+
+    z-index: 100;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.admin-box {
+    width: min(750px, 100%);
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: #111624;
+    border: 1px solid #30364a;
+    border-radius: 20px;
+
+    padding: 25px;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-btn {
+    background: none;
+    border: 0;
+    color: #aaa;
+    font-size: 28px;
+}
+
+.tabs {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+
+    margin: 20px 0;
+}
+
+.tab-btn {
+    border: 0;
+    border-radius: 9px;
+
+    padding: 10px 13px;
+
+    background: #1b2132;
+    color: #aab1c1;
+}
+
+.tab-btn.active {
+    background: #efb8d2;
+    color: #241b21;
+}
+
+.admin-section {
+    display: none;
+}
+
+.admin-section.active {
+    display: block;
+}
+
+.secondary-btn {
+    border: 0;
+    border-radius: 9px;
+
+    padding: 10px 13px;
+
+    background: #292e3c;
+    color: #ddd;
+}
+
+.danger-btn {
+    border: 0;
+    border-radius: 8px;
+
+    padding: 8px 11px;
+
+    background: #321b24;
+    color: #ff9caf;
+}
+
+.admin-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    padding: 12px 0;
+
+    border-bottom: 1px solid #282e40;
+}
+
+.admin-item-content {
+    flex: 1;
+}
+
+.admin-item-content strong {
+    display: block;
+}
+
+.admin-item-content small {
+    color: #777f92;
+}
+
+.empty {
+    color: #737b8f;
+    text-align: center;
+    padding: 25px;
+}
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+    .hero {
+        grid-template-columns: 1fr;
+        padding-top: 55px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    nav {
+        display: none;
+    }
+}
+
+@media (max-width: 520px) {
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nav {
+        height: 65px;
+    }
+
+    .hero {
+        padding-top: 40px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+<div class="nav">
+
+    <div class="logo">
+        kkwo130<span>•</span>
+    </div>
+
+    <nav>
+        <button onclick="scrollToSection('home')">HOME</button>
+        <button onclick="scrollToSection('gallery')">GALLERY</button>
+        <button onclick="scrollToSection('notice')">NOTICE</button>
+        <button onclick="scrollToSection('letter')">LETTER</button>
+        <button onclick="scrollToSection('write-letter')">WRITE</button>
+    </nav>
+
+    <button class="admin-btn" onclick="openAdmin()">
+        관리자
+    </button>
+
+</div>
+
+</header>
+
+
+<main>
+
+<!-- ================= HOME ================= -->
+
+<section class="hero" id="home">
+
+<div>
+
+    <div class="eyebrow">
+        SPOON DJ · kkwo130
+    </div>
+
+    <h1>
+        kkwo130's<br>
+        little space.
+    </h1>
+
+    <p class="hero-description">
+        kkwo130의 방송과 사진, 공지,
+        그리고 팬들이 남겨주는 편지를
+        한곳에서 볼 수 있는 작은 공간입니다.
+    </p>
+
+</div>
+
+
+<div class="live-box">
+
+    <div id="liveStatus" class="live-status">
+
+        <span class="live-dot"></span>
+
+        <span id="liveStatusText">
+            OFF AIR
+        </span>
+
+    </div>
+
+    <div class="live-title" id="liveTitle">
+        현재 방송이 없습니다.
+    </div>
+
+    <div class="live-sub" id="liveSub">
+        관리자 모드에서 방송 상태를 변경할 수 있어요.
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- ================= GALLERY ================= -->
+
+<section id="gallery">
+
+<div class="section-title">
+
+    <h2>Gallery</h2>
+
+    <p>
+        kkwo130의 순간들을 기록해요.
+    </p>
+
+</div>
+
+<div
+    id="galleryGrid"
+    class="gallery-grid">
+</div>
+
+</section>
+
+
+<!-- ================= NOTICE ================= -->
+
+<section id="notice">
+
+<div class="section-title">
+
+    <h2>Notice</h2>
+
+    <p>
+        방송과 관련된 새로운 소식을 확인하세요.
+    </p>
+
+</div>
+
+<div id="noticeList">
+</div>
+
+</section>
+
+
+<!-- ================= OFFICIAL LETTER ================= -->
+
+<section id="letter">
+
+<div class="section-title">
+
+    <h2>Letter</h2>
+
+    <p>
+        kkwo130이 전하는 이야기
+    </p>
+
+</div>
+
+<div
+    id="officialLetter"
+    class="official-letter">
+</div>
+
+</section>
+
+
+<!-- ================= VISITOR LETTER ================= -->
+
+<section id="write-letter">
+
+<div class="section-title">
+
+    <h2>Write a Letter</h2>
+
+    <p>
+        kkwo130에게 하고 싶은 이야기를 남겨주세요.
+    </p>
+
+</div>
+
+
+<div class="write-letter">
+
+<h3>
+    kkwo130에게 💌
+</h3>
+
+
+<label for="visitorName">
+    닉네임
+</label>
+
+<input
+    id="visitorName"
+    type="text"
+    maxlength="30"
+    placeholder="닉네임을 입력해주세요.">
+
+
+<label for="visitorText">
+    편지 내용
+</label>
+
+<textarea
+    id="visitorText"
+    maxlength="1000"
+    placeholder="kkwo130에게 전하고 싶은 말을 적어주세요."></textarea>
+
+
+<button
+    class="primary-btn"
+    onclick="submitVisitorLetter()">
+
+    편지 보내기 💌
+
+</button>
+
+
+<div
+    id="visitorLetters">
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+    kkwo130 · Broadcast Home
+</footer>
+
+
+<!-- ================= ADMIN MODAL ================= -->
+
+<div
+    id="adminModal"
+    class="modal">
+
+
+<div class="admin-box">
+
+
+<div class="admin-header">
+
+    <h2>
+        관리자 모드
+    </h2>
+
+    <button
+        class="close-btn"
+        onclick="closeAdmin()">
+        ×
+    </button>
+
+</div>
+
+
+<!-- LOGIN -->
+
+<div id="loginArea">
+
+    <p style="color:#9fa6b8">
+        관리자 비밀번호를 입력하세요.
+    </p>
+
+    <input
+        id="adminPassword"
+        type="password"
+        placeholder="비밀번호">
+
+    <br><br>
+
+    <button
+        class="primary-btn"
+        onclick="loginAdmin()">
+
+        관리자 입장
+
+    </button>
+
+</div>
+
+
+<!-- ADMIN PANEL -->
+
+<div
+    id="adminPanel"
+    style="display:none;">
+
+
+<div class="tabs">
+
+<button
+    class="tab-btn active"
+    onclick="showAdminTab('broadcastAdmin', this)">
+    방송
+</button>
+
+<button
+    class="tab-btn"
+    onclick="showAdminTab('noticeAdmin', this)">
+    공지
+</button>
+
+<button
+    class="tab-btn"
+    onclick="showAdminTab('galleryAdmin', this)">
+    갤러리
+</button>
+
+<button
+    class="tab-btn"
+    onclick="showAdminTab('letterAdmin', this)">
+    편지
+</button>
+
+</div>
+
+
+<!-- BROADCAST ADMIN -->
+
+<div
+    id="broadcastAdmin"
+    class="admin-section active">
+
+<h3>
+    방송 관리
+</h3>
+
+
+<label>
+    방송 상태
+</label>
+
+
+<button
+    class="primary-btn"
+    onclick="setLive(true)">
+    🔴 ON AIR
+</button>
+
+
+<button
+    class="secondary-btn"
+    onclick="setLive(false)">
+    OFF AIR
+</button>
+
+
+<label>
+    방송 제목
+</label>
+
+<input
+    id="broadcastTitle"
+    type="text"
+    placeholder="오늘도 같이 놀아요">
+
+
+<label>
+    방송 안내
+</label>
+
+<input
+    id="broadcastSub"
+    type="text"
+    placeholder="오늘 밤 10시에 만나요!">
+
+
+<button
+    class="primary-btn"
+    onclick="saveBroadcast()">
+
+    방송 정보 저장
+
+</button>
+
+</div>
+
+
+<!-- NOTICE ADMIN -->
+
+<div
+    id="noticeAdmin"
+    class="admin-section">
+
+<h3>
+    공지 관리
+</h3>
+
+
+<label>
+    공지 제목
+</label>
+
+<input
+    id="noticeTitle"
+    type="text"
+    placeholder="공지 제목">
+
+
+<label>
+    공지 내용
+</label>
+
+<textarea
+    id="noticeText"
+    placeholder="공지 내용을 입력해주세요."></textarea>
+
+
+<button
+    class="primary-btn"
+    onclick="addNotice()">
+
+    공지 등록
+
+</button>
+
+
+<div
+    id="adminNoticeList">
+</div>
+
+</div>
+
+
+<!-- GALLERY ADMIN -->
+
+<div
+    id="galleryAdmin"
+    class="admin-section">
+
+<h3>
+    갤러리 관리
+</h3>
+
+
+<label>
+    사진 제목
+</label>
+
+<input
+    id="galleryTitle"
+    type="text"
+    placeholder="사진 제목">
+
+
+<label>
+    사진 URL
+</label>
+
+<input
+    id="galleryURL"
+    type="text"
+    placeholder="https://example.com/image.jpg">
+
+
+<label>
+    사진 설명
+</label>
+
+<input
+    id="galleryDescription"
+    type="text"
+    placeholder="사진 설명">
+
+
+<button
+    class="primary-btn"
+    onclick="addGallery()">
+
+    갤러리 등록
+
+</button>
+
+
+<div
+    id="adminGalleryList">
+</div>
+
+</div>
+
+
+<!-- LETTER ADMIN -->
+
+<div
+    id="letterAdmin"
+    class="admin-section">
+
+<h3>
+    관리자 편지
+</h3>
+
+
+<label>
+    편지 제목
+</label>
+
+<input
+    id="officialLetterTitle"
+    type="text"
+    placeholder="Dear kkwo130">
+
+
+<label>
+    편지 내용
+</label>
+
+<textarea
+    id="officialLetterText"
+    placeholder="kkwo130이 직접 작성하는 편지입니다."></textarea>
+
+
+<button
+    class="primary-btn"
+    onclick="saveOfficialLetter()">
+
+    관리자 편지 저장
+
+</button>
+
+
+<hr
+    style="
+        border:0;
+        border-top:1px solid #292f43;
+        margin:30px 0;
+    ">
+
+
+<h3>
+    방문자 편지 관리
+</h3>
+
+
+<p style="color:#929aac;font-size:13px;">
+    방문자가 남긴 편지를 확인하고
+    필요하면 삭제할 수 있습니다.
+</p>
+
+
+<div
+    id="adminVisitorLetters">
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   기본 설정
+===================================================== */
+
+const ADMIN_PASSWORD = "1220";
+
+const STORAGE_KEY = "kkwo130_homepage_v1";
+
+
+/* =====================================================
+   기본 데이터
+===================================================== */
+
+const defaultData = {
+
+    live: false,
+
+    broadcastTitle:
+        "현재 방송이 없습니다.",
+
+    broadcastSub:
+        "관리자 모드에서 방송 상태를 변경할 수 있어요.",
+
+    gallery: [],
+
+    notices: [],
+
+    officialLetter: {
+
+        title: "Dear kkwo130",
+
+        text:
+            "kkwo130에게 전하고 싶은 이야기를 적어주세요."
+
+    },
+
+    visitorLetters: []
+
+};
+
+
+/* =====================================================
+   데이터 불러오기
+===================================================== */
+
+let siteData =
+    JSON.parse(
+        localStorage.getItem(STORAGE_KEY)
+    ) || defaultData;
+
+
+/* =====================================================
+   기존 데이터 호환
+===================================================== */
+
+if (!Array.isArray(siteData.gallery)) {
+
+    siteData.gallery = [];
+
+}
+
+if (!Array.isArray(siteData.notices)) {
+
+    siteData.notices = [];
+
+}
+
+if (!Array.isArray(siteData.visitorLetters)) {
+
+    siteData.visitorLetters = [];
+
+}
+
+if (!siteData.officialLetter) {
+
+    siteData.officialLetter =
+        defaultData.officialLetter;
+
+}
+
+
+/* =====================================================
+   저장
+===================================================== */
+
+function saveData() {
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(siteData)
+    );
+
+    renderAll();
+
+}
+
+
+/* =====================================================
+   HTML 문자 처리
+===================================================== */
+
+function escapeHTML(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =====================================================
+   화면 전체 렌더링
+===================================================== */
+
+function renderAll() {
+
+    renderBroadcast();
+
+    renderGallery();
+
+    renderNotices();
+
+    renderOfficialLetter();
+
+    renderVisitorLetters();
+
+    renderAdmin();
+
+}
+
+
+/* =====================================================
+   방송 상태
+===================================================== */
+
+function renderBroadcast() {
+
+    const status =
+        document.getElementById(
+            "liveStatus"
+        );
+
+    const statusText =
+        document.getElementById(
+            "liveStatusText"
+        );
+
+
+    status.classList.toggle(
+        "on",
+        siteData.live
+    );
+
+
+    statusText.textContent =
+        siteData.live
+            ? "ON AIR"
+            : "OFF AIR";
+
+
+    document.getElementById(
+        "liveTitle"
+    ).textContent =
+        siteData.broadcastTitle;
+
+
+    document.getElementById(
+        "liveSub"
+    ).textContent =
+        siteData.broadcastSub;
+
+}
+
+
+/* =====================================================
+   갤러리
+===================================================== */
+
+function renderGallery() {
+
+    const grid =
+        document.getElementById(
+            "galleryGrid"
+        );
+
+
+    if (
+        !siteData.gallery ||
+        siteData.gallery.length === 0
+    ) {
+
+        grid.innerHTML =
+            `<div
+                class="empty"
+                style="grid-column:1/-1;">
+                아직 등록된 사진이 없습니다.
+            </div>`;
+
+        return;
+
+    }
+
+
+    grid.innerHTML =
+        siteData.gallery.map(
+            function(item) {
+
+                let imageStyle = "";
+
+                if (item.url) {
+
+                    const safeURL =
+                        item.url
+                            .replace(/"/g, "%22")
+                            .replace(/'/g, "%27");
+
+                    imageStyle =
+                        `background-image:url("${safeURL}");
+                         background-size:cover;
+                         background-position:center;`;
+
+                }
+
+
+                return `
+
+                <div class="gallery-card">
+
+                    <div
+                        class="gallery-image"
+                        style="${imageStyle}">
+
+                        ${
+                            item.url
+                                ? ""
+                                : "kkwo130"
+                        }
+
+                    </div>
+
+
+                    <div class="gallery-body">
+
+                        <h3>
+                            ${escapeHTML(item.title)}
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(item.description)}
+                        </p>
+
+                    </div>
+
+                </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* =====================================================
+   공지
+===================================================== */
+
+function renderNotices() {
+
+    const list =
+        document.getElementById(
+            "noticeList"
+        );
+
+
+    if (
+        !siteData.notices ||
+        siteData.notices.length === 0
+    ) {
+
+        list.innerHTML =
+            `<div class="empty">
+                등록된 공지가 없습니다.
+            </div>`;
+
+        return;
+
+    }
+
+
+    list.innerHTML =
+        siteData.notices.map(
+            function(item) {
+
+                return `
+
+                <div class="notice">
+
+                    <div class="notice-title">
+                        ${escapeHTML(item.title)}
+                    </div>
+
+                    <div class="notice-text">
+                        ${escapeHTML(item.text)}
+                    </div>
+
+                    <div class="notice-date">
+                        ${escapeHTML(item.date)}
+                    </div>
+
+                </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* =====================================================
+   관리자 편지
+===================================================== */
+
+function renderOfficialLetter() {
+
+    const box =
+        document.getElementById(
+            "officialLetter"
+        );
+
+
+    box.innerHTML = `
+
+        <h3>
+            ${escapeHTML(
+                siteData.officialLetter.title
+            )}
+        </h3>
+
+        <p>
+            ${escapeHTML(
+                siteData.officialLetter.text
+            )}
+        </p>
+
+    `;
+
+}
+
+
+/* =====================================================
+   방문자 편지
+===================================================== */
+
+function renderVisitorLetters() {
+
+    const box =
+        document.getElementById(
+            "visitorLetters"
+        );
+
+
+    if (
+        !siteData.visitorLetters ||
+        siteData.visitorLetters.length === 0
+    ) {
+
+        box.innerHTML =
+            `<div class="empty">
+                아직 도착한 편지가 없습니다.
+                <br>
+                첫 번째 편지를 남겨주세요 💌
+            </div>`;
+
+        return;
+
+    }
+
+
+    box.innerHTML =
+        siteData.visitorLetters.map(
+            function(letter) {
+
+                return `
+
+                <div class="visitor-letter">
+
+                    <div class="visitor-letter-name">
+                        ${escapeHTML(letter.name)}
+                    </div>
+
+                    <span class="visitor-letter-date">
+                        ${escapeHTML(letter.date)}
+                    </span>
+
+                    <div class="visitor-letter-text">
+                        ${escapeHTML(letter.text)}
+                    </div>
+
+                </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* =====================================================
+   방문자 편지 작성
+===================================================== */
+
+function submitVisitorLetter() {
+
+    const name =
+        document
+            .getElementById("visitorName")
+            .value
+            .trim();
+
+
+    const text =
+        document
+            .getElementById("visitorText")
+            .value
+            .trim();
+
+
+    if (!name) {
+
+        alert(
+            "닉네임을 입력해주세요."
+        );
+
+        return;
+
+    }
+
+
+    if (!text) {
+
+        alert(
+            "편지 내용을 입력해주세요."
+        );
+
+        return;
+
+    }
+
+
+    siteData.visitorLetters.unshift({
+
+        name: name,
+
+        text: text,
+
+        date:
+            new Date().toLocaleString(
+                "ko-KR"
+            )
+
+    });
+
+
+    saveData();
+
+
+    document.getElementById(
+        "visitorName"
+    ).value = "";
+
+
+    document.getElementById(
+        "visitorText"
+    ).value = "";
+
+
+    alert(
+        "편지가 등록되었습니다 💌"
+    );
+
+}
+
+
+/* =====================================================
+   관리자 창
+===================================================== */
+
+function openAdmin() {
+
+    document
+        .getElementById("adminModal")
+        .classList.add("show");
+
+
+    document
+        .getElementById("adminPassword")
+        .focus();
+
+}
+
+
+function closeAdmin() {
+
+    document
+        .getElementById("adminModal")
+        .classList.remove("show");
+
+}
+
+
+/* =====================================================
+   관리자 로그인
+===================================================== */
+
+function loginAdmin() {
+
+    const password =
+        document
+            .getElementById("adminPassword")
+            .value;
+
+
+    if (password === ADMIN_PASSWORD) {
+
+        document.getElementById(
+            "loginArea"
+        ).style.display = "none";
+
+
+        document.getElementById(
+            "adminPanel"
+        ).style.display = "block";
+
+
+        renderAdmin();
+
+
+    } else {
+
+        alert(
+            "비밀번호가 올바르지 않습니다."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   관리자 탭
+===================================================== */
+
+function showAdminTab(
+    id,
+    button
+) {
+
+    document
+        .querySelectorAll(".admin-section")
+        .forEach(
+            function(section) {
+
+                section.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+    document
+        .getElementById(id)
+        .classList.add("active");
+
+
+    document
+        .querySelectorAll(".tab-btn")
+        .forEach(
+            function(btn) {
+
+                btn.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+    button.classList.add("active");
+
+}
+
+
+/* =====================================================
+   ON AIR
+===================================================== */
+
+function setLive(status) {
+
+    siteData.live = status;
+
+    saveData();
+
+}
+
+
+/* =====================================================
+   방송 정보 저장
+===================================================== */
+
+function saveBroadcast() {
+
+    const title =
+        document
+            .getElementById("broadcastTitle")
+            .value
+            .trim();
+
+
+    const sub =
+        document
+            .getElementById("broadcastSub")
+            .value
+            .trim();
+
+
+    siteData.broadcastTitle =
+        title || "방송 중입니다.";
+
+
+    siteData.broadcastSub =
+        sub || "";
+
+
+    saveData();
+
+
+    alert(
+        "방송 정보가 저장되었습니다."
+    );
+
+}
+
+
+/* =====================================================
+   공지 등록
+===================================================== */
+
+function addNotice() {
+
+    const title =
+        document
+            .getElementById("noticeTitle")
+            .value
+            .trim();
+
+
+    const text =
+        document
+            .getElementById("noticeText")
+            .value
+            .trim();
+
+
+    if (!title) {
+
+        alert(
+            "공지 제목을 입력해주세요."
+        );
+
+        return;
+
+    }
+
+
+    siteData.notices.unshift({
+
+        title: title,
+
+        text: text,
+
+        date:
+            new Date().toLocaleString(
+                "ko-KR"
+            )
+
+    });
+
+
+    document.getElementById(
+        "noticeTitle"
+    ).value = "";
+
+
+    document.getElementById(
+        "noticeText"
+    ).value = "";
+
+
+    saveData();
+
+
+    alert(
+        "공지가 등록되었습니다."
+    );
+
+}
+
+
+/* =====================================================
+   공지 삭제
+===================================================== */
+
+function deleteNotice(index) {
+
+    if (
+        !confirm(
+            "이 공지를 삭제할까요?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    siteData.notices.splice(
+        index,
+        1
+    );
+
+
+    saveData();
+
+}
+
+
+/* =====================================================
+   갤러리 등록
+===================================================== */
+
+function addGallery() {
+
+    const title =
+        document
+            .getElementById("galleryTitle")
+            .value
+            .trim();
+
+
+    const url =
+        document
+            .getElementById("galleryURL")
+            .value
+            .trim();
+
+
+    const description =
+        document
+            .getElementById("galleryDescription")
+            .value
+            .trim();
+
+
+    if (!title) {
+
+        alert(
+            "사진 제목을 입력해주세요."
+        );
+
+        return;
+
+    }
+
+
+    siteData.gallery.unshift({
+
+        title: title,
+
+        url: url,
+
+        description: description
+
+    });
+
+
+    document.getElementById(
+        "galleryTitle"
+    ).value = "";
+
+
+    document.getElementById(
+        "galleryURL"
+    ).value = "";
+
+
+    document.getElementById(
+        "galleryDescription"
+    ).value = "";
+
+
+    saveData();
+
+
+    alert(
+        "갤러리에 추가되었습니다."
+    );
+
+}
+
+
+/* =====================================================
+   갤러리 삭제
+===================================================== */
+
+function deleteGallery(index) {
+
+    if (
+        !confirm(
+            "이 사진을 삭제할까요?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    siteData.gallery.splice(
+        index,
+        1
+    );
+
+
+    saveData();
+
+}
+
+
+/* =====================================================
+   관리자 편지 저장
+===================================================== */
+
+function saveOfficialLetter() {
+
+    const title =
+        document
+            .getElementById(
+                "officialLetterTitle"
+            )
+            .value
+            .trim();
+
+
+    const text =
+        document
+            .getElementById(
+                "officialLetterText"
+            )
+            .value
+            .trim();
+
+
+    siteData.officialLetter = {
+
+        title:
+            title || "Dear kkwo130",
+
+        text:
+            text || ""
+
+    };
+
+
+    saveData();
+
+
+    alert(
+        "관리자 편지가 저장되었습니다."
+    );
+
+}
+
+
+/* =====================================================
+   방문자 편지 삭제
+===================================================== */
+
+function deleteVisitorLetter(index) {
+
+    if (
+        !confirm(
+            "이 방문자 편지를 삭제할까요?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    siteData.visitorLetters.splice(
+        index,
+        1
+    );
+
+
+    saveData();
+
+
+    alert(
+        "방문자 편지가 삭제되었습니다."
+    );
+
+}
+
+
+/* =====================================================
+   관리자 화면 렌더링
+===================================================== */
+
+function renderAdmin() {
+
+
+    /* 방송 */
+
+    document.getElementById(
+        "broadcastTitle"
+    ).value =
+        siteData.broadcastTitle;
+
+
+    document.getElementById(
+        "broadcastSub"
+    ).value =
+        siteData.broadcastSub;
+
+
+    /* 관리자 편지 */
+
+    document.getElementById(
+        "officialLetterTitle"
+    ).value =
+        siteData.officialLetter.title;
+
+
+    document.getElementById(
+        "officialLetterText"
+    ).value =
+        siteData.officialLetter.text;
+
+
+    /* 공지 */
+
+    const noticeList =
+        document.getElementById(
+            "adminNoticeList"
+        );
+
+
+    if (siteData.notices.length === 0) {
+
+        noticeList.innerHTML =
+            `<div class="empty">
+                등록된 공지가 없습니다.
+            </div>`;
+
+    } else {
+
+        noticeList.innerHTML =
+            siteData.notices.map(
+                function(item, index) {
+
+                    return `
+
+                    <div class="admin-item">
+
+                        <div
+                            class="admin-item-content">
+
+                            <strong>
+                                ${escapeHTML(item.title)}
+                            </strong>
+
+                            <small>
+                                ${escapeHTML(item.date)}
+                            </small>
+
+                        </div>
+
+                        <button
+                            class="danger-btn"
+                            onclick="deleteNotice(${index})">
+
+                            삭제
+
+                        </button>
+
+                    </div>
+
+                    `;
+
+                }
+            ).join("");
+
+    }
+
+
+    /* 갤러리 */
+
+    const galleryList =
+        document.getElementById(
+            "adminGalleryList"
+        );
+
+
+    if (siteData.gallery.length === 0) {
+
+        galleryList.innerHTML =
+            `<div class="empty">
+                등록된 사진이 없습니다.
+            </div>`;
+
+    } else {
+
+        galleryList.innerHTML =
+            siteData.gallery.map(
+                function(item, index) {
+
+                    return `
+
+                    <div class="admin-item">
+
+                        <div
+                            class="admin-item-content">
+
+                            <strong>
+                                ${escapeHTML(item.title)}
+                            </strong>
+
+                            <small>
+                                ${escapeHTML(item.description)}
+                            </small>
+
+                        </div>
+
+                        <button
+                            class="danger-btn"
+                            onclick="deleteGallery(${index})">
+
+                            삭제
+
+                        </button>
+
+                    </div>
+
+                    `;
+
+                }
+            ).join("");
+
+    }
+
+
+    /* 방문자 편지 */
+
+    const visitorList =
+        document.getElementById(
+            "adminVisitorLetters"
+        );
+
+
+    if (
+        siteData.visitorLetters.length === 0
+    ) {
+
+        visitorList.innerHTML =
+            `<div class="empty">
+                등록된 방문자 편지가 없습니다.
+            </div>`;
+
+    } else {
+
+        visitorList.innerHTML =
+            siteData.visitorLetters.map(
+                function(letter, index) {
+
+                    return `
+
+                    <div
+                        class="visitor-letter">
+
+                        <div
+                            class="admin-item"
+                            style="border:0;padding:0;">
+
+                            <div
+                                class="admin-item-content">
+
+                                <strong>
+                                    ${escapeHTML(
+                                        letter.name
+                                    )}
+                                </strong>
+
+                                <small>
+                                    ${escapeHTML(
+                                        letter.date
+                                    )}
+                                </small>
+
+                            </div>
+
+                            <button
+                                class="danger-btn"
+                                onclick="deleteVisitorLetter(${index})">
+
+                                삭제
+
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            class="visitor-letter-text">
+
+                            ${escapeHTML(
+                                letter.text
+                            )}
+
+                        </div>
+
+                    </div>
+
+                    `;
+
+                }
+            ).join("");
+
+    }
+
+}
+
+
+/* =====================================================
+   메뉴 이동
+===================================================== */
+
+function scrollToSection(id) {
+
+    const element =
+        document.getElementById(id);
+
+
+    if (element) {
+
+        element.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
+
+}
+
+
+/* =====================================================
+   시작
+===================================================== */
+
+renderAll();
+
+</script>
+
+</body>
+</html>
