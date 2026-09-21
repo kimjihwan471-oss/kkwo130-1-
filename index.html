@@ -4,561 +4,750 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>kkwo130 — Broadcast Home</title>
+<title>스윗 — Broadcast Home</title>
 
 <style>
-* {
-    box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-html {
-    scroll-behavior: smooth;
+html{
+    scroll-behavior:smooth;
 }
 
-body {
-    margin: 0;
+body{
+    background:#030510;
+    color:#fff;
+    font-family:'Noto Sans KR',sans-serif;
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-5;
     background:
-        radial-gradient(circle at 80% 0%, #28213a 0%, transparent 35%),
-        #0b0d16;
-    color: #f5f3f7;
-    font-family: Arial, "Noto Sans KR", sans-serif;
+        radial-gradient(circle at 75% 25%,rgba(75,76,190,.30),transparent 30%),
+        radial-gradient(circle at 15% 70%,rgba(0,104,180,.18),transparent 35%),
+        linear-gradient(135deg,#02030a,#080c22 50%,#02030a);
 }
 
-button,
-input,
-textarea {
-    font-family: inherit;
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-4;
+    pointer-events:none;
+    background:radial-gradient(circle at center,transparent 0,rgba(0,0,0,.35) 100%);
 }
 
-button {
-    cursor: pointer;
+/* HEADER */
+
+.header{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    height:72px;
+    display:flex;
+    align-items:center;
+    padding:0 34px;
+    background:rgba(3,5,20,.76);
+    backdrop-filter:blur(22px);
+    border-bottom:1px solid rgba(150,160,255,.10);
+    z-index:1000;
 }
 
-header {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    background: rgba(11, 13, 22, 0.92);
-    backdrop-filter: blur(15px);
-    border-bottom: 1px solid #292e40;
+.logo{
+    width:210px;
+    font-family:'Playfair Display',serif;
+    font-size:30px;
+    letter-spacing:1px;
+    color:#eef0ff;
 }
 
-.nav {
-    max-width: 1150px;
-    margin: auto;
-    height: 72px;
-    padding: 0 22px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.logo span{
+    color:#827cff;
 }
 
-.logo {
-    font-size: 24px;
-    font-weight: 800;
-    letter-spacing: 0.12em;
+.nav{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    gap:42px;
 }
 
-.logo span {
-    color: #efb8d2;
+.nav a{
+    color:#bfc4df;
+    text-decoration:none;
+    font-size:12px;
+    letter-spacing:1.5px;
+    transition:.25s;
 }
 
-nav {
-    display: flex;
-    gap: 5px;
+.nav a:hover{
+    color:#fff;
+    text-shadow:0 0 15px rgba(120,110,255,.9);
 }
 
-nav button {
-    border: 0;
-    background: transparent;
-    color: #a9afbf;
-    padding: 9px 12px;
-    border-radius: 8px;
+.admin-btn{
+    border:1px solid rgba(135,135,255,.35);
+    background:rgba(80,75,180,.10);
+    color:#dfe1ff;
+    padding:10px 17px;
+    border-radius:30px;
+    cursor:pointer;
 }
 
-nav button:hover {
-    background: #181d2c;
-    color: white;
+/* SIDE */
+
+.side{
+    position:fixed;
+    top:72px;
+    left:0;
+    bottom:0;
+    width:150px;
+    background:rgba(2,5,20,.72);
+    backdrop-filter:blur(20px);
+    border-right:1px solid rgba(150,160,255,.08);
+    z-index:900;
+    padding-top:25px;
 }
 
-.admin-btn {
-    background: transparent;
-    border: 1px solid #30364b;
-    color: #aeb5c7;
-    border-radius: 9px;
-    padding: 9px 13px;
+.side a{
+    display:block;
+    padding:18px 23px;
+    color:#9298ba;
+    text-decoration:none;
+    font-size:12px;
+    border-left:2px solid transparent;
+    transition:.25s;
 }
 
-.admin-btn:hover {
-    background: #181d2c;
-    color: white;
+.side a:hover,
+.side a.active{
+    color:#fff;
+    border-left-color:#7771ff;
+    background:linear-gradient(90deg,rgba(100,90,255,.18),transparent);
+}
+
+/* MAIN */
+
+main{
+    margin-left:150px;
+    padding-top:72px;
 }
 
 /* HERO */
 
-main {
-    max-width: 1150px;
-    margin: auto;
+.hero{
+    position:relative;
+    min-height:650px;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    padding:80px 7%;
 }
 
-.hero {
-    min-height: 570px;
-    padding: 80px 22px;
+.hero-photo{
+    position:absolute;
+    top:0;
+    right:0;
+    width:68%;
+    height:100%;
 
-    display: grid;
-    grid-template-columns: 1.25fr 0.75fr;
-    gap: 35px;
-    align-items: center;
+    background-image:
+        linear-gradient(
+            90deg,
+            #030510 0%,
+            rgba(3,5,16,.90) 10%,
+            rgba(3,5,16,.45) 38%,
+            rgba(3,5,16,.08) 100%
+        ),
+        url("hero.jpg");
+
+    background-position:center;
+    background-size:cover;
+    z-index:0;
 }
 
-.eyebrow {
-    color: #efb8d2;
-    font-size: 12px;
-    letter-spacing: 0.2em;
+.hero-photo::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        180deg,
+        rgba(0,0,0,.05),
+        rgba(0,0,0,.30)
+    );
 }
 
-h1 {
-    font-family: Georgia, serif;
-    font-size: clamp(55px, 8vw, 95px);
-    line-height: 0.9;
-    margin: 18px 0;
+.hero-glow{
+    position:absolute;
+    width:500px;
+    height:500px;
+    right:18%;
+    top:10%;
+    border-radius:50%;
+    background:rgba(85,80,255,.12);
+    filter:blur(90px);
+    z-index:0;
 }
 
-.hero-description {
-    color: #9fa6b8;
-    line-height: 1.8;
-    max-width: 600px;
+.hero-content{
+    position:relative;
+    z-index:2;
+    width:55%;
+    max-width:650px;
 }
 
-/* ON AIR */
-
-.live-box {
-    background: linear-gradient(145deg, #171b2b, #10131e);
-    border: 1px solid #292f43;
-    border-radius: 22px;
-    padding: 30px;
-
-    box-shadow: 0 25px 70px rgba(0,0,0,0.35);
+.small{
+    color:#858bd2;
+    font-size:13px;
+    letter-spacing:3px;
+    margin-bottom:18px;
 }
 
-.live-status {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    color: #777f91;
-    font-weight: bold;
-    letter-spacing: 0.12em;
+.hero h1{
+    font-family:'Playfair Display',serif;
+    font-size:67px;
+    font-weight:400;
+    line-height:1;
 }
 
-.live-status.on {
-    color: #ff7597;
+.script{
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-size:49px;
+    color:#8580ff;
+    margin-top:4px;
+    text-shadow:0 0 25px rgba(115,105,255,.55);
 }
 
-.live-dot {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    background: #555b6d;
+.description{
+    margin-top:25px;
+    color:#b6bad2;
+    font-size:14px;
+    line-height:1.9;
+    white-space:pre-line;
 }
 
-.live-status.on .live-dot {
-    background: #ff5679;
-    box-shadow: 0 0 18px #ff5679;
-    animation: pulse 1.2s infinite;
+/* AIR */
+
+.air{
+    width:470px;
+    max-width:100%;
+    margin-top:30px;
+    padding:22px 25px;
+    border-radius:17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34,43,95,.50),
+            rgba(5,8,25,.72)
+        );
+
+    border:1px solid rgba(117,121,255,.46);
+    backdrop-filter:blur(18px);
+    box-shadow:0 0 35px rgba(60,70,255,.12);
 }
 
-@keyframes pulse {
-    50% {
-        opacity: 0.3;
-        transform: scale(0.75);
-    }
+.air.offline{
+    opacity:.65;
 }
 
-.live-title {
-    font-size: 25px;
-    margin: 20px 0 7px;
+.air-line{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#ff86aa;
+    font-size:13px;
 }
 
-.live-sub {
-    color: #9098aa;
-    line-height: 1.6;
+.dot{
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:#ff5d91;
+    box-shadow:0 0 8px #ff5d91,0 0 20px #ff5d91;
+    animation:blink 1.5s infinite;
 }
 
-/* SECTIONS */
-
-section {
-    padding: 65px 22px;
+@keyframes blink{
+    50%{opacity:.3}
 }
 
-.section-title {
-    margin-bottom: 25px;
+.air-title{
+    font-size:20px;
+    margin-top:13px;
 }
 
-.section-title h2 {
-    font-family: Georgia, serif;
-    font-size: 36px;
-    margin: 0 0 8px;
+.air-sub{
+    font-size:12px;
+    color:#9299bd;
+    margin-top:5px;
 }
 
-.section-title p {
-    color: #8991a5;
-    margin: 0;
+.air-btn{
+    display:inline-block;
+    margin-top:15px;
+    padding:9px 18px;
+    border-radius:30px;
+    text-decoration:none;
+    color:#fff;
+    border:1px solid rgba(120,120,255,.50);
+    background:rgba(90,80,255,.17);
+}
+
+/* SECTION */
+
+.section{
+    padding:60px 5%;
+}
+
+.section-head{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    margin-bottom:25px;
+}
+
+.section-head h2{
+    font-family:'Playfair Display',serif;
+    font-size:32px;
+    font-weight:400;
+}
+
+.section-head p{
+    color:#73799b;
+    font-size:11px;
+    margin-top:5px;
+}
+
+.glass{
+    background:linear-gradient(
+        135deg,
+        rgba(18,25,63,.67),
+        rgba(5,8,24,.74)
+    );
+
+    border:1px solid rgba(140,150,255,.12);
+    border-radius:18px;
+    backdrop-filter:blur(18px);
 }
 
 /* GALLERY */
 
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
 }
 
-.gallery-card {
-    overflow: hidden;
-    background: #131827;
-    border: 1px solid #292f43;
-    border-radius: 18px;
+.gallery-card{
+    overflow:hidden;
+    transition:.3s;
 }
 
-.gallery-image {
-    height: 215px;
-
-    background:
-        linear-gradient(135deg, #302944, #b98ca7);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-family: Georgia, serif;
-    font-size: 35px;
+.gallery-card:hover{
+    transform:translateY(-4px);
 }
 
-.gallery-body {
-    padding: 18px;
+.gallery-img{
+    width:100%;
+    aspect-ratio:16/10;
+    object-fit:cover;
+    display:block;
 }
 
-.gallery-body h3 {
-    margin: 0 0 8px;
+.gallery-info{
+    padding:15px 17px;
 }
 
-.gallery-body p {
-    margin: 0;
-    color: #9da5b7;
-    line-height: 1.6;
+.gallery-info h3{
+    font-size:13px;
+    font-weight:500;
+}
+
+.gallery-info p{
+    margin-top:5px;
+    color:#686f93;
+    font-size:10px;
 }
 
 /* NOTICE */
 
-.notice {
-    background: #131827;
-    border: 1px solid #292f43;
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 12px;
+.notice-list{
+    overflow:hidden;
 }
 
-.notice-title {
-    font-weight: bold;
-    font-size: 17px;
+.notice{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:17px 20px;
+    border-bottom:1px solid rgba(255,255,255,.06);
 }
 
-.notice-text {
-    color: #9da5b7;
-    line-height: 1.7;
-    white-space: pre-wrap;
-    margin: 10px 0;
+.notice:last-child{
+    border-bottom:0;
 }
 
-.notice-date {
-    color: #6f778a;
-    font-size: 12px;
+.tag{
+    padding:4px 9px;
+    border-radius:20px;
+    background:rgba(95,90,230,.18);
+    color:#9a96ff;
+    font-size:10px;
+}
+
+.notice-text{
+    flex:1;
+    font-size:12px;
+}
+
+.date{
+    color:#656b8e;
+    font-size:10px;
+}
+
+/* TWO */
+
+.two{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
 }
 
 /* LETTER */
 
-.official-letter {
-    max-width: 820px;
-    background: #eee1dd;
-    color: #2c2730;
-
-    border-radius: 22px;
-    padding: 35px;
-
-    box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+.letter{
+    padding:25px;
 }
 
-.official-letter h3 {
-    font-family: Georgia, serif;
-    font-size: 28px;
-    margin-top: 0;
+.letter-paper{
+    min-height:300px;
+    padding:30px;
+    display:flex;
+    align-items:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(31,37,75,.70),
+            rgba(7,10,27,.65)
+        );
+
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:13px;
 }
 
-.official-letter p {
-    white-space: pre-wrap;
-    line-height: 2;
+.letter-text{
+    font-family:'Playfair Display',serif;
+    font-size:17px;
+    line-height:2;
+    color:#d9dcf0;
+    white-space:pre-line;
 }
 
-/* VISITOR LETTER */
+/* WRITE */
 
-.write-letter {
-    max-width: 820px;
-
-    background: #131827;
-    border: 1px solid #292f43;
-    border-radius: 20px;
-
-    padding: 30px;
+.write{
+    padding:25px;
 }
 
-.write-letter h3 {
-    margin-top: 0;
+.input{
+    width:100%;
+    padding:13px 15px;
+    margin-bottom:11px;
+    border-radius:11px;
+    border:1px solid rgba(120,130,210,.17);
+    background:rgba(10,16,40,.75);
+    color:#fff;
+    outline:none;
+    font-family:inherit;
 }
 
-label {
-    display: block;
-    color: #9fa6b8;
-    font-size: 13px;
-    margin: 15px 0 7px;
+textarea.input{
+    height:150px;
+    resize:vertical;
 }
 
-input,
-textarea {
-    width: 100%;
-
-    background: #0a0d16;
-    color: white;
-
-    border: 1px solid #30364a;
-    border-radius: 9px;
-
-    padding: 12px;
-    outline: none;
+.send{
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:11px;
+    color:#fff;
+    background:linear-gradient(135deg,#7771ff,#5f58df);
+    cursor:pointer;
+    font-weight:600;
 }
 
-input:focus,
-textarea:focus {
-    border-color: #efb8d2;
+/* VISITOR */
+
+.visitors{
+    margin-top:20px;
+    max-height:350px;
+    overflow:auto;
 }
 
-textarea {
-    min-height: 130px;
-    resize: vertical;
+.visitor{
+    padding:15px;
+    margin-bottom:9px;
+    background:rgba(20,27,58,.60);
+    border:1px solid rgba(130,130,220,.08);
+    border-radius:12px;
 }
 
-.primary-btn {
-    margin-top: 15px;
-
-    border: 0;
-    border-radius: 9px;
-
-    background: #efb8d2;
-    color: #241b21;
-
-    padding: 12px 18px;
-    font-weight: bold;
+.visitor-top{
+    display:flex;
+    justify-content:space-between;
+    color:#6d7396;
+    font-size:10px;
 }
 
-.primary-btn:hover {
-    filter: brightness(1.08);
+.visitor-name{
+    color:#d5d8ec;
+    font-weight:600;
 }
 
-.visitor-letter {
-    margin-top: 15px;
-    padding: 18px;
-
-    background: #181e2d;
-    border: 1px solid #292f43;
-    border-radius: 13px;
-}
-
-.visitor-letter-name {
-    font-weight: bold;
-}
-
-.visitor-letter-date {
-    display: block;
-    color: #6f778a;
-    font-size: 12px;
-    margin-top: 5px;
-}
-
-.visitor-letter-text {
-    margin-top: 12px;
-    color: #c2c7d2;
-    line-height: 1.7;
-    white-space: pre-wrap;
+.visitor-text{
+    margin-top:8px;
+    color:#adb2cd;
+    font-size:12px;
+    line-height:1.7;
+    white-space:pre-wrap;
 }
 
 /* FOOTER */
 
-footer {
-    text-align: center;
-    color: #666f82;
-    padding: 60px 20px;
+footer{
+    text-align:center;
+    padding:65px 20px 80px;
+    color:#5e6588;
+    font-size:10px;
+}
+
+.footer-logo{
+    font-family:'Playfair Display',serif;
+    color:#aeb3d9;
+    font-size:21px;
+    margin-bottom:8px;
 }
 
 /* MODAL */
 
-.modal {
-    display: none;
-
-    position: fixed;
-    inset: 0;
-
-    background: rgba(0,0,0,0.75);
-
-    z-index: 100;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 20px;
+.modal{
+    position:fixed;
+    inset:0;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(12px);
+    z-index:5000;
 }
 
-.modal.show {
-    display: flex;
+.modal.show{
+    display:flex;
 }
 
-.admin-box {
-    width: min(750px, 100%);
-    max-height: 90vh;
-
-    overflow-y: auto;
-
-    background: #111624;
-    border: 1px solid #30364a;
-    border-radius: 20px;
-
-    padding: 25px;
+.modal-box{
+    width:850px;
+    max-width:100%;
+    max-height:90vh;
+    overflow:auto;
+    padding:30px;
+    border-radius:20px;
+    background:linear-gradient(145deg,#101633,#050714);
+    border:1px solid rgba(130,130,255,.25);
+    box-shadow:0 30px 100px rgba(0,0,0,.7);
 }
 
-.admin-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
 }
 
-.close-btn {
-    background: none;
-    border: 0;
-    color: #aaa;
-    font-size: 28px;
+.modal-head h2{
+    font-family:'Playfair Display',serif;
+    font-weight:400;
 }
 
-.tabs {
-    display: flex;
-    gap: 7px;
-    flex-wrap: wrap;
-
-    margin: 20px 0;
+.close{
+    border:0;
+    background:none;
+    color:#aaa;
+    font-size:27px;
+    cursor:pointer;
 }
 
-.tab-btn {
-    border: 0;
-    border-radius: 9px;
+/* TABS */
 
-    padding: 10px 13px;
-
-    background: #1b2132;
-    color: #aab1c1;
+.tabs{
+    display:flex;
+    gap:8px;
+    overflow:auto;
+    margin-bottom:20px;
 }
 
-.tab-btn.active {
-    background: #efb8d2;
-    color: #241b21;
+.tabs button{
+    padding:9px 15px;
+    white-space:nowrap;
+    border-radius:20px;
+    border:1px solid rgba(130,130,255,.17);
+    background:rgba(60,60,130,.18);
+    color:#aaa;
+    cursor:pointer;
 }
 
-.admin-section {
-    display: none;
+.tabs button.active{
+    background:#6964ed;
+    color:#fff;
 }
 
-.admin-section.active {
-    display: block;
+.panel{
+    display:none;
 }
 
-.secondary-btn {
-    border: 0;
-    border-radius: 9px;
-
-    padding: 10px 13px;
-
-    background: #292e3c;
-    color: #ddd;
+.panel.active{
+    display:block;
 }
 
-.danger-btn {
-    border: 0;
-    border-radius: 8px;
+/* ADMIN */
 
-    padding: 8px 11px;
-
-    background: #321b24;
-    color: #ff9caf;
+.admin-btn2{
+    padding:11px 15px;
+    border-radius:10px;
+    border:1px solid rgba(130,130,255,.25);
+    background:rgba(90,80,220,.18);
+    color:#fff;
+    cursor:pointer;
 }
 
-.admin-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 12px;
-
-    padding: 12px 0;
-
-    border-bottom: 1px solid #282e40;
+.admin-group{
+    margin-bottom:25px;
+    padding-bottom:20px;
+    border-bottom:1px solid rgba(255,255,255,.07);
 }
 
-.admin-item-content {
-    flex: 1;
+.admin-group h3{
+    margin-bottom:13px;
+    font-size:15px;
 }
 
-.admin-item-content strong {
-    display: block;
+.admin-label{
+    display:block;
+    margin-bottom:6px;
+    color:#888fb3;
+    font-size:11px;
 }
 
-.admin-item-content small {
-    color: #777f92;
+.admin-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px;
+    margin-bottom:8px;
+    background:rgba(255,255,255,.035);
+    border-radius:10px;
 }
 
-.empty {
-    color: #737b8f;
-    text-align: center;
-    padding: 25px;
+.admin-item-text{
+    flex:1;
+    font-size:12px;
+}
+
+.delete{
+    border:1px solid rgba(255,70,100,.3);
+    background:rgba(200,40,70,.13);
+    color:#ff9bad;
+    padding:7px 10px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.save-all{
+    position:sticky;
+    bottom:0;
+    width:100%;
+    margin-top:20px;
+    padding:15px;
+    border:0;
+    border-radius:12px;
+    background:linear-gradient(135deg,#7771ff,#554ee0);
+    color:#fff;
+    font-weight:700;
+    cursor:pointer;
 }
 
 /* MOBILE */
 
-@media (max-width: 800px) {
+@media(max-width:950px){
 
-    .hero {
-        grid-template-columns: 1fr;
-        padding-top: 55px;
+    .side{
+        display:none;
     }
 
-    .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
+    main{
+        margin-left:0;
     }
 
-    nav {
-        display: none;
-    }
-}
-
-@media (max-width: 520px) {
-
-    .gallery-grid {
-        grid-template-columns: 1fr;
+    .header{
+        padding:0 18px;
     }
 
-    .nav {
-        height: 65px;
+    .logo{
+        width:auto;
     }
 
-    .hero {
-        padding-top: 40px;
+    .nav{
+        display:none;
+    }
+
+    .hero{
+        min-height:720px;
+        padding:80px 25px 50px;
+        align-items:flex-end;
+    }
+
+    .hero-photo{
+        width:100%;
+        opacity:.72;
+    }
+
+    .hero-content{
+        width:100%;
+    }
+
+    .hero h1{
+        font-size:49px;
+    }
+
+    .script{
+        font-size:36px;
+    }
+
+    .gallery{
+        grid-template-columns:1fr;
+    }
+
+    .two{
+        grid-template-columns:1fr;
+    }
+
+    .section{
+        padding:45px 20px;
     }
 }
 </style>
@@ -566,1115 +755,1600 @@ footer {
 
 <body>
 
-<!-- ================= HEADER ================= -->
+<header class="header">
 
-<header>
-
-<div class="nav">
-
-    <div class="logo">
-        kkwo130<span>•</span>
+    <div class="logo" id="siteLogo">
+        스윗<span>•</span>
     </div>
 
-    <nav>
-        <button onclick="scrollToSection('home')">HOME</button>
-        <button onclick="scrollToSection('gallery')">GALLERY</button>
-        <button onclick="scrollToSection('notice')">NOTICE</button>
-        <button onclick="scrollToSection('letter')">LETTER</button>
-        <button onclick="scrollToSection('write-letter')">WRITE</button>
+    <nav class="nav">
+        <a href="#home" id="navHome">HOME</a>
+        <a href="#gallery" id="navGallery">GALLERY</a>
+        <a href="#notice" id="navNotice">NOTICE</a>
+        <a href="#letter" id="navLetter">LETTER</a>
+        <a href="#write" id="navWrite">WRITE</a>
     </nav>
 
-    <button class="admin-btn" onclick="openAdmin()">
-        관리자
+    <button class="admin-btn" onclick="openLogin()">
+        ♙ 관리자
     </button>
-
-</div>
 
 </header>
 
 
+<aside class="side">
+
+    <a href="#home" class="active" id="sideHome">◆ HOME</a>
+    <a href="#gallery" id="sideGallery">▣ GALLERY</a>
+    <a href="#notice" id="sideNotice">▤ NOTICE</a>
+    <a href="#letter" id="sideLetter">♡ LETTER</a>
+    <a href="#write" id="sideWrite">✎ WRITE</a>
+
+</aside>
+
+
 <main>
 
-<!-- ================= HOME ================= -->
+<section id="home" class="hero">
 
-<section class="hero" id="home">
+    <div class="hero-photo" id="heroPhoto"></div>
 
-<div>
+    <div class="hero-glow"></div>
 
-    <div class="eyebrow">
-        SPOON DJ · kkwo130
+    <div class="hero-content">
+
+        <div class="small" id="heroSmall">
+            SPOON DJ · 스윗
+        </div>
+
+        <h1 id="heroTitle">
+            스윗's
+        </h1>
+
+        <div class="script" id="heroScript">
+            little space
+        </div>
+
+        <p class="description" id="heroDescription">
+            스윗의 방송과 사진, 공지,
+            그리고 팬들이 남겨주는 편지를
+            한곳에서 볼 수 있는 작은 공간입니다.
+        </p>
+
+
+        <div class="air" id="air">
+
+            <div class="air-line">
+
+                <span class="dot"></span>
+
+                <span id="airStatus">
+                    ON AIR
+                </span>
+
+            </div>
+
+            <div class="air-title" id="airTitle">
+                오늘도 같이 놀아요 💙
+            </div>
+
+            <div class="air-sub" id="airSub">
+                지금 바로, 스윗과 함께해요!
+            </div>
+
+            <a href="#" class="air-btn" id="airButton">
+                방송 바로가기 →
+            </a>
+
+        </div>
+
     </div>
 
-    <h1>
-        kkwo130's<br>
-        little space.
-    </h1>
-
-    <p class="hero-description">
-        kkwo130의 방송과 사진, 공지,
-        그리고 팬들이 남겨주는 편지를
-        한곳에서 볼 수 있는 작은 공간입니다.
-    </p>
-
-</div>
+</section>
 
 
-<div class="live-box">
+<section id="gallery" class="section">
 
-    <div id="liveStatus" class="live-status">
+    <div class="section-head">
 
-        <span class="live-dot"></span>
+        <div>
+            <h2 id="galleryTitle">
+                Gallery
+            </h2>
 
-        <span id="liveStatusText">
-            OFF AIR
-        </span>
+            <p id="galleryDescription">
+                스윗의 순간들을 기록해요.
+            </p>
+        </div>
 
     </div>
 
-    <div class="live-title" id="liveTitle">
-        현재 방송이 없습니다.
+    <div class="gallery" id="galleryList"></div>
+
+</section>
+
+
+<section id="notice" class="section">
+
+    <div class="section-head">
+
+        <div>
+
+            <h2 id="noticeTitle">
+                Notice
+            </h2>
+
+            <p id="noticeDescription">
+                방송과 관련된 새로운 소식을 확인하세요.
+            </p>
+
+        </div>
+
     </div>
 
-    <div class="live-sub" id="liveSub">
-        관리자 모드에서 방송 상태를 변경할 수 있어요.
+    <div class="notice-list glass" id="noticeList"></div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="two">
+
+        <div id="letter">
+
+            <div class="section-head">
+
+                <div>
+
+                    <h2 id="letterTitle">
+                        Letter
+                    </h2>
+
+                    <p id="letterDescription">
+                        스윗이 전하는 이야기
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="letter glass">
+
+                <div class="letter-paper">
+
+                    <div
+                        class="letter-text"
+                        id="officialLetter"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div id="write">
+
+            <div class="section-head">
+
+                <div>
+
+                    <h2 id="writeTitle">
+                        Write a Letter
+                    </h2>
+
+                    <p id="writeDescription">
+                        스윗에게 하고 싶은 이야기를 남겨주세요.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="write glass">
+
+                <input
+                    id="nickname"
+                    class="input"
+                    placeholder="닉네임을 입력해주세요."
+                    maxlength="20"
+                >
+
+                <textarea
+                    id="letterText"
+                    class="input"
+                    placeholder="스윗에게 전하고 싶은 말을 적어주세요."
+                    maxlength="500"
+                ></textarea>
+
+                <button
+                    class="send"
+                    onclick="sendLetter()"
+                >
+                    ✉ 편지 보내기 💌
+                </button>
+
+                <div
+                    class="visitors"
+                    id="visitorList"
+                ></div>
+
+            </div>
+
+        </div>
+
     </div>
 
-</div>
-
 </section>
 
 
-<!-- ================= GALLERY ================= -->
+<footer>
 
-<section id="gallery">
+    <div class="footer-logo" id="footerLogo">
+        스윗
+    </div>
 
-<div class="section-title">
+    <div id="footerText">
+        스윗 · Broadcast Home
+    </div>
 
-    <h2>Gallery</h2>
+    <div
+        style="margin-top:8px;"
+        id="footerSub"
+    >
+        좋은 사람들과 함께, 더 특별한 순간을.
+    </div>
 
-    <p>
-        kkwo130의 순간들을 기록해요.
-    </p>
-
-</div>
-
-<div
-    id="galleryGrid"
-    class="gallery-grid">
-</div>
-
-</section>
-
-
-<!-- ================= NOTICE ================= -->
-
-<section id="notice">
-
-<div class="section-title">
-
-    <h2>Notice</h2>
-
-    <p>
-        방송과 관련된 새로운 소식을 확인하세요.
-    </p>
-
-</div>
-
-<div id="noticeList">
-</div>
-
-</section>
-
-
-<!-- ================= OFFICIAL LETTER ================= -->
-
-<section id="letter">
-
-<div class="section-title">
-
-    <h2>Letter</h2>
-
-    <p>
-        kkwo130이 전하는 이야기
-    </p>
-
-</div>
-
-<div
-    id="officialLetter"
-    class="official-letter">
-</div>
-
-</section>
-
-
-<!-- ================= VISITOR LETTER ================= -->
-
-<section id="write-letter">
-
-<div class="section-title">
-
-    <h2>Write a Letter</h2>
-
-    <p>
-        kkwo130에게 하고 싶은 이야기를 남겨주세요.
-    </p>
-
-</div>
-
-
-<div class="write-letter">
-
-<h3>
-    kkwo130에게 💌
-</h3>
-
-
-<label for="visitorName">
-    닉네임
-</label>
-
-<input
-    id="visitorName"
-    type="text"
-    maxlength="30"
-    placeholder="닉네임을 입력해주세요.">
-
-
-<label for="visitorText">
-    편지 내용
-</label>
-
-<textarea
-    id="visitorText"
-    maxlength="1000"
-    placeholder="kkwo130에게 전하고 싶은 말을 적어주세요."></textarea>
-
-
-<button
-    class="primary-btn"
-    onclick="submitVisitorLetter()">
-
-    편지 보내기 💌
-
-</button>
-
-
-<div
-    id="visitorLetters">
-</div>
-
-</div>
-
-</section>
+</footer>
 
 </main>
 
 
-<footer>
-    kkwo130 · Broadcast Home
-</footer>
-
-
-<!-- ================= ADMIN MODAL ================= -->
-
-<div
-    id="adminModal"
-    class="modal">
-
-
-<div class="admin-box">
-
-
-<div class="admin-header">
-
-    <h2>
-        관리자 모드
-    </h2>
-
-    <button
-        class="close-btn"
-        onclick="closeAdmin()">
-        ×
-    </button>
-
-</div>
-
-
 <!-- LOGIN -->
 
-<div id="loginArea">
+<div class="modal" id="loginModal">
 
-    <p style="color:#9fa6b8">
-        관리자 비밀번호를 입력하세요.
-    </p>
+    <div class="modal-box">
 
-    <input
-        id="adminPassword"
-        type="password"
-        placeholder="비밀번호">
+        <div class="modal-head">
 
-    <br><br>
+            <h2>Administrator</h2>
 
-    <button
-        class="primary-btn"
-        onclick="loginAdmin()">
+            <button
+                class="close"
+                onclick="closeModal('loginModal')"
+            >
+                ×
+            </button>
 
-        관리자 입장
+        </div>
 
-    </button>
+        <input
+            id="password"
+            class="input"
+            type="password"
+            placeholder="관리자 비밀번호"
+        >
+
+        <button
+            class="send"
+            onclick="login()"
+        >
+            관리자 로그인
+        </button>
+
+    </div>
 
 </div>
 
 
-<!-- ADMIN PANEL -->
+<!-- ADMIN -->
 
-<div
-    id="adminPanel"
-    style="display:none;">
+<div class="modal" id="adminModal">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+<h2>스윗 관리자 모드</h2>
+
+<button
+class="close"
+onclick="closeModal('adminModal')"
+>
+×
+</button>
+
+</div>
 
 
 <div class="tabs">
 
-<button
-    class="tab-btn active"
-    onclick="showAdminTab('broadcastAdmin', this)">
-    방송
+<button class="active" onclick="tab('homeAdmin',this)">
+홈페이지
 </button>
 
-<button
-    class="tab-btn"
-    onclick="showAdminTab('noticeAdmin', this)">
-    공지
+<button onclick="tab('broadcastAdmin',this)">
+방송
 </button>
 
-<button
-    class="tab-btn"
-    onclick="showAdminTab('galleryAdmin', this)">
-    갤러리
+<button onclick="tab('galleryAdmin',this)">
+갤러리
 </button>
 
-<button
-    class="tab-btn"
-    onclick="showAdminTab('letterAdmin', this)">
-    편지
+<button onclick="tab('noticeAdmin',this)">
+공지
 </button>
 
-</div>
-
-
-<!-- BROADCAST ADMIN -->
-
-<div
-    id="broadcastAdmin"
-    class="admin-section active">
-
-<h3>
-    방송 관리
-</h3>
-
-
-<label>
-    방송 상태
-</label>
-
-
-<button
-    class="primary-btn"
-    onclick="setLive(true)">
-    🔴 ON AIR
+<button onclick="tab('letterAdmin',this)">
+편지
 </button>
 
-
-<button
-    class="secondary-btn"
-    onclick="setLive(false)">
-    OFF AIR
-</button>
-
-
-<label>
-    방송 제목
-</label>
-
-<input
-    id="broadcastTitle"
-    type="text"
-    placeholder="오늘도 같이 놀아요">
-
-
-<label>
-    방송 안내
-</label>
-
-<input
-    id="broadcastSub"
-    type="text"
-    placeholder="오늘 밤 10시에 만나요!">
-
-
-<button
-    class="primary-btn"
-    onclick="saveBroadcast()">
-
-    방송 정보 저장
-
+<button onclick="tab('menuAdmin',this)">
+메뉴
 </button>
 
 </div>
 
 
-<!-- NOTICE ADMIN -->
+<!-- ================= HOME ADMIN ================= -->
 
-<div
-    id="noticeAdmin"
-    class="admin-section">
+<div class="panel active" id="homeAdmin">
 
-<h3>
-    공지 관리
-</h3>
+<div class="admin-group">
 
+<h3>사이트 기본 정보</h3>
 
-<label>
-    공지 제목
+<label class="admin-label">
+사이트 이름
 </label>
 
 <input
-    id="noticeTitle"
-    type="text"
-    placeholder="공지 제목">
+class="input"
+id="editSiteName"
+>
 
+<label class="admin-label">
+Hero 작은 문구
+</label>
 
-<label>
-    공지 내용
+<input
+class="input"
+id="editHeroSmall"
+>
+
+<label class="admin-label">
+메인 제목
+</label>
+
+<input
+class="input"
+id="editHeroTitle"
+>
+
+<label class="admin-label">
+메인 강조 문구
+</label>
+
+<input
+class="input"
+id="editHeroScript"
+>
+
+<label class="admin-label">
+소개 문구
 </label>
 
 <textarea
-    id="noticeText"
-    placeholder="공지 내용을 입력해주세요."></textarea>
-
-
-<button
-    class="primary-btn"
-    onclick="addNotice()">
-
-    공지 등록
-
-</button>
-
-
-<div
-    id="adminNoticeList">
-</div>
+class="input"
+id="editHeroDescription"
+></textarea>
 
 </div>
 
 
-<!-- GALLERY ADMIN -->
+<div class="admin-group">
 
-<div
-    id="galleryAdmin"
-    class="admin-section">
+<h3>기존 배경 편집</h3>
 
-<h3>
-    갤러리 관리
-</h3>
-
-
-<label>
-    사진 제목
-</label>
-
-<input
-    id="galleryTitle"
-    type="text"
-    placeholder="사진 제목">
-
-
-<label>
-    사진 URL
-</label>
-
-<input
-    id="galleryURL"
-    type="text"
-    placeholder="https://example.com/image.jpg">
-
-
-<label>
-    사진 설명
-</label>
-
-<input
-    id="galleryDescription"
-    type="text"
-    placeholder="사진 설명">
-
-
-<button
-    class="primary-btn"
-    onclick="addGallery()">
-
-    갤러리 등록
-
-</button>
-
-
-<div
-    id="adminGalleryList">
-</div>
-
-</div>
-
-
-<!-- LETTER ADMIN -->
-
-<div
-    id="letterAdmin"
-    class="admin-section">
-
-<h3>
-    관리자 편지
-</h3>
-
-
-<label>
-    편지 제목
-</label>
-
-<input
-    id="officialLetterTitle"
-    type="text"
-    placeholder="Dear kkwo130">
-
-
-<label>
-    편지 내용
-</label>
-
-<textarea
-    id="officialLetterText"
-    placeholder="kkwo130이 직접 작성하는 편지입니다."></textarea>
-
-
-<button
-    class="primary-btn"
-    onclick="saveOfficialLetter()">
-
-    관리자 편지 저장
-
-</button>
-
-
-<hr
-    style="
-        border:0;
-        border-top:1px solid #292f43;
-        margin:30px 0;
-    ">
-
-
-<h3>
-    방문자 편지 관리
-</h3>
-
-
-<p style="color:#929aac;font-size:13px;">
-    방문자가 남긴 편지를 확인하고
-    필요하면 삭제할 수 있습니다.
+<p style="font-size:11px;color:#777;margin-bottom:12px;">
+현재 hero.jpg 배경은 그대로 유지하면서
+아래 설정만 변경할 수 있습니다.
 </p>
 
+<label class="admin-label">
+배경 이미지 URL
+</label>
 
-<div
-    id="adminVisitorLetters">
+<input
+class="input"
+id="editBackground"
+placeholder="비워두면 기존 hero.jpg 사용"
+>
+
+<label class="admin-label">
+배경 위치
+</label>
+
+<select
+class="input"
+id="editBackgroundPosition"
+>
+<option value="center">CENTER</option>
+<option value="center top">CENTER TOP</option>
+<option value="center bottom">CENTER BOTTOM</option>
+<option value="left center">LEFT</option>
+<option value="right center">RIGHT</option>
+</select>
+
+</div>
+
+
+<div class="admin-group">
+
+<h3>하단 Footer</h3>
+
+<input
+class="input"
+id="editFooterText"
+placeholder="Footer 메인"
+>
+
+<input
+class="input"
+id="editFooterSub"
+placeholder="Footer 설명"
+>
+
+</div>
+
+<button
+class="save-all"
+onclick="saveHomeSettings()"
+>
+홈페이지 변경사항 저장
+</button>
+
+</div>
+
+
+<!-- ================= BROADCAST ================= -->
+
+<div class="panel" id="broadcastAdmin">
+
+<div class="admin-group">
+
+<h3>방송 상태</h3>
+
+<button
+class="admin-btn2"
+onclick="toggleAir()"
+>
+ON AIR / OFF AIR 전환
+</button>
+
+</div>
+
+<label class="admin-label">
+방송 제목
+</label>
+
+<input
+class="input"
+id="editAirTitle"
+>
+
+<label class="admin-label">
+방송 설명
+</label>
+
+<input
+class="input"
+id="editAirSub"
+>
+
+<label class="admin-label">
+방송 링크
+</label>
+
+<input
+class="input"
+id="editAirUrl"
+>
+
+<button
+class="save-all"
+onclick="saveBroadcast()"
+>
+방송 정보 저장
+</button>
+
+</div>
+
+
+<!-- ================= GALLERY ================= -->
+
+<div class="panel" id="galleryAdmin">
+
+<h3>갤러리 추가</h3>
+
+<input
+class="input"
+id="galleryUrl"
+placeholder="이미지 URL"
+>
+
+<input
+class="input"
+id="galleryName"
+placeholder="사진 제목"
+>
+
+<input
+class="input"
+id="galleryDate"
+placeholder="날짜"
+>
+
+<button
+class="admin-btn2"
+onclick="addGallery()"
+>
+갤러리 추가
+</button>
+
+<hr style="border-color:rgba(255,255,255,.08);margin:25px 0;">
+
+<div id="adminGallery"></div>
+
+</div>
+
+
+<!-- ================= NOTICE ================= -->
+
+<div class="panel" id="noticeAdmin">
+
+<h3>공지 추가</h3>
+
+<input
+class="input"
+id="newNotice"
+placeholder="공지 내용"
+>
+
+<input
+class="input"
+id="newNoticeDate"
+placeholder="날짜"
+>
+
+<button
+class="admin-btn2"
+onclick="addNotice()"
+>
+공지 추가
+</button>
+
+<hr style="border-color:rgba(255,255,255,.08);margin:25px 0;">
+
+<div id="adminNotices"></div>
+
+</div>
+
+
+<!-- ================= LETTER ================= -->
+
+<div class="panel" id="letterAdmin">
+
+<h3>공식 Letter</h3>
+
+<textarea
+class="input"
+id="adminLetter"
+style="height:250px;"
+></textarea>
+
+<button
+class="admin-btn2"
+onclick="saveLetter()"
+>
+공식 Letter 저장
+</button>
+
+<h3 style="margin:30px 0 15px;">
+방문자 편지
+</h3>
+
+<div id="adminVisitors"></div>
+
+</div>
+
+
+<!-- ================= MENU ================= -->
+
+<div class="panel" id="menuAdmin">
+
+<h3>상단 / 사이드 메뉴</h3>
+
+<input class="input" id="menuHome">
+<input class="input" id="menuGallery">
+<input class="input" id="menuNotice">
+<input class="input" id="menuLetter">
+<input class="input" id="menuWrite">
+
+<button
+class="save-all"
+onclick="saveMenu()"
+>
+메뉴 저장
+</button>
+
 </div>
 
 </div>
-
-
-</div>
-
-</div>
-
 </div>
 
 
 <script>
 
-/* =====================================================
-   기본 설정
-===================================================== */
+/* ==========================================
+   DATA
+========================================== */
 
-const ADMIN_PASSWORD = "1220";
+const KEY="sweet_homepage_v5";
 
-const STORAGE_KEY = "kkwo130_homepage_v1";
+let data=JSON.parse(
+    localStorage.getItem(KEY)
+)||{
 
+    siteName:"스윗",
 
-/* =====================================================
-   기본 데이터
-===================================================== */
+    heroSmall:"SPOON DJ · 스윗",
 
-const defaultData = {
+    heroTitle:"스윗's",
 
-    live: false,
+    heroScript:"little space",
 
-    broadcastTitle:
-        "현재 방송이 없습니다.",
+    heroDescription:
+`스윗의 방송과 사진, 공지,
+그리고 팬들이 남겨주는 편지를
+한곳에서 볼 수 있는 작은 공간입니다.`,
 
-    broadcastSub:
-        "관리자 모드에서 방송 상태를 변경할 수 있어요.",
+    background:"",
 
-    gallery: [],
+    backgroundPosition:"center",
 
-    notices: [],
+    onAir:true,
 
-    officialLetter: {
+    airTitle:"오늘도 같이 놀아요 💙",
 
-        title: "Dear kkwo130",
+    airSub:"지금 바로, 스윗과 함께해요!",
 
-        text:
-            "kkwo130에게 전하고 싶은 이야기를 적어주세요."
+    airUrl:"#",
 
+    galleryTitle:"Gallery",
+
+    galleryDescription:
+    "스윗의 순간들을 기록해요.",
+
+    noticeTitle:"Notice",
+
+    noticeDescription:
+    "방송과 관련된 새로운 소식을 확인하세요.",
+
+    letterTitle:"Letter",
+
+    letterDescription:
+    "스윗이 전하는 이야기",
+
+    writeTitle:"Write a Letter",
+
+    writeDescription:
+    "스윗에게 하고 싶은 이야기를 남겨주세요.",
+
+    letter:
+`Dear. 여러분
+
+오늘도 이곳에 찾아와줘서 고마워요.
+
+제가 있는 이 공간이
+잠깐이라도 편안한 시간이 되었으면 좋겠습니다.
+
+Always with you ♡
+
+— 스윗`,
+
+    footerText:"스윗 · Broadcast Home",
+
+    footerSub:"좋은 사람들과 함께, 더 특별한 순간을.",
+
+    menu:{
+        home:"HOME",
+        gallery:"GALLERY",
+        notice:"NOTICE",
+        letter:"LETTER",
+        write:"WRITE"
     },
 
-    visitorLetters: []
+    notices:[
+
+        {
+            text:"스윗 홈페이지가 오픈되었습니다.",
+            date:"2026.09.20"
+        },
+
+        {
+            text:"새로운 방송 일정 안내",
+            date:"2026.09.18"
+        }
+
+    ],
+
+    gallery:[
+
+        {
+            url:"hero.jpg",
+            name:"밤의 분위기",
+            date:"2026.09.20"
+        },
+
+        {
+            url:"hero.jpg",
+            name:"한 잔의 여유",
+            date:"2026.09.18"
+        },
+
+        {
+            url:"hero.jpg",
+            name:"방송 준비중",
+            date:"2026.09.15"
+        }
+
+    ],
+
+    visitors:[]
 
 };
 
 
-/* =====================================================
-   데이터 불러오기
-===================================================== */
+/* ==========================================
+   SAVE
+========================================== */
 
-let siteData =
-    JSON.parse(
-        localStorage.getItem(STORAGE_KEY)
-    ) || defaultData;
-
-
-/* =====================================================
-   기존 데이터 호환
-===================================================== */
-
-if (!Array.isArray(siteData.gallery)) {
-
-    siteData.gallery = [];
-
-}
-
-if (!Array.isArray(siteData.notices)) {
-
-    siteData.notices = [];
-
-}
-
-if (!Array.isArray(siteData.visitorLetters)) {
-
-    siteData.visitorLetters = [];
-
-}
-
-if (!siteData.officialLetter) {
-
-    siteData.officialLetter =
-        defaultData.officialLetter;
-
-}
-
-
-/* =====================================================
-   저장
-===================================================== */
-
-function saveData() {
+function save(){
 
     localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(siteData)
+        KEY,
+        JSON.stringify(data)
     );
 
-    renderAll();
-
 }
 
 
-/* =====================================================
-   HTML 문자 처리
-===================================================== */
+/* ==========================================
+   RENDER ALL
+========================================== */
 
-function escapeHTML(value) {
+function render(){
 
-    return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-}
+    document.title=
+        data.siteName+" — Broadcast Home";
 
 
-/* =====================================================
-   화면 전체 렌더링
-===================================================== */
+    document.getElementById("siteLogo")
+        .innerHTML=
+        safe(data.siteName)+"<span>•</span>";
 
-function renderAll() {
 
-    renderBroadcast();
+    document.getElementById("heroSmall")
+        .textContent=data.heroSmall;
+
+    document.getElementById("heroTitle")
+        .textContent=data.heroTitle;
+
+    document.getElementById("heroScript")
+        .textContent=data.heroScript;
+
+    document.getElementById("heroDescription")
+        .textContent=data.heroDescription;
+
+
+    document.getElementById("airTitle")
+        .textContent=data.airTitle;
+
+    document.getElementById("airSub")
+        .textContent=data.airSub;
+
+    document.getElementById("airStatus")
+        .textContent=data.onAir
+        ?"ON AIR"
+        :"OFF AIR";
+
+    document.getElementById("airButton")
+        .href=data.airUrl || "#";
+
+
+    const air=
+        document.getElementById("air");
+
+    air.classList.toggle(
+        "offline",
+        !data.onAir
+    );
+
+
+    const photo=
+        document.getElementById("heroPhoto");
+
+    let image=
+        data.background || "hero.jpg";
+
+    photo.style.backgroundImage=`
+        linear-gradient(
+            90deg,
+            #030510 0%,
+            rgba(3,5,16,.90) 10%,
+            rgba(3,5,16,.45) 38%,
+            rgba(3,5,16,.08) 100%
+        ),
+        url("${image}")
+    `;
+
+    photo.style.backgroundPosition=
+        data.backgroundPosition || "center";
+
+
+    document.getElementById("galleryTitle")
+        .textContent=data.galleryTitle;
+
+    document.getElementById("galleryDescription")
+        .textContent=data.galleryDescription;
+
+
+    document.getElementById("noticeTitle")
+        .textContent=data.noticeTitle;
+
+    document.getElementById("noticeDescription")
+        .textContent=data.noticeDescription;
+
+
+    document.getElementById("letterTitle")
+        .textContent=data.letterTitle;
+
+    document.getElementById("letterDescription")
+        .textContent=data.letterDescription;
+
+
+    document.getElementById("writeTitle")
+        .textContent=data.writeTitle;
+
+    document.getElementById("writeDescription")
+        .textContent=data.writeDescription;
+
+
+    document.getElementById("officialLetter")
+        .textContent=data.letter;
+
+
+    document.getElementById("footerLogo")
+        .textContent=data.siteName;
+
+    document.getElementById("footerText")
+        .textContent=data.footerText;
+
+    document.getElementById("footerSub")
+        .textContent=data.footerSub;
+
 
     renderGallery();
 
     renderNotices();
 
-    renderOfficialLetter();
+    renderVisitors();
 
-    renderVisitorLetters();
-
-    renderAdmin();
+    renderMenus();
 
 }
 
 
-/* =====================================================
-   방송 상태
-===================================================== */
+/* ==========================================
+   MENU
+========================================== */
 
-function renderBroadcast() {
+function renderMenus(){
 
-    const status =
-        document.getElementById(
-            "liveStatus"
-        );
+    document.getElementById("navHome")
+        .textContent=data.menu.home;
 
-    const statusText =
-        document.getElementById(
-            "liveStatusText"
-        );
+    document.getElementById("navGallery")
+        .textContent=data.menu.gallery;
 
+    document.getElementById("navNotice")
+        .textContent=data.menu.notice;
 
-    status.classList.toggle(
-        "on",
-        siteData.live
-    );
+    document.getElementById("navLetter")
+        .textContent=data.menu.letter;
 
-
-    statusText.textContent =
-        siteData.live
-            ? "ON AIR"
-            : "OFF AIR";
+    document.getElementById("navWrite")
+        .textContent=data.menu.write;
 
 
-    document.getElementById(
-        "liveTitle"
-    ).textContent =
-        siteData.broadcastTitle;
+    document.getElementById("sideHome")
+        .textContent="◆ "+data.menu.home;
 
+    document.getElementById("sideGallery")
+        .textContent="▣ "+data.menu.gallery;
 
-    document.getElementById(
-        "liveSub"
-    ).textContent =
-        siteData.broadcastSub;
+    document.getElementById("sideNotice")
+        .textContent="▤ "+data.menu.notice;
+
+    document.getElementById("sideLetter")
+        .textContent="♡ "+data.menu.letter;
+
+    document.getElementById("sideWrite")
+        .textContent="✎ "+data.menu.write;
 
 }
 
 
-/* =====================================================
-   갤러리
-===================================================== */
+/* ==========================================
+   GALLERY
+========================================== */
 
-function renderGallery() {
+function renderGallery(){
 
-    const grid =
-        document.getElementById(
-            "galleryGrid"
-        );
+    const list=
+        document.getElementById("galleryList");
+
+    list.innerHTML="";
 
 
-    if (
-        !siteData.gallery ||
-        siteData.gallery.length === 0
-    ) {
+    data.gallery.forEach(item=>{
 
-        grid.innerHTML =
-            `<div
-                class="empty"
-                style="grid-column:1/-1;">
-                아직 등록된 사진이 없습니다.
-            </div>`;
+        list.innerHTML+=`
+
+        <div class="gallery-card glass">
+
+            <img
+                src="${attr(item.url)}"
+                class="gallery-img"
+                alt=""
+            >
+
+            <div class="gallery-info">
+
+                <h3>
+                    ${safe(item.name)}
+                </h3>
+
+                <p>
+                    ${safe(item.date)}
+                </p>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+
+function addGallery(){
+
+    const url=
+        document.getElementById("galleryUrl")
+        .value.trim();
+
+    const name=
+        document.getElementById("galleryName")
+        .value.trim();
+
+    const date=
+        document.getElementById("galleryDate")
+        .value.trim();
+
+
+    if(!url){
+
+        alert("이미지 URL을 입력해주세요.");
 
         return;
 
     }
 
 
-    grid.innerHTML =
-        siteData.gallery.map(
-            function(item) {
+    data.gallery.unshift({
 
-                let imageStyle = "";
+        url:url,
 
-                if (item.url) {
+        name:name || "새로운 사진",
 
-                    const safeURL =
-                        item.url
-                            .replace(/"/g, "%22")
-                            .replace(/'/g, "%27");
-
-                    imageStyle =
-                        `background-image:url("${safeURL}");
-                         background-size:cover;
-                         background-position:center;`;
-
-                }
-
-
-                return `
-
-                <div class="gallery-card">
-
-                    <div
-                        class="gallery-image"
-                        style="${imageStyle}">
-
-                        ${
-                            item.url
-                                ? ""
-                                : "kkwo130"
-                        }
-
-                    </div>
-
-
-                    <div class="gallery-body">
-
-                        <h3>
-                            ${escapeHTML(item.title)}
-                        </h3>
-
-                        <p>
-                            ${escapeHTML(item.description)}
-                        </p>
-
-                    </div>
-
-                </div>
-
-                `;
-
-            }
-        ).join("");
-
-}
-
-
-/* =====================================================
-   공지
-===================================================== */
-
-function renderNotices() {
-
-    const list =
-        document.getElementById(
-            "noticeList"
-        );
-
-
-    if (
-        !siteData.notices ||
-        siteData.notices.length === 0
-    ) {
-
-        list.innerHTML =
-            `<div class="empty">
-                등록된 공지가 없습니다.
-            </div>`;
-
-        return;
-
-    }
-
-
-    list.innerHTML =
-        siteData.notices.map(
-            function(item) {
-
-                return `
-
-                <div class="notice">
-
-                    <div class="notice-title">
-                        ${escapeHTML(item.title)}
-                    </div>
-
-                    <div class="notice-text">
-                        ${escapeHTML(item.text)}
-                    </div>
-
-                    <div class="notice-date">
-                        ${escapeHTML(item.date)}
-                    </div>
-
-                </div>
-
-                `;
-
-            }
-        ).join("");
-
-}
-
-
-/* =====================================================
-   관리자 편지
-===================================================== */
-
-function renderOfficialLetter() {
-
-    const box =
-        document.getElementById(
-            "officialLetter"
-        );
-
-
-    box.innerHTML = `
-
-        <h3>
-            ${escapeHTML(
-                siteData.officialLetter.title
-            )}
-        </h3>
-
-        <p>
-            ${escapeHTML(
-                siteData.officialLetter.text
-            )}
-        </p>
-
-    `;
-
-}
-
-
-/* =====================================================
-   방문자 편지
-===================================================== */
-
-function renderVisitorLetters() {
-
-    const box =
-        document.getElementById(
-            "visitorLetters"
-        );
-
-
-    if (
-        !siteData.visitorLetters ||
-        siteData.visitorLetters.length === 0
-    ) {
-
-        box.innerHTML =
-            `<div class="empty">
-                아직 도착한 편지가 없습니다.
-                <br>
-                첫 번째 편지를 남겨주세요 💌
-            </div>`;
-
-        return;
-
-    }
-
-
-    box.innerHTML =
-        siteData.visitorLetters.map(
-            function(letter) {
-
-                return `
-
-                <div class="visitor-letter">
-
-                    <div class="visitor-letter-name">
-                        ${escapeHTML(letter.name)}
-                    </div>
-
-                    <span class="visitor-letter-date">
-                        ${escapeHTML(letter.date)}
-                    </span>
-
-                    <div class="visitor-letter-text">
-                        ${escapeHTML(letter.text)}
-                    </div>
-
-                </div>
-
-                `;
-
-            }
-        ).join("");
-
-}
-
-
-/* =====================================================
-   방문자 편지 작성
-===================================================== */
-
-function submitVisitorLetter() {
-
-    const name =
-        document
-            .getElementById("visitorName")
-            .value
-            .trim();
-
-
-    const text =
-        document
-            .getElementById("visitorText")
-            .value
-            .trim();
-
-
-    if (!name) {
-
-        alert(
-            "닉네임을 입력해주세요."
-        );
-
-        return;
-
-    }
-
-
-    if (!text) {
-
-        alert(
-            "편지 내용을 입력해주세요."
-        );
-
-        return;
-
-    }
-
-
-    siteData.visitorLetters.unshift({
-
-        name: name,
-
-        text: text,
-
-        date:
-            new Date().toLocaleString(
-                "ko-KR"
-            )
+        date:date || new Date()
+            .toLocaleDateString("ko-KR")
 
     });
 
 
-    saveData();
+    save();
 
+    render();
 
-    document.getElementById(
-        "visitorName"
-    ).value = "";
+    document.getElementById("galleryUrl").value="";
 
+    document.getElementById("galleryName").value="";
 
-    document.getElementById(
-        "visitorText"
-    ).value = "";
+    document.getElementById("galleryDate").value="";
 
-
-    alert(
-        "편지가 등록되었습니다 💌"
-    );
+    loadAdmin();
 
 }
 
 
-/* =====================================================
-   관리자 창
-===================================================== */
+function renderAdminGallery(){
 
-function openAdmin() {
+    const box=
+        document.getElementById("adminGallery");
+
+    box.innerHTML="";
+
+
+    data.gallery.forEach((item,index)=>{
+
+        box.innerHTML+=`
+
+        <div class="admin-item">
+
+            <div class="admin-item-text">
+
+                ${safe(item.name)}
+
+                <br>
+
+                <small style="color:#666;">
+                    ${safe(item.date)}
+                </small>
+
+            </div>
+
+            <button
+                class="delete"
+                onclick="deleteGallery(${index})"
+            >
+                삭제
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+
+function deleteGallery(index){
+
+    if(!confirm("이 갤러리를 삭제할까요?"))
+        return;
+
+    data.gallery.splice(index,1);
+
+    save();
+
+    render();
+
+    loadAdmin();
+
+}
+
+
+/* ==========================================
+   NOTICE
+========================================== */
+
+function renderNotices(){
+
+    const list=
+        document.getElementById("noticeList");
+
+    list.innerHTML="";
+
+
+    data.notices.forEach(item=>{
+
+        list.innerHTML+=`
+
+        <div class="notice">
+
+            <span class="tag">
+                공지
+            </span>
+
+            <span class="notice-text">
+                ${safe(item.text)}
+            </span>
+
+            <span class="date">
+                ${safe(item.date)}
+            </span>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+
+function addNotice(){
+
+    const text=
+        document.getElementById("newNotice")
+        .value.trim();
+
+    const date=
+        document.getElementById("newNoticeDate")
+        .value.trim();
+
+
+    if(!text){
+
+        alert("공지 내용을 입력해주세요.");
+
+        return;
+
+    }
+
+
+    data.notices.unshift({
+
+        text:text,
+
+        date:
+            date ||
+            new Date()
+            .toLocaleDateString("ko-KR")
+
+    });
+
+
+    save();
+
+    render();
+
+    document.getElementById("newNotice").value="";
+
+    document.getElementById("newNoticeDate").value="";
+
+    loadAdmin();
+
+}
+
+
+function renderAdminNotices(){
+
+    const box=
+        document.getElementById("adminNotices");
+
+    box.innerHTML="";
+
+
+    data.notices.forEach((item,index)=>{
+
+        box.innerHTML+=`
+
+        <div class="admin-item">
+
+            <div class="admin-item-text">
+
+                ${safe(item.text)}
+
+                <br>
+
+                <small style="color:#666;">
+                    ${safe(item.date)}
+                </small>
+
+            </div>
+
+            <button
+                class="delete"
+                onclick="deleteNotice(${index})"
+            >
+                삭제
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+
+function deleteNotice(index){
+
+    data.notices.splice(index,1);
+
+    save();
+
+    render();
+
+    loadAdmin();
+
+}
+
+
+/* ==========================================
+   LETTER
+========================================== */
+
+function saveLetter(){
+
+    data.letter=
+        document.getElementById("adminLetter")
+        .value;
+
+    save();
+
+    render();
+
+    alert("공식 Letter가 저장되었습니다.");
+
+}
+
+
+/* ==========================================
+   VISITOR LETTER
+========================================== */
+
+function sendLetter(){
+
+    const name=
+        document.getElementById("nickname")
+        .value.trim();
+
+    const text=
+        document.getElementById("letterText")
+        .value.trim();
+
+
+    if(!name || !text){
+
+        alert("닉네임과 편지 내용을 입력해주세요.");
+
+        return;
+
+    }
+
+
+    data.visitors.unshift({
+
+        name:name,
+
+        text:text,
+
+        date:new Date()
+            .toLocaleDateString("ko-KR")
+
+    });
+
+
+    save();
+
+    document.getElementById("nickname").value="";
+
+    document.getElementById("letterText").value="";
+
+    render();
+
+    alert("편지가 전달되었습니다 💌");
+
+}
+
+
+function renderVisitors(){
+
+    const list=
+        document.getElementById("visitorList");
+
+    list.innerHTML="";
+
+
+    data.visitors.forEach(item=>{
+
+        list.innerHTML+=`
+
+        <div class="visitor">
+
+            <div class="visitor-top">
+
+                <span class="visitor-name">
+                    ${safe(item.name)}
+                </span>
+
+                <span>
+                    ${safe(item.date)}
+                </span>
+
+            </div>
+
+            <div class="visitor-text">
+                ${safe(item.text)}
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+
+function renderAdminVisitors(){
+
+    const box=
+        document.getElementById("adminVisitors");
+
+    box.innerHTML="";
+
+
+    if(!data.visitors.length){
+
+        box.innerHTML=
+        `<p style="color:#777;">아직 편지가 없습니다.</p>`;
+
+        return;
+
+    }
+
+
+    data.visitors.forEach((item,index)=>{
+
+        box.innerHTML+=`
+
+        <div class="admin-item">
+
+            <div class="admin-item-text">
+
+                <strong>
+                    ${safe(item.name)}
+                </strong>
+
+                <br>
+
+                <span style="color:#888;">
+                    ${safe(item.text)}
+                </span>
+
+            </div>
+
+            <button
+                class="delete"
+                onclick="deleteVisitor(${index})"
+            >
+                삭제
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+
+function deleteVisitor(index){
+
+    if(!confirm("이 편지를 삭제할까요?"))
+        return;
+
+
+    data.visitors.splice(index,1);
+
+    save();
+
+    render();
+
+    loadAdmin();
+
+}
+
+
+/* ==========================================
+   BROADCAST
+========================================== */
+
+function toggleAir(){
+
+    data.onAir=!data.onAir;
+
+    save();
+
+    render();
+
+}
+
+
+function saveBroadcast(){
+
+    data.airTitle=
+        document.getElementById("editAirTitle")
+        .value;
+
+    data.airSub=
+        document.getElementById("editAirSub")
+        .value;
+
+    data.airUrl=
+        document.getElementById("editAirUrl")
+        .value;
+
+
+    save();
+
+    render();
+
+    alert("방송 정보가 저장되었습니다.");
+
+}
+
+
+/* ==========================================
+   HOME SETTINGS
+========================================== */
+
+function saveHomeSettings(){
+
+    data.siteName=
+        document.getElementById("editSiteName")
+        .value;
+
+    data.heroSmall=
+        document.getElementById("editHeroSmall")
+        .value;
+
+    data.heroTitle=
+        document.getElementById("editHeroTitle")
+        .value;
+
+    data.heroScript=
+        document.getElementById("editHeroScript")
+        .value;
+
+    data.heroDescription=
+        document.getElementById("editHeroDescription")
+        .value;
+
+    data.background=
+        document.getElementById("editBackground")
+        .value.trim();
+
+    data.backgroundPosition=
+        document.getElementById("editBackgroundPosition")
+        .value;
+
+    data.footerText=
+        document.getElementById("editFooterText")
+        .value;
+
+    data.footerSub=
+        document.getElementById("editFooterSub")
+        .value;
+
+
+    save();
+
+    render();
+
+    alert("홈페이지 설정이 저장되었습니다.");
+
+}
+
+
+/* ==========================================
+   MENU
+========================================== */
+
+function saveMenu(){
+
+    data.menu.home=
+        document.getElementById("menuHome").value;
+
+    data.menu.gallery=
+        document.getElementById("menuGallery").value;
+
+    data.menu.notice=
+        document.getElementById("menuNotice").value;
+
+    data.menu.letter=
+        document.getElementById("menuLetter").value;
+
+    data.menu.write=
+        document.getElementById("menuWrite").value;
+
+
+    save();
+
+    render();
+
+    alert("메뉴가 저장되었습니다.");
+
+}
+
+
+/* ==========================================
+   ADMIN LOGIN
+========================================== */
+
+function openLogin(){
+
+    document
+        .getElementById("loginModal")
+        .classList.add("show");
+
+}
+
+
+function login(){
+
+    const password=
+        document.getElementById("password")
+        .value;
+
+
+    if(password!=="1220"){
+
+        alert("비밀번호가 올바르지 않습니다.");
+
+        return;
+
+    }
+
+
+    document.getElementById("password").value="";
+
+    closeModal("loginModal");
 
     document
         .getElementById("adminModal")
         .classList.add("show");
 
-
-    document
-        .getElementById("adminPassword")
-        .focus();
+    loadAdmin();
 
 }
 
 
-function closeAdmin() {
+function closeModal(id){
 
     document
-        .getElementById("adminModal")
+        .getElementById(id)
         .classList.remove("show");
 
 }
 
 
-/* =====================================================
-   관리자 로그인
-===================================================== */
+/* ==========================================
+   ADMIN TAB
+========================================== */
 
-function loginAdmin() {
-
-    const password =
-        document
-            .getElementById("adminPassword")
-            .value;
-
-
-    if (password === ADMIN_PASSWORD) {
-
-        document.getElementById(
-            "loginArea"
-        ).style.display = "none";
-
-
-        document.getElementById(
-            "adminPanel"
-        ).style.display = "block";
-
-
-        renderAdmin();
-
-
-    } else {
-
-        alert(
-            "비밀번호가 올바르지 않습니다."
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   관리자 탭
-===================================================== */
-
-function showAdminTab(
-    id,
-    button
-) {
+function tab(id,button){
 
     document
-        .querySelectorAll(".admin-section")
-        .forEach(
-            function(section) {
-
-                section.classList.remove(
-                    "active"
-                );
-
-            }
-        );
+        .querySelectorAll(".panel")
+        .forEach(panel=>{
+            panel.classList.remove("active");
+        });
 
 
     document
@@ -1683,16 +2357,10 @@ function showAdminTab(
 
 
     document
-        .querySelectorAll(".tab-btn")
-        .forEach(
-            function(btn) {
-
-                btn.classList.remove(
-                    "active"
-                );
-
-            }
-        );
+        .querySelectorAll(".tabs button")
+        .forEach(btn=>{
+            btn.classList.remove("active");
+        });
 
 
     button.classList.add("active");
@@ -1700,584 +2368,159 @@ function showAdminTab(
 }
 
 
-/* =====================================================
-   ON AIR
-===================================================== */
+/* ==========================================
+   LOAD ADMIN
+========================================== */
 
-function setLive(status) {
+function loadAdmin(){
 
-    siteData.live = status;
+    document.getElementById("editSiteName")
+        .value=data.siteName;
 
-    saveData();
+    document.getElementById("editHeroSmall")
+        .value=data.heroSmall;
+
+    document.getElementById("editHeroTitle")
+        .value=data.heroTitle;
+
+    document.getElementById("editHeroScript")
+        .value=data.heroScript;
+
+    document.getElementById("editHeroDescription")
+        .value=data.heroDescription;
+
+    document.getElementById("editBackground")
+        .value=data.background;
+
+    document.getElementById("editBackgroundPosition")
+        .value=data.backgroundPosition;
+
+    document.getElementById("editFooterText")
+        .value=data.footerText;
+
+    document.getElementById("editFooterSub")
+        .value=data.footerSub;
+
+
+    document.getElementById("editAirTitle")
+        .value=data.airTitle;
+
+    document.getElementById("editAirSub")
+        .value=data.airSub;
+
+    document.getElementById("editAirUrl")
+        .value=data.airUrl;
+
+
+    document.getElementById("adminLetter")
+        .value=data.letter;
+
+
+    document.getElementById("menuHome")
+        .value=data.menu.home;
+
+    document.getElementById("menuGallery")
+        .value=data.menu.gallery;
+
+    document.getElementById("menuNotice")
+        .value=data.menu.notice;
+
+    document.getElementById("menuLetter")
+        .value=data.menu.letter;
+
+    document.getElementById("menuWrite")
+        .value=data.menu.write;
+
+
+    renderAdminGallery();
+
+    renderAdminNotices();
+
+    renderAdminVisitors();
 
 }
 
 
-/* =====================================================
-   방송 정보 저장
-===================================================== */
+/* ==========================================
+   SAFE
+========================================== */
 
-function saveBroadcast() {
+function safe(text){
 
-    const title =
-        document
-            .getElementById("broadcastTitle")
-            .value
-            .trim();
-
-
-    const sub =
-        document
-            .getElementById("broadcastSub")
-            .value
-            .trim();
-
-
-    siteData.broadcastTitle =
-        title || "방송 중입니다.";
-
-
-    siteData.broadcastSub =
-        sub || "";
-
-
-    saveData();
-
-
-    alert(
-        "방송 정보가 저장되었습니다."
-    );
+    return String(text ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
 
 }
 
 
-/* =====================================================
-   공지 등록
-===================================================== */
+function attr(text){
 
-function addNotice() {
+    return String(text ?? "")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
 
-    const title =
-        document
-            .getElementById("noticeTitle")
-            .value
-            .trim();
+}
 
 
-    const text =
-        document
-            .getElementById("noticeText")
-            .value
-            .trim();
+/* ==========================================
+   START
+========================================== */
+
+render();
 
 
-    if (!title) {
+/* ==========================================
+   ACTIVE SIDE
+========================================== */
 
-        alert(
-            "공지 제목을 입력해주세요."
-        );
+const sections=
+    document.querySelectorAll("section[id]");
 
-        return;
-
-    }
+const sideLinks=
+    document.querySelectorAll(".side a");
 
 
-    siteData.notices.unshift({
+window.addEventListener("scroll",()=>{
 
-        title: title,
+    let current="home";
 
-        text: text,
 
-        date:
-            new Date().toLocaleString(
-                "ko-KR"
-            )
+    sections.forEach(section=>{
+
+        if(
+            window.scrollY >=
+            section.offsetTop-180
+        ){
+
+            current=
+                section.getAttribute("id");
+
+        }
 
     });
 
 
-    document.getElementById(
-        "noticeTitle"
-    ).value = "";
+    sideLinks.forEach(link=>{
+
+        link.classList.remove("active");
 
 
-    document.getElementById(
-        "noticeText"
-    ).value = "";
+        if(
+            link.getAttribute("href")
+            ==="#"+current
+        ){
 
+            link.classList.add("active");
 
-    saveData();
-
-
-    alert(
-        "공지가 등록되었습니다."
-    );
-
-}
-
-
-/* =====================================================
-   공지 삭제
-===================================================== */
-
-function deleteNotice(index) {
-
-    if (
-        !confirm(
-            "이 공지를 삭제할까요?"
-        )
-    ) {
-
-        return;
-
-    }
-
-
-    siteData.notices.splice(
-        index,
-        1
-    );
-
-
-    saveData();
-
-}
-
-
-/* =====================================================
-   갤러리 등록
-===================================================== */
-
-function addGallery() {
-
-    const title =
-        document
-            .getElementById("galleryTitle")
-            .value
-            .trim();
-
-
-    const url =
-        document
-            .getElementById("galleryURL")
-            .value
-            .trim();
-
-
-    const description =
-        document
-            .getElementById("galleryDescription")
-            .value
-            .trim();
-
-
-    if (!title) {
-
-        alert(
-            "사진 제목을 입력해주세요."
-        );
-
-        return;
-
-    }
-
-
-    siteData.gallery.unshift({
-
-        title: title,
-
-        url: url,
-
-        description: description
+        }
 
     });
 
-
-    document.getElementById(
-        "galleryTitle"
-    ).value = "";
-
-
-    document.getElementById(
-        "galleryURL"
-    ).value = "";
-
-
-    document.getElementById(
-        "galleryDescription"
-    ).value = "";
-
-
-    saveData();
-
-
-    alert(
-        "갤러리에 추가되었습니다."
-    );
-
-}
-
-
-/* =====================================================
-   갤러리 삭제
-===================================================== */
-
-function deleteGallery(index) {
-
-    if (
-        !confirm(
-            "이 사진을 삭제할까요?"
-        )
-    ) {
-
-        return;
-
-    }
-
-
-    siteData.gallery.splice(
-        index,
-        1
-    );
-
-
-    saveData();
-
-}
-
-
-/* =====================================================
-   관리자 편지 저장
-===================================================== */
-
-function saveOfficialLetter() {
-
-    const title =
-        document
-            .getElementById(
-                "officialLetterTitle"
-            )
-            .value
-            .trim();
-
-
-    const text =
-        document
-            .getElementById(
-                "officialLetterText"
-            )
-            .value
-            .trim();
-
-
-    siteData.officialLetter = {
-
-        title:
-            title || "Dear kkwo130",
-
-        text:
-            text || ""
-
-    };
-
-
-    saveData();
-
-
-    alert(
-        "관리자 편지가 저장되었습니다."
-    );
-
-}
-
-
-/* =====================================================
-   방문자 편지 삭제
-===================================================== */
-
-function deleteVisitorLetter(index) {
-
-    if (
-        !confirm(
-            "이 방문자 편지를 삭제할까요?"
-        )
-    ) {
-
-        return;
-
-    }
-
-
-    siteData.visitorLetters.splice(
-        index,
-        1
-    );
-
-
-    saveData();
-
-
-    alert(
-        "방문자 편지가 삭제되었습니다."
-    );
-
-}
-
-
-/* =====================================================
-   관리자 화면 렌더링
-===================================================== */
-
-function renderAdmin() {
-
-
-    /* 방송 */
-
-    document.getElementById(
-        "broadcastTitle"
-    ).value =
-        siteData.broadcastTitle;
-
-
-    document.getElementById(
-        "broadcastSub"
-    ).value =
-        siteData.broadcastSub;
-
-
-    /* 관리자 편지 */
-
-    document.getElementById(
-        "officialLetterTitle"
-    ).value =
-        siteData.officialLetter.title;
-
-
-    document.getElementById(
-        "officialLetterText"
-    ).value =
-        siteData.officialLetter.text;
-
-
-    /* 공지 */
-
-    const noticeList =
-        document.getElementById(
-            "adminNoticeList"
-        );
-
-
-    if (siteData.notices.length === 0) {
-
-        noticeList.innerHTML =
-            `<div class="empty">
-                등록된 공지가 없습니다.
-            </div>`;
-
-    } else {
-
-        noticeList.innerHTML =
-            siteData.notices.map(
-                function(item, index) {
-
-                    return `
-
-                    <div class="admin-item">
-
-                        <div
-                            class="admin-item-content">
-
-                            <strong>
-                                ${escapeHTML(item.title)}
-                            </strong>
-
-                            <small>
-                                ${escapeHTML(item.date)}
-                            </small>
-
-                        </div>
-
-                        <button
-                            class="danger-btn"
-                            onclick="deleteNotice(${index})">
-
-                            삭제
-
-                        </button>
-
-                    </div>
-
-                    `;
-
-                }
-            ).join("");
-
-    }
-
-
-    /* 갤러리 */
-
-    const galleryList =
-        document.getElementById(
-            "adminGalleryList"
-        );
-
-
-    if (siteData.gallery.length === 0) {
-
-        galleryList.innerHTML =
-            `<div class="empty">
-                등록된 사진이 없습니다.
-            </div>`;
-
-    } else {
-
-        galleryList.innerHTML =
-            siteData.gallery.map(
-                function(item, index) {
-
-                    return `
-
-                    <div class="admin-item">
-
-                        <div
-                            class="admin-item-content">
-
-                            <strong>
-                                ${escapeHTML(item.title)}
-                            </strong>
-
-                            <small>
-                                ${escapeHTML(item.description)}
-                            </small>
-
-                        </div>
-
-                        <button
-                            class="danger-btn"
-                            onclick="deleteGallery(${index})">
-
-                            삭제
-
-                        </button>
-
-                    </div>
-
-                    `;
-
-                }
-            ).join("");
-
-    }
-
-
-    /* 방문자 편지 */
-
-    const visitorList =
-        document.getElementById(
-            "adminVisitorLetters"
-        );
-
-
-    if (
-        siteData.visitorLetters.length === 0
-    ) {
-
-        visitorList.innerHTML =
-            `<div class="empty">
-                등록된 방문자 편지가 없습니다.
-            </div>`;
-
-    } else {
-
-        visitorList.innerHTML =
-            siteData.visitorLetters.map(
-                function(letter, index) {
-
-                    return `
-
-                    <div
-                        class="visitor-letter">
-
-                        <div
-                            class="admin-item"
-                            style="border:0;padding:0;">
-
-                            <div
-                                class="admin-item-content">
-
-                                <strong>
-                                    ${escapeHTML(
-                                        letter.name
-                                    )}
-                                </strong>
-
-                                <small>
-                                    ${escapeHTML(
-                                        letter.date
-                                    )}
-                                </small>
-
-                            </div>
-
-                            <button
-                                class="danger-btn"
-                                onclick="deleteVisitorLetter(${index})">
-
-                                삭제
-
-                            </button>
-
-                        </div>
-
-
-                        <div
-                            class="visitor-letter-text">
-
-                            ${escapeHTML(
-                                letter.text
-                            )}
-
-                        </div>
-
-                    </div>
-
-                    `;
-
-                }
-            ).join("");
-
-    }
-
-}
-
-
-/* =====================================================
-   메뉴 이동
-===================================================== */
-
-function scrollToSection(id) {
-
-    const element =
-        document.getElementById(id);
-
-
-    if (element) {
-
-        element.scrollIntoView({
-            behavior: "smooth"
-        });
-
-    }
-
-}
-
-
-/* =====================================================
-   시작
-===================================================== */
-
-renderAll();
+});
 
 </script>
 
