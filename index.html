@@ -1392,26 +1392,25 @@ onclick="saveMenu()"
 </div>
 
 
-
 <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import {
+  getFirestore, doc, getDoc, setDoc, onSnapshot
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyBbx6PdrFA22a-4V_r-zvGQbEmCNEGs0OI",
-    authDomain: "kkwo130.firebaseapp.com",
-    projectId: "kkwo130",
-    storageBucket: "kkwo130.firebasestorage.app",
-    messagingSenderId: "527893225312",
-    appId: "1:527893225312:web:fddb935e1c8926b9d60805",
-    measurementId: "G-FVNC7SCHMK"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyBbx6PdrFA22a-4V_r-zvGQbEmCNEGs0OI",
+  authDomain: "kkwo130.firebaseapp.com",
+  projectId: "kkwo130",
+  storageBucket: "kkwo130.firebasestorage.app",
+  messagingSenderId: "527893225312",
+  appId: "1:527893225312:web:fddb935e1c8926b9d60805",
+  measurementId: "G-FVNC7SCHMK"
+};
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+window.firebaseShared = { db, doc, getDoc, setDoc, onSnapshot };
 </script>
 
 <script>
@@ -1421,10 +1420,10 @@ onclick="saveMenu()"
 ========================================== */
 
 const KEY="sweet_homepage_v5";
+const FIRESTORE_COLLECTION="homepage";
+const FIRESTORE_DOC="main";
 
-let data=JSON.parse(
-    localStorage.getItem(KEY)
-)||{
+let data = {
 
     siteName:"스윗",
 
@@ -1533,21 +1532,53 @@ Always with you ♡
 
     visitors:[]
 
-};
+};;
+let firebaseReady = false;
+let firebaseUnsubscribe = null;
 
+async function loadSharedData(){
+  try{
+    const {db, doc, getDoc, setDoc, onSnapshot} = window.firebaseShared;
+    const ref = doc(db, FIRESTORE_COLLECTION, FIRESTORE_DOC);
+    const snap = await getDoc(ref);
 
-/* ==========================================
-   SAVE
-========================================== */
+    if(snap.exists()){
+      data = {...data, ...snap.data()};
+    }else{
+      await setDoc(ref, data);
+    }
 
-function save(){
+    firebaseReady = true;
+    render();
 
-    localStorage.setItem(
-        KEY,
-        JSON.stringify(data)
-    );
-
+    if(firebaseUnsubscribe) firebaseUnsubscribe();
+    firebaseUnsubscribe = onSnapshot(ref, (snapshot)=>{
+      if(snapshot.exists()){
+        data = {...data, ...snapshot.data()};
+        render();
+      }
+    });
+  }catch(error){
+    console.error("Firebase 불러오기 실패:", error);
+    render();
+  }
 }
+
+async function save(){
+  render();
+  if(!firebaseReady) return;
+  try{
+    const {db, doc, setDoc} = window.firebaseShared;
+    await setDoc(doc(db, FIRESTORE_COLLECTION, FIRESTORE_DOC), data, {merge:true});
+  }catch(error){
+    console.error("Firebase 저장 실패:", error);
+    alert("서버 저장에 실패했습니다. Firebase Firestore 설정/규칙을 확인해주세요.");
+  }
+}
+
+window.addEventListener("DOMContentLoaded", loadSharedData);
+
+
 
 
 /* ==========================================
