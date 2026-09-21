@@ -751,6 +751,11 @@ footer{
     }
 }
 </style>
+
+<!-- Firebase SDK 추가 -->
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+
 </head>
 
 <body>
@@ -1429,14 +1434,27 @@ onclick="saveMenu()"
 <script>
 
 /* ==========================================
+   FIREBASE 초기화
+========================================== */
+const firebaseConfig = {
+    apiKey: "AIzaSyBbx6PdrFA22a-4V_r-zvGQbEmCNEGs0OI",
+    authDomain: "kkwo130.firebaseapp.com",
+    projectId: "kkwo130",
+    storageBucket: "kkwo130.firebasestorage.app",
+    messagingSenderId: "527893225312",
+    appId: "1:527893225312:web:fddb935e1c8926b9d60805",
+    measurementId: "G-FVNC7SCHMK"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const docRef = db.collection("sweet_site").doc("homepage_data");
+
+/* ==========================================
    DATA
 ========================================== */
 
-const KEY="sweet_homepage_v5";
-
-let data=JSON.parse(
-    localStorage.getItem(KEY)
-)||{
+let defaultData = {
 
     siteName:"스윗",
 
@@ -1547,18 +1565,17 @@ Always with you ♡
 
 };
 
+let data = defaultData;
+
 
 /* ==========================================
-   SAVE
+   SAVE (Firestore 연동)
 ========================================== */
 
 function save(){
-
-    localStorage.setItem(
-        KEY,
-        JSON.stringify(data)
-    );
-
+    docRef.set(data).catch(error => {
+        console.error("저장 실패:", error);
+    });
 }
 
 
@@ -2567,10 +2584,18 @@ function attr(text){
 
 
 /* ==========================================
-   START
+   START (Firestore 실시간 데이터 동기화)
 ========================================== */
 
-render();
+docRef.onSnapshot((docSnap) => {
+    if (docSnap.exists) {
+        data = docSnap.data();
+    } else {
+        docRef.set(defaultData);
+        data = defaultData;
+    }
+    render();
+});
 
 
 /* ==========================================
