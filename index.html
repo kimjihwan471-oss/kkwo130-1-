@@ -3,2671 +3,657 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>스윗 — Broadcast Home</title>
-
+<title>ASTRA ENTERTAINMENT | MAKE YOUR MOMENT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Noto+Serif+KR:wght@500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:#030510;
-    color:#fff;
-    font-family:'Noto Sans KR',sans-serif;
-    overflow-x:hidden;
-}
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    z-index:-5;
-    background:
-        radial-gradient(circle at 75% 25%,rgba(75,76,190,.30),transparent 30%),
-        radial-gradient(circle at 15% 70%,rgba(0,104,180,.18),transparent 35%),
-        linear-gradient(135deg,#02030a,#080c22 50%,#02030a);
-}
-
-body::after{
-    content:"";
-    position:fixed;
-    inset:0;
-    z-index:-4;
-    pointer-events:none;
-    background:radial-gradient(circle at center,transparent 0,rgba(0,0,0,.35) 100%);
-}
-
-/* HEADER */
-
-.header{
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    height:72px;
-    display:flex;
-    align-items:center;
-    padding:0 34px;
-    background:rgba(3,5,20,.76);
-    backdrop-filter:blur(22px);
-    border-bottom:1px solid rgba(150,160,255,.10);
-    z-index:1000;
-}
-
-.logo{
-    width:210px;
-    font-family:'Playfair Display',serif;
-    font-size:30px;
-    letter-spacing:1px;
-    color:#eef0ff;
-}
-
-.logo span{
-    color:#827cff;
-}
-
-.nav{
-    flex:1;
-    display:flex;
-    justify-content:center;
-    gap:42px;
-}
-
-.nav a{
-    color:#bfc4df;
-    text-decoration:none;
-    font-size:12px;
-    letter-spacing:1.5px;
-    transition:.25s;
-}
-
-.nav a:hover{
-    color:#fff;
-    text-shadow:0 0 15px rgba(120,110,255,.9);
-}
-
-.admin-btn{
-    border:1px solid rgba(135,135,255,.35);
-    background:rgba(80,75,180,.10);
-    color:#dfe1ff;
-    padding:10px 17px;
-    border-radius:30px;
-    cursor:pointer;
-}
-
-/* SIDE */
-
-.side{
-    position:fixed;
-    top:72px;
-    left:0;
-    bottom:0;
-    width:150px;
-    background:rgba(2,5,20,.72);
-    backdrop-filter:blur(20px);
-    border-right:1px solid rgba(150,160,255,.08);
-    z-index:900;
-    padding-top:25px;
-}
-
-.side a{
-    display:block;
-    padding:18px 23px;
-    color:#9298ba;
-    text-decoration:none;
-    font-size:12px;
-    border-left:2px solid transparent;
-    transition:.25s;
-}
-
-.side a:hover,
-.side a.active{
-    color:#fff;
-    border-left-color:#7771ff;
-    background:linear-gradient(90deg,rgba(100,90,255,.18),transparent);
-}
-
-/* MAIN */
-
-main{
-    margin-left:150px;
-    padding-top:72px;
-}
-
-/* HERO */
-
-.hero{
-    position:relative;
-    min-height:650px;
-    overflow:hidden;
-    display:flex;
-    align-items:center;
-    padding:80px 7%;
-}
-
-.hero-photo{
-    position:absolute;
-    top:0;
-    right:0;
-    width:68%;
-    height:100%;
-
-    background-image:
-        linear-gradient(
-            90deg,
-            #030510 0%,
-            rgba(3,5,16,.90) 10%,
-            rgba(3,5,16,.45) 38%,
-            rgba(3,5,16,.08) 100%
-        ),
-        url("hero.jpg");
-
-    background-position:center;
-    background-size:cover;
-    z-index:0;
-}
-
-.hero-photo::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(
-        180deg,
-        rgba(0,0,0,.05),
-        rgba(0,0,0,.30)
-    );
-}
-
-.hero-glow{
-    position:absolute;
-    width:500px;
-    height:500px;
-    right:18%;
-    top:10%;
-    border-radius:50%;
-    background:rgba(85,80,255,.12);
-    filter:blur(90px);
-    z-index:0;
-}
-
-.hero-content{
-    position:relative;
-    z-index:2;
-    width:55%;
-    max-width:650px;
-}
-
-.small{
-    color:#858bd2;
-    font-size:13px;
-    letter-spacing:3px;
-    margin-bottom:18px;
-}
-
-.hero h1{
-    font-family:'Playfair Display',serif;
-    font-size:67px;
-    font-weight:400;
-    line-height:1;
-}
-
-.script{
-    font-family:'Playfair Display',serif;
-    font-style:italic;
-    font-size:49px;
-    color:#8580ff;
-    margin-top:4px;
-    text-shadow:0 0 25px rgba(115,105,255,.55);
-}
-
-.description{
-    margin-top:25px;
-    color:#b6bad2;
-    font-size:14px;
-    line-height:1.9;
-    white-space:pre-line;
-}
-
-/* AIR */
-
-.air{
-    width:470px;
-    max-width:100%;
-    margin-top:30px;
-    padding:22px 25px;
-    border-radius:17px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(34,43,95,.50),
-            rgba(5,8,25,.72)
-        );
-
-    border:1px solid rgba(117,121,255,.46);
-    backdrop-filter:blur(18px);
-    box-shadow:0 0 35px rgba(60,70,255,.12);
-}
-
-.air.offline{
-    opacity:.65;
-}
-
-.air-line{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    color:#ff86aa;
-    font-size:13px;
-}
-
-.dot{
-    width:9px;
-    height:9px;
-    border-radius:50%;
-    background:#ff5d91;
-    box-shadow:0 0 8px #ff5d91,0 0 20px #ff5d91;
-    animation:blink 1.5s infinite;
-}
-
-@keyframes blink{
-    50%{opacity:.3}
-}
-
-.air-title{
-    font-size:20px;
-    margin-top:13px;
-}
-
-.air-sub{
-    font-size:12px;
-    color:#9299bd;
-    margin-top:5px;
-}
-
-.air-btn{
-    display:inline-block;
-    margin-top:15px;
-    padding:9px 18px;
-    border-radius:30px;
-    text-decoration:none;
-    color:#fff;
-    border:1px solid rgba(120,120,255,.50);
-    background:rgba(90,80,255,.17);
-}
-
-/* SECTION */
-
-.section{
-    padding:60px 5%;
-}
-
-.section-head{
-    display:flex;
-    align-items:end;
-    justify-content:space-between;
-    margin-bottom:25px;
-}
-
-.section-head h2{
-    font-family:'Playfair Display',serif;
-    font-size:32px;
-    font-weight:400;
-}
-
-.section-head p{
-    color:#73799b;
-    font-size:11px;
-    margin-top:5px;
-}
-
-.glass{
-    background:linear-gradient(
-        135deg,
-        rgba(18,25,63,.67),
-        rgba(5,8,24,.74)
-    );
-
-    border:1px solid rgba(140,150,255,.12);
-    border-radius:18px;
-    backdrop-filter:blur(18px);
-}
-
-/* GALLERY */
-
-.gallery{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-
-.gallery-card{
-    overflow:hidden;
-    transition:.3s;
-}
-
-.gallery-card:hover{
-    transform:translateY(-4px);
-}
-
-.gallery-img{
-    width:100%;
-    aspect-ratio:16/10;
-    object-fit:cover;
-    display:block;
-}
-
-.gallery-info{
-    padding:15px 17px;
-}
-
-.gallery-info h3{
-    font-size:13px;
-    font-weight:500;
-}
-
-.gallery-info p{
-    margin-top:5px;
-    color:#686f93;
-    font-size:10px;
-}
-
-/* NOTICE */
-
-.notice-list{
-    overflow:hidden;
-}
-
-.notice{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    padding:17px 20px;
-    border-bottom:1px solid rgba(255,255,255,.06);
-}
-
-.notice:last-child{
-    border-bottom:0;
-}
-
-.tag{
-    padding:4px 9px;
-    border-radius:20px;
-    background:rgba(95,90,230,.18);
-    color:#9a96ff;
-    font-size:10px;
-}
-
-.notice-text{
-    flex:1;
-    font-size:12px;
-}
-
-.date{
-    color:#656b8e;
-    font-size:10px;
-}
-
-/* TWO */
-
-.two{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:22px;
-}
-
-/* LETTER */
-
-.letter{
-    padding:25px;
-}
-
-.letter-paper{
-    min-height:300px;
-    padding:30px;
-    display:flex;
-    align-items:center;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(31,37,75,.70),
-            rgba(7,10,27,.65)
-        );
-
-    border:1px solid rgba(255,255,255,.07);
-    border-radius:13px;
-}
-
-.letter-text{
-    font-family:'Playfair Display',serif;
-    font-size:17px;
-    line-height:2;
-    color:#d9dcf0;
-    white-space:pre-line;
-}
-
-/* WRITE */
-
-.write{
-    padding:25px;
-}
-
-.input{
-    width:100%;
-    padding:13px 15px;
-    margin-bottom:11px;
-    border-radius:11px;
-    border:1px solid rgba(120,130,210,.17);
-    background:rgba(10,16,40,.75);
-    color:#fff;
-    outline:none;
-    font-family:inherit;
-}
-
-textarea.input{
-    height:150px;
-    resize:vertical;
-}
-
-.send{
-    width:100%;
-    padding:13px;
-    border:0;
-    border-radius:11px;
-    color:#fff;
-    background:linear-gradient(135deg,#7771ff,#5f58df);
-    cursor:pointer;
-    font-weight:600;
-}
-
-/* VISITOR */
-
-.visitors{
-    margin-top:20px;
-    max-height:350px;
-    overflow:auto;
-}
-
-.visitor{
-    padding:15px;
-    margin-bottom:9px;
-    background:rgba(20,27,58,.60);
-    border:1px solid rgba(130,130,220,.08);
-    border-radius:12px;
-}
-
-.visitor-top{
-    display:flex;
-    justify-content:space-between;
-    color:#6d7396;
-    font-size:10px;
-}
-
-.visitor-name{
-    color:#d5d8ec;
-    font-weight:600;
-}
-
-.visitor-text{
-    margin-top:8px;
-    color:#adb2cd;
-    font-size:12px;
-    line-height:1.7;
-    white-space:pre-wrap;
-}
-
-/* FOOTER */
-
-footer{
-    text-align:center;
-    padding:65px 20px 80px;
-    color:#5e6588;
-    font-size:10px;
-}
-
-.footer-logo{
-    font-family:'Playfair Display',serif;
-    color:#aeb3d9;
-    font-size:21px;
-    margin-bottom:8px;
-}
-
-/* MODAL */
-
-.modal{
-    position:fixed;
-    inset:0;
-    display:none;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-    background:rgba(0,0,0,.72);
-    backdrop-filter:blur(12px);
-    z-index:5000;
-}
-
-.modal.show{
-    display:flex;
-}
-
-.modal-box{
-    width:850px;
-    max-width:100%;
-    max-height:90vh;
-    overflow:auto;
-    padding:30px;
-    border-radius:20px;
-    background:linear-gradient(145deg,#101633,#050714);
-    border:1px solid rgba(130,130,255,.25);
-    box-shadow:0 30px 100px rgba(0,0,0,.7);
-}
-
-.modal-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:25px;
-}
-
-.modal-head h2{
-    font-family:'Playfair Display',serif;
-    font-weight:400;
-}
-
-.close{
-    border:0;
-    background:none;
-    color:#aaa;
-    font-size:27px;
-    cursor:pointer;
-}
-
-/* TABS */
-
-.tabs{
-    display:flex;
-    gap:8px;
-    overflow:auto;
-    margin-bottom:20px;
-}
-
-.tabs button{
-    padding:9px 15px;
-    white-space:nowrap;
-    border-radius:20px;
-    border:1px solid rgba(130,130,255,.17);
-    background:rgba(60,60,130,.18);
-    color:#aaa;
-    cursor:pointer;
-}
-
-.tabs button.active{
-    background:#6964ed;
-    color:#fff;
-}
-
-.panel{
-    display:none;
-}
-
-.panel.active{
-    display:block;
-}
-
-/* ADMIN */
-
-.admin-btn2{
-    padding:11px 15px;
-    border-radius:10px;
-    border:1px solid rgba(130,130,255,.25);
-    background:rgba(90,80,220,.18);
-    color:#fff;
-    cursor:pointer;
-}
-
-.admin-group{
-    margin-bottom:25px;
-    padding-bottom:20px;
-    border-bottom:1px solid rgba(255,255,255,.07);
-}
-
-.admin-group h3{
-    margin-bottom:13px;
-    font-size:15px;
-}
-
-.admin-label{
-    display:block;
-    margin-bottom:6px;
-    color:#888fb3;
-    font-size:11px;
-}
-
-.admin-item{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:12px;
-    margin-bottom:8px;
-    background:rgba(255,255,255,.035);
-    border-radius:10px;
-}
-
-.admin-item-text{
-    flex:1;
-    font-size:12px;
-}
-
-.delete{
-    border:1px solid rgba(255,70,100,.3);
-    background:rgba(200,40,70,.13);
-    color:#ff9bad;
-    padding:7px 10px;
-    border-radius:8px;
-    cursor:pointer;
-}
-
-.save-all{
-    position:sticky;
-    bottom:0;
-    width:100%;
-    margin-top:20px;
-    padding:15px;
-    border:0;
-    border-radius:12px;
-    background:linear-gradient(135deg,#7771ff,#554ee0);
-    color:#fff;
-    font-weight:700;
-    cursor:pointer;
-}
-
-/* MOBILE */
-
-@media(max-width:950px){
-
-    .side{
-        display:none;
+    :root {
+        --bg-deep: #05060d;
+        --bg-panel: #0a0d1c;
+        --bg-panel-alt: #0d1128;
+        --gold: #d4af7a;
+        --gold-soft: #ecd9b3;
+        --lavender: #9b90d6;
+        --star-white: #f5f3ec;
+        --text-muted: #8890ad;
+        --text-dim: #5c6284;
+        --line: rgba(245,243,236,0.09);
+        --shadow-deep: 0 20px 60px rgba(0,0,0,0.55);
     }
 
-    main{
-        margin-left:0;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+        background: var(--bg-deep);
+        color: var(--star-white);
+        font-family: 'Noto Sans KR', sans-serif;
+        line-height: 1.6;
+        overflow-x: hidden;
+        position: relative;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; }
+    ul { list-style: none; }
+    ::selection { background: var(--gold); color: #17140a; }
+
+    /* 배경 별빛 */
+    .starfield {
+        position: fixed; inset: 0; z-index: 0; pointer-events: none;
+        background: radial-gradient(ellipse at 20% 20%, rgba(155,144,214,0.10) 0%, transparent 55%),
+                    radial-gradient(ellipse at 80% 70%, rgba(212,175,122,0.08) 0%, transparent 55%), var(--bg-deep);
     }
 
-    .header{
-        padding:0 18px;
+    .section {
+        position: relative; z-index: 1; padding: 130px 8vw 110px; max-width: 1180px; margin: 0 auto;
+    }
+    .section.alt { background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.015) 15%, rgba(255,255,255,0.015) 85%, transparent 100%); }
+
+    .eyebrow { font-size: 0.78rem; letter-spacing: 0.32em; color: var(--gold); font-weight: 500; margin-bottom: 18px; text-transform: uppercase; }
+    .section h2 { font-family: 'Playfair Display', 'Noto Serif KR', serif; font-size: clamp(2.1rem, 4.2vw, 3.2rem); font-weight: 600; letter-spacing: 0.02em; margin-bottom: 16px; }
+    .section-desc { color: var(--text-muted); max-width: 560px; font-size: 0.98rem; margin-bottom: 56px; }
+
+    /* 내비게이션 & 로고 스타일 */
+    .nav {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 26px 6vw;
+        display: flex; align-items: center; justify-content: space-between;
+        transition: padding 0.35s ease, background 0.35s ease, backdrop-filter 0.35s ease, border-color 0.35s ease;
+        border-bottom: 1px solid transparent;
+    }
+    .nav.scrolled {
+        padding: 15px 6vw; background: rgba(5,6,13,0.78); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line);
+    }
+    .nav-inner { width: 100%; display: flex; align-items: center; justify-content: space-between; max-width: 1300px; margin: 0 auto; }
+
+    .logo-mark {
+        display: inline-flex; flex-direction: column; align-items: center; justify-content: center; color: var(--star-white); line-height: 1;
+    }
+    .logo-star { font-size: 0.65rem; color: var(--gold); margin-bottom: 3px; letter-spacing: 0.1em; }
+    .logo-word { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 600; letter-spacing: 0.28em; padding-left: 0.28em; }
+    .logo-subword {
+        position: relative; margin-top: 5px; padding: 0 14px; font-size: 0.42rem; letter-spacing: 0.35em; color: var(--gold-soft); white-space: nowrap;
     }
 
-    .logo{
-        width:auto;
+    .nav-links { display: flex; gap: 42px; }
+    .nav-links a { font-size: 0.82rem; letter-spacing: 0.16em; color: var(--text-muted); font-weight: 500; position: relative; padding-bottom: 4px; transition: color 0.25s ease; }
+    .nav-links a::after { content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s ease; }
+    .nav-links a:hover { color: var(--star-white); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 6px; z-index: 110; }
+    .hamburger span { width: 24px; height: 1.5px; background: var(--star-white); transition: transform 0.3s ease, opacity 0.3s ease; }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .mobile-menu {
+        position: fixed; inset: 0; background: rgba(5,6,13,0.98); z-index: 99;
+        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px; opacity: 0; pointer-events: none; transition: opacity 0.35s ease;
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: auto; }
+    .mobile-menu a { font-family: 'Playfair Display', serif; font-size: 1.7rem; letter-spacing: 0.08em; color: var(--star-white); }
+
+    /* 히어로 섹션 */
+    .hero {
+        position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 6vw; z-index: 1;
+    }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-logo-mark { display: inline-flex; flex-direction: column; align-items: center; line-height: 1; margin-bottom: 24px; }
+    .hero-logo-star { font-size: 1.8rem; color: var(--gold); margin-bottom: 6px; }
+    .hero-logo-word {
+        font-family: 'Playfair Display', serif; font-size: clamp(3.2rem, 8vw, 6rem); font-weight: 600; letter-spacing: 0.28em; padding-left: 0.28em; color: var(--star-white); line-height: 0.9;
+    }
+    .hero-logo-subword {
+        position: relative; margin-top: 18px; padding: 0 32px; font-size: clamp(0.5rem, 0.9vw, 0.65rem); letter-spacing: 0.5em; color: var(--gold-soft); white-space: nowrap;
     }
 
-    .nav{
-        display:none;
+    .hero-title {
+        font-family: 'Playfair Display', serif; font-weight: 600; font-size: clamp(1.7rem, 4vw, 3rem); line-height: 1.12; letter-spacing: 0.08em;
+        background: linear-gradient(135deg, #ffffff 0%, var(--gold-soft) 55%, var(--gold) 100%);
+        -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 20px;
     }
+    .hero-sub { color: var(--text-muted); font-size: clamp(0.95rem, 1.6vw, 1.1rem); max-width: 480px; margin: 0 auto 40px; }
+    .scroll-cue {
+        display: inline-block; font-size: 0.78rem; letter-spacing: 0.2em; color: var(--gold-soft); border: 1px solid rgba(212,175,122,0.4); padding: 13px 30px; border-radius: 999px; transition: background 0.3s ease, transform 0.3s ease;
+    }
+    .scroll-cue:hover { background: rgba(212,175,122,0.1); transform: translateY(-2px); }
 
-    .hero{
-        min-height:720px;
-        padding:80px 25px 50px;
-        align-items:flex-end;
+    /* 대표 섹션 */
+    .representative-card {
+        position: relative; display: grid; grid-template-columns: minmax(260px, 0.75fr) minmax(280px, 1fr); gap: 38px 56px; padding: 42px;
+        background: radial-gradient(circle at 12% 15%, rgba(212,175,122,0.08), transparent 28%), var(--bg-panel);
+        border: 1px solid var(--line); border-radius: 6px; box-shadow: var(--shadow-deep);
     }
+    .representative-intro { display: flex; align-items: center; gap: 24px; }
+    .representative-avatar {
+        flex: 0 0 92px; width: 92px; height: 92px; display: flex; align-items: center; justify-content: center; border-radius: 50%;
+        border: 1px solid rgba(212,175,122,0.55); background: radial-gradient(circle, rgba(212,175,122,0.22), rgba(212,175,122,0.04));
+        color: var(--gold-soft); font-family: 'Playfair Display', serif; font-size: 2rem;
+    }
+    .representative-label, .career-heading { display: block; color: var(--gold); font-size: 0.68rem; letter-spacing: 0.2em; font-weight: 600; margin-bottom: 8px; }
+    .representative-intro h3 { font-family: 'Noto Serif KR', serif; font-size: 2rem; margin-bottom: 3px; }
+    .representative-title { color: var(--text-muted); font-size: 0.88rem; }
+    .representative-info { display: grid; grid-template-columns: 1fr; gap: 13px; }
+    .rep-info-item { display: flex; align-items: baseline; gap: 16px; padding: 16px 18px; border: 1px solid var(--line); background: rgba(255,255,255,0.018); }
+    .rep-info-item span { flex: 0 0 44px; color: var(--gold); font-size: 0.75rem; }
+    .rep-info-item strong { font-size: 0.9rem; font-weight: 500; color: var(--star-white); }
+    .career { grid-column: 1 / -1; border-top: 1px solid var(--line); padding-top: 30px; }
+    .career ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px 28px; color: var(--text-muted); font-size: 0.86rem; }
+    .career li { padding-bottom: 10px; border-bottom: 1px solid rgba(245,243,236,0.05); }
+    .career b { color: var(--gold-soft); font-weight: 500; margin-right: 5px; }
 
-    .hero-photo{
-        width:100%;
-        opacity:.72;
+    /* 아티스트 카드 섹션 */
+    .artist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 26px; }
+    .artist-card {
+        background: var(--bg-panel); border: 1px solid var(--line); border-radius: 4px; padding: 30px 26px; position: relative; cursor: pointer;
+        transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
     }
+    .artist-card:hover { transform: translateY(-6px); border-color: rgba(212,175,122,0.45); box-shadow: var(--shadow-deep); }
+    .artist-avatar {
+        width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 600; color: #0c0e1a; background: var(--gold-soft); margin-bottom: 22px;
+    }
+    .artist-group-tag { font-size: 0.68rem; letter-spacing: 0.14em; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; display: block; }
+    .artist-header-row { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
+    .artist-card h3 { font-family: 'Noto Serif KR', serif; font-size: 1.2rem; }
+    .artist-handle { font-size: 0.78rem; color: var(--lavender); }
+    .artist-role { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px; }
+    .artist-click-hint { font-size: 0.72rem; color: var(--gold-soft); letter-spacing: 0.05em; margin-top: 14px; opacity: 0.7; }
 
-    .hero-content{
-        width:100%;
-    }
+    /* 스케줄 & 뉴스 */
+    .schedule-list { position: relative; padding-left: 28px; border-left: 1px solid var(--line); }
+    .schedule-item { position: relative; padding: 0 0 40px 30px; }
+    .schedule-item::before { content: ''; position: absolute; left: -35px; top: 3px; width: 9px; height: 9px; border-radius: 50%; background: var(--gold); }
+    .schedule-date { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--gold-soft); margin-bottom: 8px; }
+    .schedule-type { display: inline-block; font-size: 0.68rem; color: var(--lavender); border: 1px solid rgba(155,144,214,0.35); padding: 3px 10px; border-radius: 999px; margin-bottom: 10px; }
+    .schedule-item h4 { font-size: 1.05rem; font-weight: 500; margin-bottom: 4px; }
+    .schedule-artist { font-size: 0.85rem; color: var(--text-muted); }
 
-    .hero h1{
-        font-size:49px;
-    }
+    .news-list { display: flex; flex-direction: column; gap: 1px; background: var(--line); }
+    .news-item { background: var(--bg-deep); padding: 28px 8px; cursor: pointer; transition: background 0.25s ease; }
+    .news-item:hover { background: rgba(255,255,255,0.02); }
+    .news-top { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; }
+    .news-date { font-size: 0.78rem; color: var(--text-dim); white-space: nowrap; }
+    .news-item h4 { font-size: 1.08rem; font-weight: 500; flex: 1; }
+    .news-badge-new { font-size: 0.62rem; background: var(--gold); color: #17140a; padding: 2px 8px; border-radius: 999px; margin-left: 10px; font-weight: 700; }
+    .news-body-wrap { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, margin-top 0.4s ease; }
+    .news-item.open .news-body-wrap { max-height: 500px; margin-top: 14px; }
+    .news-body { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
 
-    .script{
-        font-size:36px;
-    }
+    /* 관리자 및 모달 */
+    .admin-only { display: none; }
+    body.is-admin .admin-only { display: inline-flex; }
+    .item-admin-controls { display: none; gap: 8px; position: absolute; top: 18px; right: 18px; z-index: 5; }
+    body.is-admin .item-admin-controls { display: flex; }
+    .icon-btn { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); background: rgba(255,255,255,0.03); color: var(--text-muted); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; }
+    .icon-btn:hover { color: var(--gold); border-color: var(--gold); }
+    .icon-btn.danger:hover { color: #f87171; border-color: #f87171; }
+    .schedule-item .item-admin-controls, .news-top .item-admin-controls { position: static; margin-left: auto; }
+    .add-btn { margin-top: 34px; background: none; border: 1px dashed rgba(212,175,122,0.4); color: var(--gold-soft); padding: 13px 26px; border-radius: 4px; font-size: 0.85rem; }
+    .add-btn:hover { background: rgba(212,175,122,0.08); border-color: var(--gold); }
 
-    .gallery{
-        grid-template-columns:1fr;
-    }
+    .admin-banner { position: fixed; bottom: 0; left: 0; right: 0; z-index: 90; background: rgba(212,175,122,0.95); color: #17140a; display: none; align-items: center; justify-content: center; gap: 18px; padding: 12px 20px; font-size: 0.85rem; font-weight: 500; }
+    body.is-admin .admin-banner { display: flex; }
+    .admin-banner button { background: #17140a; color: var(--gold-soft); border: none; padding: 7px 16px; border-radius: 999px; font-size: 0.78rem; }
 
-    .two{
-        grid-template-columns:1fr;
-    }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(3,4,9,0.72); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; z-index: 200; padding: 20px; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: var(--bg-panel-alt); border: 1px solid var(--line); border-radius: 6px; padding: 34px 32px 24px; width: 100%; max-width: 420px; box-shadow: var(--shadow-deep); max-height: 85vh; display: flex; flex-direction: column; }
+    .modal-scroll-content { overflow-y: auto; max-height: calc(85vh - 140px); padding-right: 4px; }
+    .modal h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 22px; color: var(--gold-soft); }
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: 0.76rem; color: var(--text-muted); margin-bottom: 7px; }
+    .field input, .field textarea, .field select { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--line); color: var(--star-white); padding: 11px 13px; border-radius: 4px; font-family: inherit; font-size: 0.9rem; }
+    .field textarea { resize: vertical; min-height: 70px; }
+    
+    .profile-detail-modal .profile-modal-top { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; }
+    .profile-detail-modal .modal-avatar { width: 80px; height: 80px; border-radius: 50%; border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.5rem; background: var(--gold-soft); color: #0c0e1a; }
+    .profile-quote-box { background: rgba(212,175,122,0.06); border-left: 2px solid var(--gold); padding: 16px 20px; border-radius: 0 4px 4px 0; margin-top: 15px; }
+    .profile-quote-box .quote-label { font-size: 0.72rem; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; display: block; }
+    .profile-quote-box .quote-text { font-size: 0.98rem; color: var(--star-white); font-style: italic; line-height: 1.5; }
 
-    .section{
-        padding:45px 20px;
+    .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px; border-top: 1px solid var(--line); padding-top: 16px; }
+    .btn { padding: 10px 22px; border-radius: 4px; border: 1px solid var(--line); background: transparent; color: var(--text-muted); font-size: 0.85rem; cursor: pointer; }
+    .btn.primary { background: var(--gold); color: #17140a; border-color: var(--gold); font-weight: 600; }
+    .modal-error { color: #f87171; font-size: 0.8rem; margin-top: 12px; min-height: 1em; }
+
+    .site-footer { text-align: center; padding: 60px 6vw 90px; color: var(--text-dim); font-size: 0.8rem; border-top: 1px solid var(--line); position: relative; z-index: 1; }
+    .site-footer .logo { display: block; margin-bottom: 18px; font-size: 1.1rem; }
+    .admin-link { background: none; border: none; color: var(--text-dim); font-size: 0.75rem; margin-top: 14px; text-decoration: underline; cursor: pointer; }
+    .admin-link:hover { color: var(--gold-soft); }
+
+    @media (max-width: 860px) {
+        .nav-links { display: none; }
+        .hamburger { display: flex; }
+        .representative-card { grid-template-columns: 1fr; padding: 30px; }
+        .career ul { grid-template-columns: 1fr; }
     }
-}
 </style>
-
-<!-- Firebase SDK 추가 -->
-<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
-
 </head>
-
 <body>
 
-<header class="header">
+<div class="starfield"></div>
 
-    <div class="logo" id="siteLogo">
-        스윗<span>•</span>
+<header class="nav" id="nav">
+    <div class="nav-inner">
+        <a class="logo-mark" href="#home" aria-label="ASTRIX STUDIO">
+            <span class="logo-star">✦</span>
+            <span class="logo-word">ASTRIX</span>
+            <span class="logo-subword">ENTERTAINMENT</span>
+        </a>
+        <nav class="nav-links">
+            <a href="#representative">ABOUT</a>
+            <a href="#artists">ARTISTS</a>
+            <a href="#schedule">SCHEDULE</a>
+            <a href="#news">NEWS</a>
+        </nav>
+        <button class="hamburger" id="hamburger" aria-label="메뉴 열기">
+            <span></span><span></span><span></span>
+        </button>
     </div>
-
-    <nav class="nav">
-        <a href="#home" id="navHome">HOME</a>
-        <a href="#gallery" id="navGallery">GALLERY</a>
-        <a href="#notice" id="navNotice">NOTICE</a>
-        <a href="#letter" id="navLetter">LETTER</a>
-        <a href="#write" id="navWrite">WRITE</a>
-    </nav>
-
-    <button class="admin-btn" onclick="openLogin()">
-        ♙ 관리자
-    </button>
-
 </header>
 
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#representative" class="mobile-link">ABOUT</a>
+    <a href="#artists" class="mobile-link">ARTISTS</a>
+    <a href="#schedule" class="mobile-link">SCHEDULE</a>
+    <a href="#news" class="mobile-link">NEWS</a>
+</div>
 
-<aside class="side">
-
-    <a href="#home" class="active" id="sideHome">◆ HOME</a>
-    <a href="#gallery" id="sideGallery">▣ GALLERY</a>
-    <a href="#notice" id="sideNotice">▤ NOTICE</a>
-    <a href="#letter" id="sideLetter">♡ LETTER</a>
-    <a href="#write" id="sideWrite">✎ WRITE</a>
-
-</aside>
-
-
-<main>
-
-<section id="home" class="hero">
-
-    <div class="hero-photo" id="heroPhoto"></div>
-
-    <div class="hero-glow"></div>
-
+<section class="hero" id="home">
     <div class="hero-content">
-
-        <div class="small" id="heroSmall">
-            SPOON DJ · 스윗
+        <div class="hero-logo-mark">
+            <span class="hero-logo-star">✦</span>
+            <span class="hero-logo-word">ASTRIX</span>
+            <span class="hero-logo-subword">ENTERTAINMENT & CREATIVE STUDIO</span>
         </div>
-
-        <h1 id="heroTitle">
-            스윗's
-        </h1>
-
-        <div class="script" id="heroScript">
-            little space
-        </div>
-
-        <p class="description" id="heroDescription">
-            스윗의 방송과 사진, 공지,
-            그리고 팬들이 남겨주는 편지를
-            한곳에서 볼 수 있는 작은 공간입니다.
-        </p>
-
-
-        <div class="air" id="air">
-
-            <div class="air-line">
-
-                <span class="dot"></span>
-
-                <span id="airStatus">
-                    ON AIR
-                </span>
-
-            </div>
-
-            <div class="air-title" id="airTitle">
-                오늘도 같이 놀아요 💙
-            </div>
-
-            <div class="air-sub" id="airSub">
-                지금 바로, 스윗과 함께해요!
-            </div>
-
-            <a href="#" class="air-btn" id="airButton">
-                방송 바로가기 →
-            </a>
-
-        </div>
-
+        <p class="eyebrow">Entertainment & Creative Studio</p>
+        <h1 class="hero-title">MAKE YOUR MOMENT</h1>
+        <p class="hero-sub">빛나는 순간을 만드는 감각적인 크리에이터들의 공간</p>
+        <a href="#representative" class="scroll-cue">EXPLORE</a>
     </div>
-
 </section>
 
+<section class="section representative-section" id="representative">
+    <p class="eyebrow">Leadership</p>
+    <h2>Representative</h2>
+    <p class="section-desc">아스트릭을 이끌어가는 리더의 비전과 발자취입니다.</p>
 
-<section id="gallery" class="section">
-
-    <div class="section-head">
-
-        <div>
-            <h2 id="galleryTitle">
-                Gallery
-            </h2>
-
-            <p id="galleryDescription">
-                스윗의 순간들을 기록해요.
-            </p>
+    <div class="representative-card">
+        <div class="representative-intro">
+            <div class="representative-avatar">✦</div>
+            <div>
+                <span class="representative-label">FOUNDER & CEO</span>
+                <h3>김지환</h3>
+                <p class="representative-title">Jihwan Kim</p>
+            </div>
         </div>
-
+        <div class="representative-info">
+            <div class="rep-info-item">
+                <span>VISION</span>
+                <strong>한계 없는 크리에이티브 생태계 구축</strong>
+            </div>
+            <div class="rep-info-item">
+                <span>CONTACT</span>
+                <strong>contact@astrix.co.kr</strong>
+            </div>
+        </div>
+        <div class="career">
+            <span class="career-heading">CAREER & HISTORY</span>
+            <ul>
+                <li><b>2026</b> 아스트릭 엔터테인먼트 설립 및 총괄 대표</li>
+                <li><b>2025</b> 다수의 혁신 디지털 미디어 프로젝트 총괄 디렉팅</li>
+                <li><b>2024</b> 크리에이터 매니지먼트 및 브랜드 협업 솔루션 개발</li>
+                <li><b>2023</b> 뉴미디어 콘텐츠 프로덕션 어드바이저</li>
+            </ul>
+        </div>
     </div>
-
-    <div class="gallery" id="galleryList"></div>
-
 </section>
 
+<section class="section alt" id="artists">
+    <p class="eyebrow">Profiles</p>
+    <h2>Artists & Members</h2>
+    <p class="section-desc">카드를 클릭하여 멤버들의 개성 있는 한마디와 하고 싶은 말을 확인해보세요.</p>
 
-<section id="notice" class="section">
-
-    <div class="section-head">
-
-        <div>
-
-            <h2 id="noticeTitle">
-                Notice
-            </h2>
-
-            <p id="noticeDescription">
-                방송과 관련된 새로운 소식을 확인하세요.
-            </p>
-
-        </div>
-
-    </div>
-
-    <div class="notice-list glass" id="noticeList"></div>
-
+    <div class="artist-grid" id="artistGrid"></div>
+    <button class="add-btn admin-only" id="addArtistBtn">+ 프로필 추가하기</button>
 </section>
 
+<section class="section" id="schedule">
+    <p class="eyebrow">Timeline</p>
+    <h2>Schedule</h2>
+    <p class="section-desc">아스트릭 아티스트들의 다가오는 일정을 확인하세요.</p>
 
-<section class="section">
-
-    <div class="two">
-
-        <div id="letter">
-
-            <div class="section-head">
-
-                <div>
-
-                    <h2 id="letterTitle">
-                        Letter
-                    </h2>
-
-                    <p id="letterDescription">
-                        스윗이 전하는 이야기
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="letter glass">
-
-                <div class="letter-paper">
-
-                    <div
-                        class="letter-text"
-                        id="officialLetter"
-                    ></div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div id="write">
-
-            <div class="section-head">
-
-                <div>
-
-                    <h2 id="writeTitle">
-                        Write a Letter
-                    </h2>
-
-                    <p id="writeDescription">
-                        스윗에게 하고 싶은 이야기를 남겨주세요.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="write glass">
-
-                <input
-                    id="nickname"
-                    class="input"
-                    placeholder="닉네임을 입력해주세요."
-                    maxlength="20"
-                >
-
-                <textarea
-                    id="letterText"
-                    class="input"
-                    placeholder="스윗에게 전하고 싶은 말을 적어주세요."
-                    maxlength="500"
-                ></textarea>
-
-                <button
-                    class="send"
-                    onclick="sendLetter()"
-                >
-                    ✉ 편지 보내기 💌
-                </button>
-
-                <div
-                    class="visitors"
-                    id="visitorList"
-                ></div>
-
-            </div>
-
-        </div>
-
-    </div>
-
+    <div class="schedule-list" id="scheduleList"></div>
+    <button class="add-btn admin-only" id="addScheduleBtn">+ 일정 추가하기</button>
 </section>
 
+<section class="section alt" id="news">
+    <p class="eyebrow">Updates</p>
+    <h2>News & Notices</h2>
+    <p class="section-desc">아스트릭의 새로운 소식과 공지사항을 전해드립니다.</p>
 
-<footer>
+    <div class="news-list" id="newsList"></div>
+    <button class="add-btn admin-only" id="addNewsBtn">+ 소식 추가하기</button>
+</section>
 
-    <div class="footer-logo" id="footerLogo">
-        스윗
-    </div>
-
-    <div id="footerText">
-        스윗 · Broadcast Home
-    </div>
-
-    <div
-        style="margin-top:8px;"
-        id="footerSub"
-    >
-        좋은 사람들과 함께, 더 특별한 순간을.
-    </div>
-
+<footer class="site-footer">
+    <span class="logo">ASTRIX ENTERTAINMENT</span>
+    <p>&copy; ASTRIX STUDIO. All rights reserved.</p>
+    <button class="admin-link" id="adminToggleBtn">관리자 모드</button>
 </footer>
 
-</main>
+<div class="admin-banner" id="adminBanner">
+    <span>🔒 관리자 모드가 활성화되어 있습니다. 항목별 수정 및 추가가 가능합니다.</span>
+    <button id="adminExitBtn">관리자 종료</button>
+</div>
 
-
-<!-- LOGIN -->
-
-<div class="modal" id="loginModal">
-
-    <div class="modal-box">
-
-        <div class="modal-head">
-
-            <h2>Administrator</h2>
-
-            <button
-                class="close"
-                onclick="closeModal('loginModal')"
-            >
-                ×
-            </button>
-
+<div class="modal-overlay" id="profileDetailModal">
+    <div class="modal profile-detail-modal">
+        <h3 id="modalProfileName">프로필 정보</h3>
+        <div class="modal-scroll-content">
+            <div class="profile-modal-top">
+                <div class="modal-avatar" id="modalProfileAvatar">✦</div>
+                <div>
+                    <span class="artist-group-tag" id="modalProfileTag">TAG</span>
+                    <h4 id="modalProfileRealName" style="font-family:'Noto Serif KR', serif; font-size: 1.25rem;">이름</h4>
+                    <p class="artist-handle" id="modalProfileHandle">@handle</p>
+                </div>
+            </div>
+            <div class="field" style="margin-bottom:0;">
+                <label>역할 / 포지션</label>
+                <p id="modalProfileRole" style="color: var(--text-muted); font-size: 0.9rem;"></p>
+            </div>
+            <div class="profile-quote-box">
+                <span class="quote-label">✦ 한마디 & 하고 싶은 말</span>
+                <p class="quote-text" id="modalProfileQuote">"등록된 한마디가 없습니다."</p>
+            </div>
         </div>
-
-        <input
-            id="password"
-            class="input"
-            type="password"
-            placeholder="관리자 비밀번호"
-        >
-
-        <button
-            class="send"
-            onclick="login()"
-        >
-            관리자 로그인
-        </button>
-
+        <div class="modal-actions">
+            <button class="btn primary" id="closeProfileModal">확인</button>
+        </div>
     </div>
-
 </div>
 
-
-<!-- ADMIN -->
-
-<div class="modal" id="adminModal">
-
-<div class="modal-box">
-
-<div class="modal-head">
-
-<h2>스윗 관리자 모드</h2>
-
-<button
-class="close"
-onclick="closeModal('adminModal')"
->
-×
-</button>
-
+<div class="modal-overlay" id="dataModal">
+    <div class="modal">
+        <h3 id="modalTitle">항목 편집</h3>
+        <div class="modal-scroll-content" id="modalFormFields"></div>
+        <div class="modal-error" id="modalError"></div>
+        <div class="modal-actions">
+            <button class="btn" id="modalCancel">취소</button>
+            <button class="btn primary" id="modalSave">저장</button>
+        </div>
+    </div>
 </div>
-
-
-<div class="tabs">
-
-<button class="active" onclick="tab('homeAdmin',this)">
-홈페이지
-</button>
-
-<button onclick="tab('broadcastAdmin',this)">
-방송
-</button>
-
-<button onclick="tab('galleryAdmin',this)">
-갤러리
-</button>
-
-<button onclick="tab('noticeAdmin',this)">
-공지
-</button>
-
-<button onclick="tab('letterAdmin',this)">
-편지
-</button>
-
-<button onclick="tab('menuAdmin',this)">
-메뉴
-</button>
-
-</div>
-
-
-<!-- ================= HOME ADMIN ================= -->
-
-<div class="panel active" id="homeAdmin">
-
-<div class="admin-group">
-
-<h3>사이트 기본 정보</h3>
-
-<label class="admin-label">
-사이트 이름
-</label>
-
-<input
-class="input"
-id="editSiteName"
->
-
-<label class="admin-label">
-Hero 작은 문구
-</label>
-
-<input
-class="input"
-id="editHeroSmall"
->
-
-<label class="admin-label">
-메인 제목
-</label>
-
-<input
-class="input"
-id="editHeroTitle"
->
-
-<label class="admin-label">
-메인 강조 문구
-</label>
-
-<input
-class="input"
-id="editHeroScript"
->
-
-<label class="admin-label">
-소개 문구
-</label>
-
-<textarea
-class="input"
-id="editHeroDescription"
-></textarea>
-
-</div>
-
-
-<div class="admin-group">
-
-<h3>기존 배경 편집</h3>
-
-<p style="font-size:11px;color:#777;margin-bottom:12px;">
-현재 hero.jpg 배경은 그대로 유지하면서
-아래 설정만 변경할 수 있습니다.
-</p>
-
-<label class="admin-label">
-배경 이미지 URL
-</label>
-
-<input
-class="input"
-id="editBackground"
-placeholder="비워두면 기존 hero.jpg 사용 (또는 아래에서 파일 선택)"
->
-
-<label class="admin-label" style="margin-top:8px;">
-파일에서 배경 사진 선택
-</label>
-
-<input
-type="file"
-accept="image/*"
-class="input"
-id="backgroundFile"
-onchange="handleBackgroundFile(event)"
->
-
-<img
-id="backgroundFilePreview"
-style="display:none;max-width:180px;margin-top:10px;border-radius:8px;"
->
-
-<label class="admin-label">
-배경 위치
-</label>
-
-<select
-class="input"
-id="editBackgroundPosition"
->
-<option value="center">CENTER</option>
-<option value="center top">CENTER TOP</option>
-<option value="center bottom">CENTER BOTTOM</option>
-<option value="left center">LEFT</option>
-<option value="right center">RIGHT</option>
-</select>
-
-</div>
-
-
-<div class="admin-group">
-
-<h3>하단 Footer</h3>
-
-<input
-class="input"
-id="editFooterText"
-placeholder="Footer 메인"
->
-
-<input
-class="input"
-id="editFooterSub"
-placeholder="Footer 설명"
->
-
-</div>
-
-<button
-class="save-all"
-onclick="saveHomeSettings()"
->
-홈페이지 변경사항 저장
-</button>
-
-</div>
-
-
-<!-- ================= BROADCAST ================= -->
-
-<div class="panel" id="broadcastAdmin">
-
-<div class="admin-group">
-
-<h3>방송 상태</h3>
-
-<button
-class="admin-btn2"
-onclick="toggleAir()"
->
-ON AIR / OFF AIR 전환
-</button>
-
-</div>
-
-<label class="admin-label">
-방송 제목
-</label>
-
-<input
-class="input"
-id="editAirTitle"
->
-
-<label class="admin-label">
-방송 설명
-</label>
-
-<input
-class="input"
-id="editAirSub"
->
-
-<label class="admin-label">
-방송 링크
-</label>
-
-<input
-class="input"
-id="editAirUrl"
->
-
-<button
-class="save-all"
-onclick="saveBroadcast()"
->
-방송 정보 저장
-</button>
-
-</div>
-
-
-<!-- ================= GALLERY ================= -->
-
-<div class="panel" id="galleryAdmin">
-
-<h3>갤러리 추가</h3>
-
-<input
-class="input"
-id="galleryUrl"
-placeholder="이미지 URL (또는 아래에서 파일 선택)"
->
-
-<label class="admin-label" style="margin-top:8px;">
-파일에서 사진 추가
-</label>
-
-<input
-type="file"
-accept="image/*"
-class="input"
-id="galleryFile"
-onchange="handleGalleryFile(event)"
->
-
-<img
-id="galleryFilePreview"
-style="display:none;max-width:140px;margin-top:10px;border-radius:8px;"
->
-
-<input
-class="input"
-id="galleryName"
-placeholder="사진 제목"
->
-
-<input
-class="input"
-id="galleryDate"
-placeholder="날짜"
->
-
-<input
-class="input"
-id="galleryHeight"
-placeholder="사진 높이 (예: 250px 또는 비워두면 기본 비율)"
->
-
-<button
-class="admin-btn2"
-onclick="addGallery()"
->
-갤러리 추가
-</button>
-
-<hr style="border-color:rgba(255,255,255,.08);margin:25px 0;">
-
-<div id="adminGallery"></div>
-
-</div>
-
-
-<!-- ================= NOTICE ================= -->
-
-<div class="panel" id="noticeAdmin">
-
-<h3>공지 추가</h3>
-
-<input
-class="input"
-id="newNotice"
-placeholder="공지 내용"
->
-
-<input
-class="input"
-id="newNoticeDate"
-placeholder="날짜"
->
-
-<button
-class="admin-btn2"
-onclick="addNotice()"
->
-공지 추가
-</button>
-
-<hr style="border-color:rgba(255,255,255,.08);margin:25px 0;">
-
-<div id="adminNotices"></div>
-
-</div>
-
-
-<!-- ================= LETTER ================= -->
-
-<div class="panel" id="letterAdmin">
-
-<h3>공식 Letter</h3>
-
-<textarea
-class="input"
-id="adminLetter"
-style="height:250px;"
-></textarea>
-
-<button
-class="admin-btn2"
-onclick="saveLetter()"
->
-공식 Letter 저장
-</button>
-
-<h3 style="margin:30px 0 15px;">
-방문자 편지
-</h3>
-
-<div id="adminVisitors"></div>
-
-</div>
-
-
-<!-- ================= MENU ================= -->
-
-<div class="panel" id="menuAdmin">
-
-<h3>상단 / 사이드 메뉴</h3>
-
-<input class="input" id="menuHome">
-<input class="input" id="menuGallery">
-<input class="input" id="menuNotice">
-<input class="input" id="menuLetter">
-<input class="input" id="menuWrite">
-
-<button
-class="save-all"
-onclick="saveMenu()"
->
-메뉴 저장
-</button>
-
-</div>
-
-</div>
-</div>
-
 
 <script>
-
-/* ==========================================
-   FIREBASE 초기화
-========================================== */
-const firebaseConfig = {
-    apiKey: "AIzaSyBbx6PdrFA22a-4V_r-zvGQbEmCNEGs0OI",
-    authDomain: "kkwo130.firebaseapp.com",
-    projectId: "kkwo130",
-    storageBucket: "kkwo130.firebasestorage.app",
-    messagingSenderId: "527893225312",
-    appId: "1:527893225312:web:fddb935e1c8926b9d60805",
-    measurementId: "G-FVNC7SCHMK"
-};
-
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const docRef = db.collection("sweet_site").doc("homepage_data");
-
-/* ==========================================
-   DATA
-========================================== */
-
-let defaultData = {
-
-    siteName:"스윗",
-
-    heroSmall:"SPOON DJ · 스윗",
-
-    heroTitle:"스윗's",
-
-    heroScript:"little space",
-
-    heroDescription:
-`스윗의 방송과 사진, 공지,
-그리고 팬들이 남겨주는 편지를
-한곳에서 볼 수 있는 작은 공간입니다.`,
-
-    background:"",
-
-    backgroundPosition:"center",
-
-    onAir:true,
-
-    airTitle:"오늘도 같이 놀아요 💙",
-
-    airSub:"지금 바로, 스윗과 함께해요!",
-
-    airUrl:"#",
-
-    galleryTitle:"Gallery",
-
-    galleryDescription:
-    "스윗의 순간들을 기록해요.",
-
-    noticeTitle:"Notice",
-
-    noticeDescription:
-    "방송과 관련된 새로운 소식을 확인하세요.",
-
-    letterTitle:"Letter",
-
-    letterDescription:
-    "스윗이 전하는 이야기",
-
-    writeTitle:"Write a Letter",
-
-    writeDescription:
-    "스윗에게 하고 싶은 이야기를 남겨주세요.",
-
-    letter:
-`Dear. 여러분
-
-오늘도 이곳에 찾아와줘서 고마워요.
-
-제가 있는 이 공간이
-잠깐이라도 편안한 시간이 되었으면 좋겠습니다.
-
-Always with you ♡
-
-— 스윗`,
-
-    footerText:"스윗 · Broadcast Home",
-
-    footerSub:"좋은 사람들과 함께, 더 특별한 순간을.",
-
-    menu:{
-        home:"HOME",
-        gallery:"GALLERY",
-        notice:"NOTICE",
-        letter:"LETTER",
-        write:"WRITE"
-    },
-
-    notices:[
-
-        {
-            text:"스윗 홈페이지가 오픈되었습니다.",
-            date:"2026.09.20"
-        },
-
-        {
-            text:"새로운 방송 일정 안내",
-            date:"2026.09.18"
-        }
-
-    ],
-
-    gallery:[
-
-        {
-            url:"hero.jpg",
-            name:"밤의 분위기",
-            date:"2026.09.20",
-            height:""
-        },
-
-        {
-            url:"hero.jpg",
-            name:"한 잔의 여유",
-            date:"2026.09.18",
-            height:""
-        },
-
-        {
-            url:"hero.jpg",
-            name:"방송 준비중",
-            date:"2026.09.15",
-            height:""
-        }
-
-    ],
-
-    visitors:[]
-
-};
-
-let data = defaultData;
-
-
-/* ==========================================
-   SAVE (Firestore 연동)
-========================================== */
-
-function save(){
-    docRef.set(data).catch(error => {
-        console.error("저장 실패:", error);
-    });
-}
-
-
-/* ==========================================
-   RENDER ALL
-========================================== */
-
-function render(){
-
-    document.title=
-        data.siteName+" — Broadcast Home";
-
-
-    document.getElementById("siteLogo")
-        .innerHTML=
-        safe(data.siteName)+"<span>•</span>";
-
-
-    document.getElementById("heroSmall")
-        .textContent=data.heroSmall;
-
-    document.getElementById("heroTitle")
-        .textContent=data.heroTitle;
-
-    document.getElementById("heroScript")
-        .textContent=data.heroScript;
-
-    document.getElementById("heroDescription")
-        .textContent=data.heroDescription;
-
-
-    document.getElementById("airTitle")
-        .textContent=data.airTitle;
-
-    document.getElementById("airSub")
-        .textContent=data.airSub;
-
-    document.getElementById("airStatus")
-        .textContent=data.onAir
-        ?"ON AIR"
-        :"OFF AIR";
-
-    document.getElementById("airButton")
-        .href=data.airUrl || "#";
-
-
-    const air=
-        document.getElementById("air");
-
-    air.classList.toggle(
-        "offline",
-        !data.onAir
-    );
-
-
-    const photo=
-        document.getElementById("heroPhoto");
-
-    let image=
-        data.background || "hero.jpg";
-
-    photo.style.backgroundImage=`
-        linear-gradient(
-            90deg,
-            #030510 0%,
-            rgba(3,5,16,.90) 10%,
-            rgba(3,5,16,.45) 38%,
-            rgba(3,5,16,.08) 100%
-        ),
-        url("${image}")
-    `;
-
-    photo.style.backgroundPosition=
-        data.backgroundPosition || "center";
-
-
-    document.getElementById("galleryTitle")
-        .textContent=data.galleryTitle;
-
-    document.getElementById("galleryDescription")
-        .textContent=data.galleryDescription;
-
-
-    document.getElementById("noticeTitle")
-        .textContent=data.noticeTitle;
-
-    document.getElementById("noticeDescription")
-        .textContent=data.noticeDescription;
-
-
-    document.getElementById("letterTitle")
-        .textContent=data.letterTitle;
-
-    document.getElementById("letterDescription")
-        .textContent=data.letterDescription;
-
-
-    document.getElementById("writeTitle")
-        .textContent=data.writeTitle;
-
-    document.getElementById("writeDescription")
-        .textContent=data.writeDescription;
-
-
-    document.getElementById("officialLetter")
-        .textContent=data.letter;
-
-
-    document.getElementById("footerLogo")
-        .textContent=data.siteName;
-
-    document.getElementById("footerText")
-        .textContent=data.footerText;
-
-    document.getElementById("footerSub")
-        .textContent=data.footerSub;
-
-
-    renderGallery();
-
-    renderNotices();
-
-    renderVisitors();
-
-    renderMenus();
-
-}
-
-
-/* ==========================================
-   MENU
-========================================== */
-
-function renderMenus(){
-
-    document.getElementById("navHome")
-        .textContent=data.menu.home;
-
-    document.getElementById("navGallery")
-        .textContent=data.menu.gallery;
-
-    document.getElementById("navNotice")
-        .textContent=data.menu.notice;
-
-    document.getElementById("navLetter")
-        .textContent=data.menu.letter;
-
-    document.getElementById("navWrite")
-        .textContent=data.menu.write;
-
-
-    document.getElementById("sideHome")
-        .textContent="◆ "+data.menu.home;
-
-    document.getElementById("sideGallery")
-        .textContent="▣ "+data.menu.gallery;
-
-    document.getElementById("sideNotice")
-        .textContent="▤ "+data.menu.notice;
-
-    document.getElementById("sideLetter")
-        .textContent="♡ "+data.menu.letter;
-
-    document.getElementById("sideWrite")
-        .textContent="✎ "+data.menu.write;
-
-}
-
-
-/* ==========================================
-   GALLERY
-========================================== */
-
-function renderGallery(){
-
-    const list=
-        document.getElementById("galleryList");
-
-    list.innerHTML="";
-
-
-    data.gallery.forEach(item=>{
-
-        let styleAttr = item.height ? `style="height: ${attr(item.height)}; object-fit: cover;"` : "";
-
-        list.innerHTML+=`
-
-        <div class="gallery-card glass">
-
-            <img
-                src="${attr(item.url)}"
-                class="gallery-img"
-                ${styleAttr}
-                alt=""
-            >
-
-            <div class="gallery-info">
-
-                <h3>
-                    ${safe(item.name)}
-                </h3>
-
-                <p>
-                    ${safe(item.date)}
-                </p>
-
-            </div>
-
-        </div>
-
-        `;
-
-    });
-
-}
-
-
-/* ==========================================
-   FILE → IMAGE (BASE64)
-========================================== */
-
-function handleGalleryFile(event){
-
-    const file=
-        event.target.files[0];
-
-    if(!file)
-        return;
-
-
-    const reader=new FileReader();
-
-    reader.onload=function(e){
-
-        document.getElementById("galleryUrl")
-            .value=e.target.result;
-
-        const preview=
-            document.getElementById("galleryFilePreview");
-
-        preview.src=e.target.result;
-        preview.style.display="block";
-
+    let state = {
+        artists: [
+            { id: 1, name: "레이나", handle: "@reina_astrix", role: "Main Vocal & Producer", tag: "Vocal", quote: "언제나 진심을 다해 마음을 울리는 음악을 들려드릴게요." },
+            { id: 2, name: "시안", handle: "@sian_Visual", role: "Performance & Lead Dancer", tag: "Dance", quote: "무대 위에서 가장 살아있음을 느낍니다. 지켜봐 주세요!" },
+            { id: 3, name: "도현", handle: "@dohyun_beat", role: "Producer & DJ", tag: "Producer", quote: "좋은 바이브는 세상을 바꾼다. 늘 새로운 사운드로 찾아올게요." }
+        ],
+        schedules: [
+            { id: 1, date: "2026. 10. 15", type: "RELEASE", title: "레이나 디지털 싱글 [Starlight] 발매", artist: "Reina" },
+            { id: 2, date: "2026. 10. 28", type: "EVENT", title: "ASTRIX 쇼케이스 라이브 인 서울", artist: "All Artists" }
+        ],
+        news: [
+            { id: 1, date: "2026. 09. 10", title: "아스트릭 엔터테인먼트 공식 홈페이지 리뉴얼 오픈", body: "더욱 감각적인 디자인과 편리한 구성으로 공식 웹사이트가 새롭게 단장했습니다. 팬 여러분의 많은 관심 부탁드립니다.", newBadge: true }
+        ],
+        isAdmin: false
     };
 
-    reader.readAsDataURL(file);
+    const savedState = localStorage.getItem('astrix_state_v3');
+    if(savedState) { try { state = JSON.parse(savedState); } catch(e) {} }
+    function saveState() { localStorage.setItem('astrix_state_v3', JSON.stringify(state)); }
 
-}
+    function render() {
+        if(state.isAdmin) document.body.classList.add('is-admin');
+        else document.body.classList.remove('is-admin');
 
+        const artistGrid = document.getElementById('artistGrid');
+        artistGrid.innerHTML = state.artists.map(a => `
+            <div class="artist-card" onclick="openProfileDetail(${a.id})">
+                ${state.isAdmin ? `
+                    <div class="item-admin-controls" onclick="event.stopPropagation()">
+                        <button class="icon-btn" onclick="openEditModal('artist', ${a.id})">✏️</button>
+                        <button class="icon-btn danger" onclick="deleteItem('artist', ${a.id})">✕</button>
+                    </div>
+                ` : ''}
+                <div class="artist-avatar">${a.name.charAt(0)}</div>
+                <span class="artist-group-tag">${a.tag || 'ARTIST'}</span>
+                <div class="artist-header-row">
+                    <h3>${a.name}</h3>
+                    <span class="artist-handle">${a.handle}</span>
+                </div>
+                <p class="artist-role">${a.role}</p>
+                <div class="artist-click-hint">✦ 프로필 및 한마디 보기</div>
+            </div>
+        `).join('');
 
-function handleBackgroundFile(event){
+        const scheduleList = document.getElementById('scheduleList');
+        scheduleList.innerHTML = state.schedules.map(s => `
+            <div class="schedule-item">
+                <div class="schedule-date">${s.date}</div>
+                <span class="schedule-type">${s.type}</span>
+                <h4>${s.title}</h4>
+                <div class="schedule-artist">${s.artist}</div>
+                ${state.isAdmin ? `
+                    <div class="item-admin-controls">
+                        <button class="icon-btn" onclick="openEditModal('schedule', ${s.id})">✏️</button>
+                        <button class="icon-btn danger" onclick="deleteItem('schedule', ${s.id})">✕</button>
+                    </div>
+                ` : ''}
+            </div>
+        `).join('');
 
-    const file=
-        event.target.files[0];
-
-    if(!file)
-        return;
-
-
-    const reader=new FileReader();
-
-    reader.onload=function(e){
-
-        document.getElementById("editBackground")
-            .value=e.target.result;
-
-        const preview=
-            document.getElementById("backgroundFilePreview");
-
-        preview.src=e.target.result;
-        preview.style.display="block";
-
-    };
-
-    reader.readAsDataURL(file);
-
-}
-
-
-function addGallery(){
-
-    const url=
-        document.getElementById("galleryUrl")
-        .value.trim();
-
-    const name=
-        document.getElementById("galleryName")
-        .value.trim();
-
-    const date=
-        document.getElementById("galleryDate")
-        .value.trim();
-
-    const height=
-        document.getElementById("galleryHeight")
-        .value.trim();
-
-
-    if(!url){
-
-        alert("이미지 URL을 입력해주세요.");
-
-        return;
-
+        const newsList = document.getElementById('newsList');
+        newsList.innerHTML = state.news.map(n => `
+            <div class="news-item" onclick="toggleNews(this)">
+                <div class="news-top">
+                    <span class="news-date">${n.date}</span>
+                    <h4>${n.title} ${n.newBadge ? '<span class="news-badge-new">NEW</span>' : ''}</h4>
+                    ${state.isAdmin ? `
+                        <div class="item-admin-controls" onclick="event.stopPropagation()">
+                            <button class="icon-btn" onclick="openEditModal('news', ${n.id})">✏️</button>
+                            <button class="icon-btn danger" onclick="deleteItem('news', ${n.id})">✕</button>
+                        </div>
+                    ` : ''}
+                </div>
+                <div class="news-body-wrap">
+                    <div class="news-body">${n.body}</div>
+                </div>
+            </div>
+        `).join('');
     }
 
-
-    data.gallery.unshift({
-
-        url:url,
-
-        name:name || "새로운 사진",
-
-        date:date || new Date()
-            .toLocaleDateString("ko-KR"),
-
-        height: height || ""
-
-    });
-
-
-    save();
-
-    render();
-
-    document.getElementById("galleryUrl").value="";
-
-    document.getElementById("galleryName").value="";
-
-    document.getElementById("galleryDate").value="";
-
-    document.getElementById("galleryHeight").value="";
-
-    document.getElementById("galleryFile").value="";
-
-    document.getElementById("galleryFilePreview").style.display="none";
-
-    loadAdmin();
-
-}
-
-
-function renderAdminGallery(){
-
-    const box=
-        document.getElementById("adminGallery");
-
-    box.innerHTML="";
-
-
-    data.gallery.forEach((item,index)=>{
-
-        box.innerHTML+=`
-
-        <div class="admin-item">
-
-            <div class="admin-item-text">
-
-                ${safe(item.name)}
-
-                <br>
-
-                <small style="color:#666;">
-                    ${safe(item.date)} ${item.height ? '(' + safe(item.height) + ')' : ''}
-                </small>
-
-            </div>
-
-            <button
-                class="delete"
-                onclick="deleteGallery(${index})"
-            >
-                삭제
-            </button>
-
-        </div>
-
-        `;
-
-    });
-
-}
-
-
-function deleteGallery(index){
-
-    if(!confirm("이 갤러리를 삭제할까요?"))
-        return;
-
-    data.gallery.splice(index,1);
-
-    save();
-
-    render();
-
-    loadAdmin();
-
-}
-
-
-/* ==========================================
-   NOTICE
-========================================== */
-
-function renderNotices(){
-
-    const list=
-        document.getElementById("noticeList");
-
-    list.innerHTML="";
-
-
-    data.notices.forEach(item=>{
-
-        list.innerHTML+=`
-
-        <div class="notice">
-
-            <span class="tag">
-                공지
-            </span>
-
-            <span class="notice-text">
-                ${safe(item.text)}
-            </span>
-
-            <span class="date">
-                ${safe(item.date)}
-            </span>
-
-        </div>
-
-        `;
-
-    });
-
-}
-
-
-function addNotice(){
-
-    const text=
-        document.getElementById("newNotice")
-        .value.trim();
-
-    const date=
-        document.getElementById("newNoticeDate")
-        .value.trim();
-
-
-    if(!text){
-
-        alert("공지 내용을 입력해주세요.");
-
-        return;
-
+    function openProfileDetail(id) {
+        const artist = state.artists.find(a => a.id === id);
+        if(!artist) return;
+
+        document.getElementById('modalProfileName').innerText = artist.name + " 프로필";
+        document.getElementById('modalProfileRealName').innerText = artist.name;
+        document.getElementById('modalProfileHandle').innerText = artist.handle;
+        document.getElementById('modalProfileTag').innerText = artist.tag || 'ARTIST';
+        document.getElementById('modalProfileRole').innerText = artist.role;
+        document.getElementById('modalProfileQuote').innerText = artist.quote ? `"${artist.quote}"` : `"작성된 한마디가 없습니다."`;
+        document.getElementById('modalProfileAvatar').innerText = artist.name.charAt(0);
+
+        document.getElementById('profileDetailModal').classList.add('open');
     }
 
-
-    data.notices.unshift({
-
-        text:text,
-
-        date:
-            date ||
-            new Date()
-            .toLocaleDateString("ko-KR")
-
+    document.getElementById('closeProfileModal').addEventListener('click', () => {
+        document.getElementById('profileDetailModal').classList.remove('open');
     });
 
-
-    save();
-
-    render();
-
-    document.getElementById("newNotice").value="";
-
-    document.getElementById("newNoticeDate").value="";
-
-    loadAdmin();
-
-}
-
-
-function renderAdminNotices(){
-
-    const box=
-        document.getElementById("adminNotices");
-
-    box.innerHTML="";
-
-
-    data.notices.forEach((item,index)=>{
-
-        box.innerHTML+=`
-
-        <div class="admin-item">
-
-            <div class="admin-item-text">
-
-                ${safe(item.text)}
-
-                <br>
-
-                <small style="color:#666;">
-                    ${safe(item.date)}
-                </small>
-
-            </div>
-
-            <button
-                class="delete"
-                onclick="deleteNotice(${index})"
-            >
-                삭제
-            </button>
-
-        </div>
-
-        `;
-
-    });
-
-}
-
-
-function deleteNotice(index){
-
-    data.notices.splice(index,1);
-
-    save();
-
-    render();
-
-    loadAdmin();
-
-}
-
-
-/* ==========================================
-   LETTER
-========================================== */
-
-function saveLetter(){
-
-    data.letter=
-        document.getElementById("adminLetter")
-        .value;
-
-    save();
-
-    render();
-
-    alert("공식 Letter가 저장되었습니다.");
-
-}
-
-
-/* ==========================================
-   VISITOR LETTER
-========================================== */
-
-function sendLetter(){
-
-    const name=
-        document.getElementById("nickname")
-        .value.trim();
-
-    const text=
-        document.getElementById("letterText")
-        .value.trim();
-
-
-    if(!name || !text){
-
-        alert("닉네임과 편지 내용을 입력해주세요.");
-
-        return;
-
+    function toggleNews(el) {
+        if(state.isAdmin) return;
+        el.classList.toggle('open');
     }
 
-
-    data.visitors.unshift({
-
-        name:name,
-
-        text:text,
-
-        date:new Date()
-            .toLocaleDateString("ko-KR")
-
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('nav');
+        if(window.scrollY > 40) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
     });
 
-
-    save();
-
-    document.getElementById("nickname").value="";
-
-    document.getElementById("letterText").value="";
-
-    render();
-
-    alert("편지가 전달되었습니다 💌");
-
-}
-
-
-function renderVisitors(){
-
-    const list=
-        document.getElementById("visitorList");
-
-    list.innerHTML="";
-
-
-    data.visitors.forEach(item=>{
-
-        list.innerHTML+=`
-
-        <div class="visitor">
-
-            <div class="visitor-top">
-
-                <span class="visitor-name">
-                    ${safe(item.name)}
-                </span>
-
-                <span>
-                    ${safe(item.date)}
-                </span>
-
-            </div>
-
-            <div class="visitor-text">
-                ${safe(item.text)}
-            </div>
-
-        </div>
-
-        `;
-
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
     });
-
-}
-
-
-function renderAdminVisitors(){
-
-    const box=
-        document.getElementById("adminVisitors");
-
-    box.innerHTML="";
-
-
-    if(!data.visitors.length){
-
-        box.innerHTML=
-        `<p style="color:#777;">아직 편지가 없습니다.</p>`;
-
-        return;
-
-    }
-
-
-    data.visitors.forEach((item,index)=>{
-
-        box.innerHTML+=`
-
-        <div class="admin-item">
-
-            <div class="admin-item-text">
-
-                <strong>
-                    ${safe(item.name)}
-                </strong>
-
-                <br>
-
-                <span style="color:#888;">
-                    ${safe(item.text)}
-                </span>
-
-            </div>
-
-            <button
-                class="delete"
-                onclick="deleteVisitor(${index})"
-            >
-                삭제
-            </button>
-
-        </div>
-
-        `;
-
-    });
-
-}
-
-
-function deleteVisitor(index){
-
-    if(!confirm("이 편지를 삭제할까요?"))
-        return;
-
-
-    data.visitors.splice(index,1);
-
-    save();
-
-    render();
-
-    loadAdmin();
-
-}
-
-
-/* ==========================================
-   BROADCAST
-========================================== */
-
-function toggleAir(){
-
-    data.onAir=!data.onAir;
-
-    save();
-
-    render();
-
-}
-
-
-function saveBroadcast(){
-
-    data.airTitle=
-        document.getElementById("editAirTitle")
-        .value;
-
-    data.airSub=
-        document.getElementById("editAirSub")
-        .value;
-
-    data.airUrl=
-        document.getElementById("editAirUrl")
-        .value;
-
-
-    save();
-
-    render();
-
-    alert("방송 정보가 저장되었습니다.");
-
-}
-
-
-/* ==========================================
-   HOME SETTINGS
-========================================== */
-
-function saveHomeSettings(){
-
-    data.siteName=
-        document.getElementById("editSiteName")
-        .value;
-
-    data.heroSmall=
-        document.getElementById("editHeroSmall")
-        .value;
-
-    data.heroTitle=
-        document.getElementById("editHeroTitle")
-        .value;
-
-    data.heroScript=
-        document.getElementById("editHeroScript")
-        .value;
-
-    data.heroDescription=
-        document.getElementById("editHeroDescription")
-        .value;
-
-    data.background=
-        document.getElementById("editBackground")
-        .value.trim();
-
-    data.backgroundPosition=
-        document.getElementById("editBackgroundPosition")
-        .value;
-
-    data.footerText=
-        document.getElementById("editFooterText")
-        .value;
-
-    data.footerSub=
-        document.getElementById("editFooterSub")
-        .value;
-
-
-    save();
-
-    render();
-
-    alert("홈페이지 설정이 저장되었습니다.");
-
-}
-
-
-/* ==========================================
-   MENU
-========================================== */
-
-function saveMenu(){
-
-    data.menu.home=
-        document.getElementById("menuHome").value;
-
-    data.menu.gallery=
-        document.getElementById("menuGallery").value;
-
-    data.menu.notice=
-        document.getElementById("menuNotice").value;
-
-    data.menu.letter=
-        document.getElementById("menuLetter").value;
-
-    data.menu.write=
-        document.getElementById("menuWrite").value;
-
-
-    save();
-
-    render();
-
-    alert("메뉴가 저장되었습니다.");
-
-}
-
-
-/* ==========================================
-   ADMIN LOGIN
-========================================== */
-
-function openLogin(){
-
-    document
-        .getElementById("loginModal")
-        .classList.add("show");
-
-}
-
-
-function login(){
-
-    const password=
-        document.getElementById("password")
-        .value;
-
-
-    if(password!=="1220"){
-
-        alert("비밀번호가 올바르지 않습니다.");
-
-        return;
-
-    }
-
-
-    document.getElementById("password").value="";
-
-    closeModal("loginModal");
-
-    document
-        .getElementById("adminModal")
-        .classList.add("show");
-
-    loadAdmin();
-
-}
-
-
-function closeModal(id){
-
-    document
-        .getElementById(id)
-        .classList.remove("show");
-
-}
-
-
-/* ==========================================
-   ADMIN TAB
-========================================== */
-
-function tab(id,button){
-
-    document
-        .querySelectorAll(".panel")
-        .forEach(panel=>{
-            panel.classList.remove("active");
+    document.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('open');
+            mobileMenu.classList.remove('open');
         });
+    });
 
+    document.getElementById('adminToggleBtn').addEventListener('click', () => {
+        const pass = prompt("관리자 비밀번호를 입력하세요:");
+        if(pass === "1234") {
+            state.isAdmin = true;
+            saveState();
+            render();
+            alert("관리자 모드가 활성화되었습니다.");
+        } else if(pass !== null) {
+            alert("비밀번호가 틀렸습니다.");
+        }
+    });
+    document.getElementById('adminExitBtn').addEventListener('click', () => {
+        state.isAdmin = false;
+        saveState();
+        render();
+    });
 
-    document
-        .getElementById(id)
-        .classList.add("active");
+    let currentEdit = { type: null, id: null };
+    const dataModal = document.getElementById('dataModal');
 
-
-    document
-        .querySelectorAll(".tabs button")
-        .forEach(btn=>{
-            btn.classList.remove("active");
-        });
-
-
-    button.classList.add("active");
-
-}
-
-
-/* ==========================================
-   LOAD ADMIN
-========================================== */
-
-function loadAdmin(){
-
-    document.getElementById("editSiteName")
-        .value=data.siteName;
-
-    document.getElementById("editHeroSmall")
-        .value=data.heroSmall;
-
-    document.getElementById("editHeroTitle")
-        .value=data.heroTitle;
-
-    document.getElementById("editHeroScript")
-        .value=data.heroScript;
-
-    document.getElementById("editHeroDescription")
-        .value=data.heroDescription;
-
-    document.getElementById("editBackground")
-        .value=data.background;
-
-    document.getElementById("editBackgroundPosition")
-        .value=data.backgroundPosition;
-
-    document.getElementById("editFooterText")
-        .value=data.footerText;
-
-    document.getElementById("editFooterSub")
-        .value=data.footerSub;
-
-
-    document.getElementById("editAirTitle")
-        .value=data.airTitle;
-
-    document.getElementById("editAirSub")
-        .value=data.airSub;
-
-    document.getElementById("editAirUrl")
-        .value=data.airUrl;
-
-
-    document.getElementById("adminLetter")
-        .value=data.letter;
-
-
-    document.getElementById("menuHome")
-        .value=data.menu.home;
-
-    document.getElementById("menuGallery")
-        .value=data.menu.gallery;
-
-    document.getElementById("menuNotice")
-        .value=data.menu.notice;
-
-    document.getElementById("menuLetter")
-        .value=data.menu.letter;
-
-    document.getElementById("menuWrite")
-        .value=data.menu.write;
-
-
-    renderAdminGallery();
-
-    renderAdminNotices();
-
-    renderAdminVisitors();
-
-}
-
-
-/* ==========================================
-   SAFE
-========================================== */
-
-function safe(text){
-
-    return String(text ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-
-}
-
-
-function attr(text){
-
-    return String(text ?? "")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-
-}
-
-
-/* ==========================================
-   START (Firestore 실시간 데이터 동기화)
-========================================== */
-
-docRef.onSnapshot((docSnap) => {
-    if (docSnap.exists) {
-        data = docSnap.data();
-    } else {
-        docRef.set(defaultData);
-        data = defaultData;
+    function openAddModal(type) {
+        currentEdit = { type, id: null };
+        document.getElementById('modalTitle').innerText = `${type === 'artist' ? '아티스트' : type === 'schedule' ? '일정' : '뉴스'} 추가`;
+        buildForm(type, {});
+        dataModal.classList.add('open');
     }
-    render();
-});
 
+    function openEditModal(type, id) {
+        currentEdit = { type, id };
+        const item = state[type + 's'].find(x => x.id === id);
+        document.getElementById('modalTitle').innerText = `${type === 'artist' ? '아티스트' : type === 'schedule' ? '일정' : '뉴스'} 수정`;
+        buildForm(type, item);
+        dataModal.classList.add('open');
+    }
 
-/* ==========================================
-   ACTIVE SIDE
-========================================== */
+    function buildForm(type, data) {
+        const container = document.getElementById('modalFormFields');
+        document.getElementById('modalError').innerText = '';
 
-const sections=
-    document.querySelectorAll("section[id]");
+        if(type === 'artist') {
+            container.innerHTML = `
+                <div class="field"><label>이름</label><input type="text" id="f_name" value="${data.name || ''}"></div>
+                <div class="field"><label>핸들 아이디 (@)</label><input type="text" id="f_handle" value="${data.handle || ''}"></div>
+                <div class="field"><label>태그 (분류)</label><input type="text" id="f_tag" value="${data.tag || ''}" placeholder="예: Vocal, Dance"></div>
+                <div class="field"><label>역할 / 포지션</label><input type="text" id="f_role" value="${data.role || ''}"></div>
+                <div class="field"><label>한마디 및 하고 싶은 말</label><textarea id="f_quote">${data.quote || ''}</textarea></div>
+            `;
+        } else if(type === 'schedule') {
+            container.innerHTML = `
+                <div class="field"><label>날짜</label><input type="text" id="f_date" value="${data.date || ''}" placeholder="2026. 10. 15"></div>
+                <div class="field"><label>종류 (타입)</label><input type="text" id="f_type" value="${data.type || ''}" placeholder="RELEASE, EVENT"></div>
+                <div class="field"><label>일정 제목</label><input type="text" id="f_title" value="${data.title || ''}"></div>
+                <div class="field"><label>아티스트 / 대상</label><input type="text" id="f_artist" value="${data.artist || ''}"></div>
+            `;
+        } else if(type === 'news') {
+            container.innerHTML = `
+                <div class="field"><label>날짜</label><input type="text" id="f_date" value="${data.date || ''}" placeholder="2026. 09. 10"></div>
+                <div class="field"><label>제목</label><input type="text" id="f_title" value="${data.title || ''}"></div>
+                <div class="field"><label>본문 내용</label><textarea id="f_body">${data.body || ''}</textarea></div>
+                <div class="field"><label>NEW 배지 표시</label><select id="f_badge"><option value="true" ${data.newBadge ? 'selected' : ''}>표시함</option><option value="false" ${!data.newBadge ? 'selected' : ''}>표시 안 함</option></select></div>
+            `;
+        }
+    }
 
-const sideLinks=
-    document.querySelectorAll(".side a");
+    document.getElementById('modalCancel').addEventListener('click', () => dataModal.classList.remove('open'));
+    
+    document.getElementById('modalSave').addEventListener('click', () => {
+        const { type, id } = currentEdit;
 
+        if(type === 'artist') {
+            const name = document.getElementById('f_name').value.trim();
+            if(!name) { document.getElementById('modalError').innerText = "이름을 입력해주세요."; return; }
+            
+            const obj = {
+                id: id || Date.now(),
+                name,
+                handle: document.getElementById('f_handle').value.trim(),
+                tag: document.getElementById('f_tag').value.trim(),
+                role: document.getElementById('f_role').value.trim(),
+                quote: document.getElementById('f_quote').value.trim()
+            };
 
-window.addEventListener("scroll",()=>{
+            if(id) {
+                const idx = state.artists.findIndex(x => x.id === id);
+                if(idx !== -1) state.artists[idx] = obj;
+            } else {
+                state.artists.push(obj);
+            }
+        } else if(type === 'schedule') {
+            const title = document.getElementById('f_title').value.trim();
+            if(!title) { document.getElementById('modalError').innerText = "일정 제목을 입력해주세요."; return; }
 
-    let current="home";
+            const obj = {
+                id: id || Date.now(),
+                date: document.getElementById('f_date').value.trim(),
+                type: document.getElementById('f_type').value.trim(),
+                title,
+                artist: document.getElementById('f_artist').value.trim()
+            };
 
+            if(id) {
+                const idx = state.schedules.findIndex(x => x.id === id);
+                if(idx !== -1) state.schedules[idx] = obj;
+            } else {
+                state.schedules.push(obj);
+            }
+        } else if(type === 'news') {
+            const title = document.getElementById('f_title').value.trim();
+            if(!title) { document.getElementById('modalError').innerText = "제목을 입력해주세요."; return; }
 
-    sections.forEach(section=>{
+            const obj = {
+                id: id || Date.now(),
+                date: document.getElementById('f_date').value.trim(),
+                title,
+                body: document.getElementById('f_body').value.trim(),
+                newBadge: document.getElementById('f_badge').value === 'true'
+            };
 
-        if(
-            window.scrollY >=
-            section.offsetTop-180
-        ){
-
-            current=
-                section.getAttribute("id");
-
+            if(id) {
+                const idx = state.news.findIndex(x => x.id === id);
+                if(idx !== -1) state.news[idx] = obj;
+            } else {
+                state.news.unshift(obj);
+            }
         }
 
+        saveState();
+        render();
+        dataModal.classList.remove('open');
     });
 
+    function deleteItem(type, id) {
+        if(!confirm("정말 삭제하시겠습니까?")) return;
+        state[type + 's'] = state[type + 's'].filter(x => x.id !== id);
+        saveState();
+        render();
+    }
 
-    sideLinks.forEach(link=>{
+    document.getElementById('addArtistBtn').addEventListener('click', () => openAddModal('artist'));
+    document.getElementById('addScheduleBtn').addEventListener('click', () => openAddModal('schedule'));
+    document.getElementById('addNewsBtn').addEventListener('click', () => openAddModal('news'));
 
-        link.classList.remove("active");
-
-
-        if(
-            link.getAttribute("href")
-            ==="#"+current
-        ){
-
-            link.classList.add("active");
-
-        }
-
-    });
-
-});
-
+    render();
 </script>
-
 </body>
 </html>
