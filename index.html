@@ -1166,7 +1166,24 @@ id="editHeroDescription"
 <input
 class="input"
 id="editBackground"
-placeholder="비워두면 기존 hero.jpg 사용"
+placeholder="비워두면 기존 hero.jpg 사용 (또는 아래에서 파일 선택)"
+>
+
+<label class="admin-label" style="margin-top:8px;">
+파일에서 배경 사진 선택
+</label>
+
+<input
+type="file"
+accept="image/*"
+class="input"
+id="backgroundFile"
+onchange="handleBackgroundFile(event)"
+>
+
+<img
+id="backgroundFilePreview"
+style="display:none;max-width:180px;margin-top:10px;border-radius:8px;"
 >
 
 <label class="admin-label">
@@ -1278,7 +1295,24 @@ onclick="saveBroadcast()"
 <input
 class="input"
 id="galleryUrl"
-placeholder="이미지 URL"
+placeholder="이미지 URL (또는 아래에서 파일 선택)"
+>
+
+<label class="admin-label" style="margin-top:8px;">
+파일에서 사진 추가
+</label>
+
+<input
+type="file"
+accept="image/*"
+class="input"
+id="galleryFile"
+onchange="handleGalleryFile(event)"
+>
+
+<img
+id="galleryFilePreview"
+style="display:none;max-width:140px;margin-top:10px;border-radius:8px;"
 >
 
 <input
@@ -1392,27 +1426,6 @@ onclick="saveMenu()"
 </div>
 
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-import {
-  getFirestore, doc, getDoc, setDoc, onSnapshot
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBbx6PdrFA22a-4V_r-zvGQbEmCNEGs0OI",
-  authDomain: "kkwo130.firebaseapp.com",
-  projectId: "kkwo130",
-  storageBucket: "kkwo130.firebasestorage.app",
-  messagingSenderId: "527893225312",
-  appId: "1:527893225312:web:fddb935e1c8926b9d60805",
-  measurementId: "G-FVNC7SCHMK"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-window.firebaseShared = { db, doc, getDoc, setDoc, onSnapshot };
-</script>
-
 <script>
 
 /* ==========================================
@@ -1420,10 +1433,10 @@ window.firebaseShared = { db, doc, getDoc, setDoc, onSnapshot };
 ========================================== */
 
 const KEY="sweet_homepage_v5";
-const FIRESTORE_COLLECTION="homepage";
-const FIRESTORE_DOC="main";
 
-let data = {
+let data=JSON.parse(
+    localStorage.getItem(KEY)
+)||{
 
     siteName:"스윗",
 
@@ -1532,53 +1545,21 @@ Always with you ♡
 
     visitors:[]
 
-};;
-let firebaseReady = false;
-let firebaseUnsubscribe = null;
+};
 
-async function loadSharedData(){
-  try{
-    const {db, doc, getDoc, setDoc, onSnapshot} = window.firebaseShared;
-    const ref = doc(db, FIRESTORE_COLLECTION, FIRESTORE_DOC);
-    const snap = await getDoc(ref);
 
-    if(snap.exists()){
-      data = {...data, ...snap.data()};
-    }else{
-      await setDoc(ref, data);
-    }
+/* ==========================================
+   SAVE
+========================================== */
 
-    firebaseReady = true;
-    render();
+function save(){
 
-    if(firebaseUnsubscribe) firebaseUnsubscribe();
-    firebaseUnsubscribe = onSnapshot(ref, (snapshot)=>{
-      if(snapshot.exists()){
-        data = {...data, ...snapshot.data()};
-        render();
-      }
-    });
-  }catch(error){
-    console.error("Firebase 불러오기 실패:", error);
-    render();
-  }
+    localStorage.setItem(
+        KEY,
+        JSON.stringify(data)
+    );
+
 }
-
-async function save(){
-  render();
-  if(!firebaseReady) return;
-  try{
-    const {db, doc, setDoc} = window.firebaseShared;
-    await setDoc(doc(db, FIRESTORE_COLLECTION, FIRESTORE_DOC), data, {merge:true});
-  }catch(error){
-    console.error("Firebase 저장 실패:", error);
-    alert("서버 저장에 실패했습니다. Firebase Firestore 설정/규칙을 확인해주세요.");
-  }
-}
-
-window.addEventListener("DOMContentLoaded", loadSharedData);
-
-
 
 
 /* ==========================================
@@ -1792,6 +1773,68 @@ function renderGallery(){
 }
 
 
+/* ==========================================
+   FILE → IMAGE (BASE64)
+========================================== */
+
+function handleGalleryFile(event){
+
+    const file=
+        event.target.files[0];
+
+    if(!file)
+        return;
+
+
+    const reader=new FileReader();
+
+    reader.onload=function(e){
+
+        document.getElementById("galleryUrl")
+            .value=e.target.result;
+
+        const preview=
+            document.getElementById("galleryFilePreview");
+
+        preview.src=e.target.result;
+        preview.style.display="block";
+
+    };
+
+    reader.readAsDataURL(file);
+
+}
+
+
+function handleBackgroundFile(event){
+
+    const file=
+        event.target.files[0];
+
+    if(!file)
+        return;
+
+
+    const reader=new FileReader();
+
+    reader.onload=function(e){
+
+        document.getElementById("editBackground")
+            .value=e.target.result;
+
+        const preview=
+            document.getElementById("backgroundFilePreview");
+
+        preview.src=e.target.result;
+        preview.style.display="block";
+
+    };
+
+    reader.readAsDataURL(file);
+
+}
+
+
 function addGallery(){
 
     const url=
@@ -1837,6 +1880,10 @@ function addGallery(){
     document.getElementById("galleryName").value="";
 
     document.getElementById("galleryDate").value="";
+
+    document.getElementById("galleryFile").value="";
+
+    document.getElementById("galleryFilePreview").style.display="none";
 
     loadAdmin();
 
