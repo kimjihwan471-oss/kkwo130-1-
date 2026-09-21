@@ -1332,6 +1332,12 @@ id="galleryDate"
 placeholder="날짜"
 >
 
+<input
+class="input"
+id="galleryHeight"
+placeholder="사진 높이 (예: 250px 또는 비워두면 기본 비율)"
+>
+
 <button
 class="admin-btn2"
 onclick="addGallery()"
@@ -1544,19 +1550,22 @@ Always with you ♡
         {
             url:"hero.jpg",
             name:"밤의 분위기",
-            date:"2026.09.20"
+            date:"2026.09.20",
+            height:""
         },
 
         {
             url:"hero.jpg",
             name:"한 잔의 여유",
-            date:"2026.09.18"
+            date:"2026.09.18",
+            height:""
         },
 
         {
             url:"hero.jpg",
             name:"방송 준비중",
-            date:"2026.09.15"
+            date:"2026.09.15",
+            height:""
         }
 
     ],
@@ -1759,6 +1768,8 @@ function renderGallery(){
 
     data.gallery.forEach(item=>{
 
+        let styleAttr = item.height ? `style="height: ${attr(item.height)}; object-fit: cover;"` : "";
+
         list.innerHTML+=`
 
         <div class="gallery-card glass">
@@ -1766,6 +1777,7 @@ function renderGallery(){
             <img
                 src="${attr(item.url)}"
                 class="gallery-img"
+                ${styleAttr}
                 alt=""
             >
 
@@ -1866,6 +1878,10 @@ function addGallery(){
         document.getElementById("galleryDate")
         .value.trim();
 
+    const height=
+        document.getElementById("galleryHeight")
+        .value.trim();
+
 
     if(!url){
 
@@ -1883,7 +1899,9 @@ function addGallery(){
         name:name || "새로운 사진",
 
         date:date || new Date()
-            .toLocaleDateString("ko-KR")
+            .toLocaleDateString("ko-KR"),
+
+        height: height || ""
 
     });
 
@@ -1897,6 +1915,8 @@ function addGallery(){
     document.getElementById("galleryName").value="";
 
     document.getElementById("galleryDate").value="";
+
+    document.getElementById("galleryHeight").value="";
 
     document.getElementById("galleryFile").value="";
 
@@ -1928,7 +1948,7 @@ function renderAdminGallery(){
                 <br>
 
                 <small style="color:#666;">
-                    ${safe(item.date)}
+                    ${safe(item.date)} ${item.height ? '(' + safe(item.height) + ')' : ''}
                 </small>
 
             </div>
